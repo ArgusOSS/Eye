@@ -1,0 +1,16 @@
+django==3.2.12
+gunicorn==20.1.*
+djangorestframework-simplejwt
+djangorestframework
+djangorestframework-swagger
+drf_yasg
+django-rest-swagger
+django-cors-headers
+celery
+redis
+django-jsonfield
+flake8==4.0.1
+black==22.3.0
+isort==5.10.1
+pre-commit==2.19.0
+coverage==6.4
