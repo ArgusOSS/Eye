@@ -14,7 +14,9 @@ import {
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import { SVGProps } from 'react'
-
+import Tiles from './Tiles';
+import Costs from './Costs';
+import Comments from './Comments';
 const navigation: Array<{name: string, href: string, icon: (props: SVGProps<SVGSVGElement>) => JSX.Element, current: boolean}> = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
@@ -24,7 +26,7 @@ const navigation: Array<{name: string, href: string, icon: (props: SVGProps<SVGS
   { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ]
 const userNavigation: Array<{name: string, href: string}> = [
-  { name: 'Your Profile', href: '#' },
+  { name: 'Your Profile', href: '/profile' },
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ]
@@ -38,14 +40,6 @@ export default function Dashboard() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
@@ -258,10 +252,10 @@ export default function Dashboard() {
                 <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
               </div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                {/* Replace with your content */}
-                <div className="py-4">
-                  <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
-                </div>
+                {/* user content here */}
+                  <Tiles />
+                  <Costs />
+                  <Comments />
                 {/* /End replace */}
               </div>
             </div>
