@@ -1,0 +1,17 @@
+version: 3.7
+
+services:
+  django_gunicorn:
+    volumes:
+      - static:/static
+    env_file:
+      - .env
+    build: 
+      context: .
+    ports:
+      - "8000:8000"
+
+volumes:
+  static:
+  
+
