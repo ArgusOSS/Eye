@@ -6,4 +6,5 @@ db.*
 .env
 .venv
 *.log
+env_file_postgres
 
