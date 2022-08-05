@@ -3,8 +3,8 @@
 db.*
 *.db
 .DS_Store
-.env
+.env_file_app
 .venv
 *.log
-env_file_postgres
+
 
