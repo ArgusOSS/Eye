@@ -9,3 +9,4 @@ django-cors-headers
 celery
 redis
 django-jsonfield
+rest_flex_fields

@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
-from .models import User
+from .models import OrganizationUser, User
 
 
 class LoginSerializer(serializers.ModelSerializer):
@@ -17,6 +17,11 @@ class LoginSerializer(serializers.ModelSerializer):
         user = User.objects.get(email=obj["email"])
 
         return {"refresh": user.tokens()["refresh"], "access": user.tokens()["access"]}
+
+    def get_user_organizations(self, email):
+        user = User.objects.get(email=email)
+        organizations = OrganizationUser.user_organizations(user=user)
+        return organizations
 
     class Meta:
         model = User
@@ -36,7 +41,14 @@ class LoginSerializer(serializers.ModelSerializer):
                 "Email is not verified"
             )  # turning verification requirement off
 
-        return {"email": user.email, "username": user.username, "tokens": user.tokens}
+        organizations = self.get_user_organizations(email)
+
+        return {
+            "email": user.email,
+            "username": user.username,
+            "tokens": user.tokens,
+            "organizations": organizations,
+        }
 
 
 class LogoutSerializer(serializers.Serializer):
