@@ -7,16 +7,16 @@ services:
     volumes:
       - .postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ./env_file_postgres
+      - ./backend/env_file_postgres
 
   django_gunicorn:
     volumes:
-      - ../backend/static:/app/static
+      - ./backend/static:/app/static
     env_file:
-      - ./env_file_app
+      - ./backend/env_file_app
     build: 
-      context: ../backend
-      dockerfile: ./Dockerfile_guicorn
+      context: ./backend/
+      dockerfile: ./Dockerfile_gunicorn
     ports:
       - "8000:8000"
     depends_on:
@@ -24,8 +24,8 @@ services:
 
   frontend:
       build:
+        context: ./frontend/
         dockerfile: ./Dockerfile_react
-        context: ../frontend
 
 volumes:
   postgres_data:
