@@ -1,31 +1,33 @@
 version: "3.7"
 
 services:
-  django_gunicorn:
-    volumes:
-      - static:/static
-    env_file:
-      - .env
-    build: 
-      context: .
-    ports:
-      - "8000:8000"
   postgres:
     image: library/postgres:12-alpine
     container_name: eye_postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - .postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./env_file_postgres
+
+  django_gunicorn:
+    volumes:
+      - ../backend/static:/app/static
+    env_file:
+      - ./env_file_app
+    build: 
+      context: ../backend
+      dockerfile: ./Dockerfile_guicorn
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  frontend:
+      build:
+        dockerfile: ./Dockerfile_react
+        context: ../frontend
 
 volumes:
   postgres_data:
   static:
   
-backend:
-    build:
-      dockerfile: Dockerfile_guicorn
-
-frontend:
-    build:
-      dockerfile: Dockerfile_react

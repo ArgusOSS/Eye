@@ -7,5 +7,4 @@ env_file_app
 .venv
 *.log
 env_file_postgres
-
-
+**/.postgres_data
