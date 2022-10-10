@@ -1,0 +1,13 @@
+django==3.2.12
+gunicorn==20.1.*
+djangorestframework-simplejwt
+djangorestframework
+djangorestframework-swagger
+drf_yasg
+psycopg2-binary
+django-rest-swagger
+Authlib==1.0.1
+django-cors-headers
+celery
+redis
+django-jsonfield

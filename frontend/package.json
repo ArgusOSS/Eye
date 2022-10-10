@@ -1,0 +1,43 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "proxy": "http://0.0.0.0:8000/",
+  "dependencies": {
+    "@chakra-ui/core": "latest",
+    "@chakra-ui/react": "latest",
+    "@emotion/cache": "latest",
+    "@emotion/core": "10.1.1",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@material-ui/core": "^5.0.0-beta.5",
+    "@material-ui/data-grid": "^4.0.0-alpha.37",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.58",
+    "@mui/icons-material": "^5.0.0-rc.1",
+    "@mui/material": "next",
+    "@mui/styles": "^5.0.0",
+    "emotion-theming": "latest",
+    "framer-motion": "4.1.17",
+    "http-proxy-middleware": "^2.0.6",
+    "next": "12.3.1",
+    "cookies-next": "latest",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zustand": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "8.24.0",
+    "eslint-config-next": "12.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}

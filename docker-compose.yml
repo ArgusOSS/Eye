@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: library/postgres:12-alpine
+    container_name: postgres_app_still
+    networks:
+      internal:
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+  backend:
+    container_name: backend_app_still
+    networks:
+      default:
+      internal:
+    expose:
+      - "8000"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    env_file:
+      - ./.env
+
+networks:
+    default:
+    internal:
+        internal: true
