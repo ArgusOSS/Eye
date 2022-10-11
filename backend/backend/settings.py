@@ -35,8 +35,8 @@ AUTHLIB_OAUTH_CLIENTS["google"] = {
     # ideally, shouldn't be hardcoded.
     # hardcoding for the sake of the assignment
     # anyways, test users are necessary to be added.
-    "client_id": "418768242316-trpjevj2ift825tamn0brrp49qm4gums.apps.googleusercontent.com",
-    "client_secret": "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",
+    "client_id": "",
+    "client_secret": "",
 }
 
 
