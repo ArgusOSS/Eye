@@ -8,12 +8,16 @@ RUN apt-get update \
 
 RUN pip install --upgrade pip
 
-COPY ./ /app
+COPY ./requirements /app/requirements
 
 WORKDIR /app
 
 RUN pip install --no-cache-dir --compile -r requirements/run-requirements.txt
 
+COPY ./backend /app/backend
+
 EXPOSE 8000
 
-ENTRYPOINT ["sh","entrypoint.sh"]
+COPY ./entrypoint.sh /app/
+COPY ./entrypoint_celery.sh /app/
+COPY ./entrypoint_beat_celery.sh /app/

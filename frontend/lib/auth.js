@@ -1,4 +1,5 @@
 import { getToken, removeToken } from "./token";
+import cookie from "cookie"
 
 const BASE_URL = `http://${process.env.NEXT_PUBLIC_API_URL}`
 
@@ -61,3 +62,7 @@ export const whoAmI = async () => {
   const data = await res.json()[0];
   return data;
 };
+
+export function parseCookies(req) {
+  return cookie.parse(req ? req.headers.cookie || "" : document.cookie)
+}

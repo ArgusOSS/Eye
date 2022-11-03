@@ -10,12 +10,6 @@ export default function Login() {
   return (
     <BaseAuthLayout>
       <LoginForm />
-
-      <div style={styles} className="text-light">
-        <a href="/auth/register">
-          Haven't registered before?
-        </a>
-      </div>
     </BaseAuthLayout>
   );
 }

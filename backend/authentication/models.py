@@ -1,5 +1,4 @@
-from shirts.models import ShirtSize
-from core.models import BaseMixin
+from api_app.core.models import BaseMixin
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -39,13 +38,11 @@ class User(AbstractBaseUser, PermissionsMixin, BaseMixin):
     username = models.CharField(max_length=255, unique=True, db_index=True)
     email = models.EmailField(max_length=255, unique=True, db_index=True)
     is_staff = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     auth_provider = models.CharField(
         max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get("email")
-    )
-    shirt_size = models.CharField(
-        max_length=255, null=True, choices=ShirtSize.choices,
     )
 
     USERNAME_FIELD = "email"

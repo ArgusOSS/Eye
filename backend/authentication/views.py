@@ -1,5 +1,4 @@
 import logging
-from multiprocessing import context
 import os
 
 from authlib.integrations.base_client import OAuthError
@@ -42,9 +41,12 @@ class RegisterView(generics.GenericAPIView):
         user_data = serializer.data
         user = User.objects.get(email=user_data["email"])
 
-        return Response({
-            "status": "successful",
-        }, status=status.HTTP_201_CREATED)
+        return Response(
+            {
+                "status": "successful",
+            },
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class LoginAPIView(generics.GenericAPIView):
@@ -65,11 +67,13 @@ class LogoutAPIView(generics.GenericAPIView):
 
     def post(self, request):
 
-        serializer = self.serializer_class(data=request.data, context={"request": request})
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response({"status": "successful"},status=status.HTTP_200_OK)
+        return Response({"status": "successful"}, status=status.HTTP_200_OK)
 
 
 class MeAPIView(generics.ListAPIView):
@@ -82,7 +86,9 @@ class MeAPIView(generics.ListAPIView):
 
 
 def google_login(request):
-    redirect_uri = request.build_absolute_uri(reverse("oauth_google_callback")).replace("0.0.0.0:8000", "localhost:3000/api")
+    redirect_uri = request.build_absolute_uri(reverse("oauth_google_callback")).replace(
+        "0.0.0.0:8000", "localhost:3000/api"
+    )
     try:
         return oauth.google.authorize_redirect(request, redirect_uri)
     except AttributeError as error:
@@ -110,7 +116,10 @@ class GoogleLoginCallbackView(generics.GenericAPIView):
         except User.DoesNotExist:
             logging.info("[Google Oauth] User does not exist. Creating new user.")
             return User.objects.create_user(
-                email=user_email, username=user_name, password=None, auth_provider="google"
+                email=user_email,
+                username=user_name,
+                password=None,
+                auth_provider="google",
             )
 
     def get(self, request):
@@ -125,6 +134,8 @@ class GoogleLoginCallbackView(generics.GenericAPIView):
 
         # Uncomment this for local testing
         return redirect(
-            f"http://localhost:3000/auth/social?access={access_token}&refresh={refresh_token}&username={user.username}&shirt_size={user.shirt_size}"
+            "http://localhost:3000/auth/social?access"
+            f"={access_token}&refresh={refresh_token}&username={user.username}"
+            f"&shirt_size={user.shirt_size}"
         )
         # return redirect(self.request.build_absolute_uri(f"/login?token={token}"))

@@ -1,0 +1,47 @@
+name: Generate OpenAPI Schema for Redoc
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "urNode-backend/**"
+  pull_request_target:
+    branches:
+      - master
+    paths:
+      - "urNode-backend/**"
+
+jobs:
+  generate-schema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.head_ref }}
+
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r urNode-backend/requirements/run-requirements.txt
+
+      # this edtion of the workflow uses Django's inbuilt generateschema to give us the schema file
+      - name: Generate the schema file
+        run: |
+          ./urNode-backend/ur_node/manage.py generateschema --title urNode --description Documentation --file docs/schema.yml
+
+      - name: Commit the generated schema
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 🤖 commit the new OpenAPI schema
+          # this gives the commit author the github bot pfp and username
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          file_pattern: 'docs/schema.yml'

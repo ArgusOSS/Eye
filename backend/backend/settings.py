@@ -42,7 +42,7 @@ AUTHLIB_OAUTH_CLIENTS["google"] = {
 
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_HEADERS = ["*"]
 
 # Application definition
 
@@ -57,7 +57,9 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "authentication",
-    "shirts",
+    "api_app",
+    "api_app.core",
+    "api_app.servers",
 ]
 
 SIMPLE_JWT = {
@@ -75,6 +77,8 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 500,
 }
 
 AUTH_USER_MODEL = "authentication.User"
@@ -166,3 +170,38 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REDIS_PORT = 6379
+REDIS_DB = 0
+REDIS_HOST = os.environ.get("REDIS_PORT_6379_TCP_ADDR", "redis")
+
+RABBIT_HOSTNAME = os.environ.get("RABBIT_PORT_5672_TCP", "rabbit")
+
+if RABBIT_HOSTNAME.startswith("tcp://"):
+    RABBIT_HOSTNAME = RABBIT_HOSTNAME.split("//")[1]
+
+BROKER_URL = os.environ.get("BROKER_URL", "")
+if not BROKER_URL:
+    BROKER_URL = "amqp://{user}:{password}@{hostname}/{vhost}/".format(
+        user=os.environ.get("RABBIT_ENV_USER", "admin"),
+        password=os.environ.get("RABBIT_ENV_RABBITMQ_PASS", "mypass"),
+        hostname=RABBIT_HOSTNAME,
+        vhost=os.environ.get("RABBIT_ENV_VHOST", ""),
+    )
+
+# We don't want to have dead connections stored on rabbitmq,
+# so we have to negotiate using heartbeats
+BROKER_HEARTBEAT = "?heartbeat=60"
+if not BROKER_URL.endswith(BROKER_HEARTBEAT):
+    BROKER_URL += BROKER_HEARTBEAT
+
+BROKER_POOL_LIMIT = 1
+BROKER_CONNECTION_TIMEOUT = 10
+
+# Set redis as celery result backend
+CELERY_RESULT_BACKEND = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+CELERY_REDIS_MAX_CONNECTIONS = 1
+
+# Don't use pickle as serializer, json is much safer
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["application/json"]

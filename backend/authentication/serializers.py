@@ -1,9 +1,8 @@
 from django.contrib import auth
+from django.contrib.auth import logout
 from rest_framework import serializers as rfs
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework_simplejwt.tokens import RefreshToken, TokenError
-from django.contrib.auth import logout
-
+from rest_framework_simplejwt.tokens import TokenError
 
 from .models import User
 
@@ -61,10 +60,7 @@ class LoginSerializer(rfs.ModelSerializer):
         filtered_user_by_email = User.objects.filter(email=email).first()
         user = auth.authenticate(email=email, password=password)
 
-        if (
-            filtered_user_by_email
-            and filtered_user_by_email.auth_provider != "email"
-        ):
+        if filtered_user_by_email and filtered_user_by_email.auth_provider != "email":
             raise AuthenticationFailed(
                 detail="Please continue your login using "
                 + filtered_user_by_email.auth_provider
@@ -73,7 +69,7 @@ class LoginSerializer(rfs.ModelSerializer):
         if not user:
             raise AuthenticationFailed("Invalid credentials, try again")
 
-        return {"email": user.email, "username": user.username, "tokens": user.tokens, "shirt_size": user.shirt_size}
+        return {"email": user.email, "username": user.username, "tokens": user.tokens}
 
 
 class LogoutSerializer(rfs.Serializer):
@@ -86,13 +82,12 @@ class LogoutSerializer(rfs.Serializer):
 
     def save(self):
         try:
-            logout(self.context["request"]) 
+            logout(self.context["request"])
         except TokenError:
             self.fail("bad_token")
 
 
 class UserSerializer(rfs.ModelSerializer):
-
     class Meta:
         model = User
         fields = (

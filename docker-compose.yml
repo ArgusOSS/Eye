@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   postgres:
+    hostname: postgres
     image: library/postgres:12-alpine
     container_name: postgres_app_still
     networks:
@@ -12,7 +13,7 @@ services:
       - ./.env
 
   backend:
-    container_name: backend_app_still
+    container_name: backend_app_eye
     networks:
       default:
       internal:
@@ -21,6 +22,7 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
+    entrypoint: /app/entrypoint.sh
     depends_on:
       - postgres
     ports:
@@ -29,6 +31,61 @@ services:
       - ./:/app
     env_file:
       - ./.env
+    links:
+      - celery
+      - rabbit
+      - postgres
+      - redis
+
+  celery:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: celery_eye
+    volumes:
+      - "./:/app"
+    entrypoint: /app/entrypoint_celery.sh
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - postgres
+    links:
+      - postgres
+      - rabbit
+      - redis
+
+  celery_beat:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./:/app"
+    container_name: celery_beat_eye
+    entrypoint: /app/entrypoint_beat_celery.sh
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - postgres
+    links:
+      - postgres
+      - rabbit
+      - redis
+
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass  # Redis - result backend
+
+  redis:
+    container_name: redis_app_eye
+    image: redis:alpine
+    hostname: redis
+  
+
 
 networks:
     default:
