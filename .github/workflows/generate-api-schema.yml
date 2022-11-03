@@ -30,12 +30,12 @@ jobs:
       - name: Install requirements
         run: |
           python -m pip install --upgrade pip
-          pip install -r urNode-backend/requirements/run-requirements.txt
+          pip install -r requirements/run-requirements.txt
 
       # this edtion of the workflow uses Django's inbuilt generateschema to give us the schema file
       - name: Generate the schema file
         run: |
-          ./urNode-backend/ur_node/manage.py generateschema --title urNode --description Documentation --file docs/schema.yml
+          ./backend/manage.py generateschema --title urNode --description Documentation --file docs/schema.yml
 
       - name: Commit the generated schema
         uses: stefanzweifel/git-auto-commit-action@v4

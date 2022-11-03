@@ -32,11 +32,8 @@ DEBUG = True
 AUTHLIB_OAUTH_CLIENTS = {}
 
 AUTHLIB_OAUTH_CLIENTS["google"] = {
-    # ideally, shouldn't be hardcoded.
-    # hardcoding for the sake of the assignment
-    # anyways, test users are necessary to be added.
-    "client_id": "",
-    "client_secret": "",
+    "client_id": os.environ.get("GOOGLE_CLIENT_ID", ""),
+    "client_secret": os.environ.get("GOOGLE_CLIENT_SECRET", ""),
 }
 
 

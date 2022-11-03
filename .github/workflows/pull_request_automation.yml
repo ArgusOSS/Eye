@@ -23,7 +23,7 @@ jobs:
       - name: Install Dependencies
         run: |
           pip3 install --upgrade pip
-          pip3 install -r urNode-backend/requirements/test-requirements.txt
+          pip3 install -r requirements/test-requirements.txt
 
       - name: Black formatter
         run: |

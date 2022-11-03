@@ -4,7 +4,7 @@ services:
   postgres:
     hostname: postgres
     image: library/postgres:12-alpine
-    container_name: postgres_app_still
+    container_name: postgres_app_eye
     networks:
       internal:
     volumes:
