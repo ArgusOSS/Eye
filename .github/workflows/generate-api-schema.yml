@@ -4,12 +4,12 @@ on:
     branches:
       - master
     paths:
-      - "urNode-backend/**"
+      - "backend/**"
   pull_request_target:
     branches:
       - master
     paths:
-      - "urNode-backend/**"
+      - "backend/**"
 
 jobs:
   generate-schema:
