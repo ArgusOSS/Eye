@@ -1,15 +1,15 @@
-import { baseDashboardLayout } from "../../src/components/dashboard/Base";
-import { dashboardStatus } from "../../src/components/dashboard/Status";
+import { BaseDashboardLayout } from "../../src/components/dashboard/Base";
+import { DashboardStatus } from "../../src/components/dashboard/Status";
 
 const styles = {
   marginTop: 30,
   textAlign: "center",
 };
 
-export default function Login() {
+export default function Status() {
   return (
-    <baseDashboardLayout>
-      <dashboardStatus />
-    </baseDashboardLayout>
+    <BaseDashboardLayout>
+      <DashboardStatus />
+    </BaseDashboardLayout>
   );
 }
