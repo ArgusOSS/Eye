@@ -20,7 +20,19 @@ export function baseDashboardLayout(props) {
       padding="md"
       fixed={false}
       navbar={
-        <Navbar width={{ base: 300 }} height={500} p="xs">
+          <Navbar 
+          width={{
+            // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
+            sm: 300,
+    
+            // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
+            lg: 400,
+    
+            // When other breakpoints do not match base width is used, defaults to 100%
+            base: 100,
+          }}
+        >
+           Application navbar
           <Navbar.Section grow mt="xs">
             <MainLinks />
           </Navbar.Section>
@@ -29,6 +41,7 @@ export function baseDashboardLayout(props) {
           </Navbar.Section>
         </Navbar>
       }
+      
       header={
         <Header height={60}>
           <Group sx={{ height: '100%' }} px={20} position="apart">
