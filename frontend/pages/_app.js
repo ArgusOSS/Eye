@@ -5,7 +5,8 @@ import { CookiesProvider } from "react-cookie"
 import PropTypes from 'prop-types';
 import createEmotionCache from '../src/createEmotionCache';
 import { CacheProvider } from '@emotion/react';
-import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import { ColorSchemeProvider, MantineProvider, ColorScheme } from '@mantine/core';
+import { useState } from 'react';
 
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -13,6 +14,11 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const {colorScheme, setColorScheme} = useState<ColorScheme>('light');
+  const toggleColorScheme = (value) => {
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  }
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -27,7 +33,7 @@ export default function MyApp(props) {
         <link rel="icon" href="/logo.ico" />
       </Head>
         <CookiesProvider>
-          <ColorSchemeProvider>
+          <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
             <MantineProvider theme={{ colorScheme: "dark" }} withGlobalStyles withNormalizeCSS>
               <Component {...pageProps} />
             </MantineProvider>

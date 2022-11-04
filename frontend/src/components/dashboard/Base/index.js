@@ -6,6 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { logoutUser } from "../../../../lib/auth";
 import { Navbar, Title, ScrollArea, Header, AppShell, Group, useMantineColorScheme, ActionIcon } from '@mantine/core';
 import { IconMoon, IconMoonStars } from '@tabler/icons';
+import { BaseDashboardHeader } from "./_header";
 
 
 export function BaseDashboardLayout(props) {
@@ -19,15 +20,13 @@ export function BaseDashboardLayout(props) {
     }
   };
 
-  // const handleOnThemeChange = () => {
-  //   toggleColorScheme();
-  // }
+  const DashboardHeader = BaseDashboardHeader();
 
-  function handleOnThemeChange () {
-    // toggleColorScheme();
-  }
+  
 
   return (
+    <div>
+    {DashboardHeader}
     <AppShell
       padding="md"
       fixed={false}
@@ -53,16 +52,7 @@ export function BaseDashboardLayout(props) {
         </Navbar>
       }
       
-      header={
-        <Header height={60}>
-          <Group sx={{ height: '100%' }} px={20} position="apart">
-            <Logo colorScheme={colorScheme} />
-            <ActionIcon variant="default" onClick={handleOnThemeChange} size={30}>
-              {colorScheme === 'dark' ? <IconSun size={16} /> : <IconMoonStars size={16} />}
-            </ActionIcon>
-          </Group>
-        </Header>
-      }
+      // header={DashboardHeader}
       styles={(theme) => ({
         main: {
           backgroundColor:
@@ -74,5 +64,6 @@ export function BaseDashboardLayout(props) {
         <div className="col-md-6">{props.children}</div>
       </div>
     </AppShell>
+    </div>
   );
 }

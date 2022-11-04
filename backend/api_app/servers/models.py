@@ -5,6 +5,7 @@ class Server(BaseMixin):
     name = models.CharField(default="Server", max_length=125)
     provider = models.CharField(default="", blank=True, max_length=125)
     url = models.CharField(max_length=225)
+    api_ping_url = models.CharField(max_length=225)
 
     def __str__(self): 
         return f"{self.name}:{self.url}"
