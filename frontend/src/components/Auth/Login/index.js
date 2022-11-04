@@ -3,7 +3,7 @@ import Router from "next/router";
 import { loginUser } from "../../../../lib/auth";
 import { removeToken } from "../../../../lib/token";
 import { useCookies } from "react-cookie"
-import { Divider, Button, PasswordInput, Group, TextInput } from '@mantine/core';
+import { Divider, Button, PasswordInput, Group, TextInput, Text } from '@mantine/core';
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -86,7 +86,7 @@ export function LoginForm() {
         <Group position="right" mt="md">
           {/* <Button type="submit">Submit</Button> */}
           <Button color="ocean-blue" type="submit" className="btn btn-light" disabled={isLoading}>
-            Login
+            <Text>Login</Text>
           </Button>
         </Group>
         </div>
