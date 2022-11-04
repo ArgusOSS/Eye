@@ -77,6 +77,163 @@ paths:
           description: ''
       tags:
       - authentication
+  /servers/settings:
+    get:
+      operationId: listServers
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Settings'
+          description: ''
+      tags:
+      - servers
+    post:
+      operationId: createServer
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Settings'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Settings'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+          description: ''
+      tags:
+      - servers
+  /servers/settings/{id}:
+    get:
+      operationId: retrieveServer
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this server.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+          description: ''
+      tags:
+      - servers
+    put:
+      operationId: updateServer
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this server.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Settings'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Settings'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+          description: ''
+      tags:
+      - servers
+    patch:
+      operationId: partialUpdateServer
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this server.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Settings'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Settings'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+          description: ''
+      tags:
+      - servers
+    delete:
+      operationId: destroyServer
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this server.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - servers
   /authentication/login:
     post:
       operationId: createLogin
@@ -206,6 +363,39 @@ components:
       required:
       - email
       - username
+    Settings:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 125
+        provider:
+          type: string
+          maxLength: 125
+        url:
+          type: string
+          maxLength: 225
+        webhook_url:
+          type: string
+          maxLength: 225
+        api_ping_url:
+          type: string
+          maxLength: 225
+        active:
+          type: boolean
+      required:
+      - url
     Login:
       type: object
       properties:
