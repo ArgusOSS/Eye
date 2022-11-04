@@ -48,6 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseMixin):
     auth_provider = models.CharField(
         max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get("email")
     )
+    avatar = models.CharField(default="", max_length=225)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
