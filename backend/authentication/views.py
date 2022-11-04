@@ -10,6 +10,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.views import APIView
 
 from .oauth import oauth
 from .serializers import (
@@ -97,7 +98,7 @@ def google_login(request):
         raise error
 
 
-class GoogleLoginCallbackView(generics.GenericAPIView):
+class GoogleLoginCallbackView(APIView):
     @staticmethod
     def validate_and_return_user(request):
         try:
@@ -136,6 +137,5 @@ class GoogleLoginCallbackView(generics.GenericAPIView):
         return redirect(
             "http://localhost:3000/auth/social?access"
             f"={access_token}&refresh={refresh_token}&username={user.username}"
-            f"&shirt_size={user.shirt_size}"
         )
         # return redirect(self.request.build_absolute_uri(f"/login?token={token}"))
