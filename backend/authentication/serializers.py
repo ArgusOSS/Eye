@@ -6,6 +6,7 @@ from rest_framework_simplejwt.tokens import TokenError
 
 from .models import User
 
+
 class RegisterSerializer(rfs.ModelSerializer):
     password = rfs.CharField(max_length=68, min_length=6, write_only=True)
 
@@ -50,7 +51,11 @@ class LoginSerializer(rfs.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password", "tokens",]
+        fields = [
+            "email",
+            "password",
+            "tokens",
+        ]
 
     def validate(self, attrs):
         email = attrs.get("email", "")

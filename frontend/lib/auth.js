@@ -16,6 +16,7 @@ export const loginUser = async (email, password) => {
     method: "POST",
     headers: {"Content-type": "application/json;charset=UTF-8"}
   });
+
   const status = res.status;
   console.log(status);
   if (status !== 200) {

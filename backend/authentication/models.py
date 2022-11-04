@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
             raise TypeError("Users should have a Email")
 
         user = self.model(
-            username=username, 
+            username=username,
             email=self.normalize_email(email),
             auth_provider=auth_provider,
         )

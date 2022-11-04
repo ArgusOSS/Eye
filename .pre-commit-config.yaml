@@ -7,6 +7,7 @@ repos:
     rev: 4.0.1
     hooks:
       - id: flake8
+        exclude: ^(migrations/)
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:

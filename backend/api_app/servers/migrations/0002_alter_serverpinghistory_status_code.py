@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('servers', '0001_initial'),
+        ("servers", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='serverpinghistory',
-            name='status_code',
+            model_name="serverpinghistory",
+            name="status_code",
             field=models.IntegerField(null=True),
         ),
     ]
