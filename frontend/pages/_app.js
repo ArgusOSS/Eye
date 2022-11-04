@@ -14,10 +14,10 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const {colorScheme, setColorScheme} = useState<ColorScheme>('light');
-  const toggleColorScheme = (value) => {
+
+  const [colorScheme, setColorScheme] = useState('dark');
+  const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
-  }
 
   return (
     <CacheProvider value={emotionCache}>
@@ -35,12 +35,7 @@ export default function MyApp(props) {
         <CookiesProvider>
           <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
             <MantineProvider 
-            theme={{
-            fontFamily: 'Verdana, sans-serif',
-            fontFamilyMonospace: 'Monaco, Courier, monospace',
-            headings: { fontFamily: 'Greycliff CF, sans-serif' },
-            colorScheme: "dark"
-          }}  
+            theme={{colorScheme}}  
             withGlobalStyles 
             withNormalizeCSS>
               <Component {...pageProps} />

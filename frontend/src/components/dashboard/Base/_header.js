@@ -1,10 +1,10 @@
 import { Header, Group, useMantineColorScheme, ActionIcon } from '@mantine/core';
 import { Logo } from "./_logo";
-import { IconMoon, IconMoonStars } from '@tabler/icons';
+import { IconSun, IconMoonStars } from '@tabler/icons';
 
 
 export function BaseDashboardHeader() {
-    const { colorScheme, toggleColorScheme } = useMantineColorScheme('dark');
+    const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
     return (
         <Header height={60}>
