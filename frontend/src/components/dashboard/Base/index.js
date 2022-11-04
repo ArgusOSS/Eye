@@ -5,6 +5,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { logoutUser } from "../../../../lib/auth";
 import { Navbar, Title, ScrollArea, Header, AppShell } from '@mantine/core';
 
+function MyNavbar(props) {
+  return <Navbar {...props}>Your component</Navbar>
+}
 
 export function baseDashboardLayout(props) {
   const mobile = useMediaQuery('(max-width:500px)')
@@ -16,52 +19,15 @@ export function baseDashboardLayout(props) {
   };
 
   return (
-    <AppShell
-      padding="md"
-      fixed={false}
-      navbar={
-          <Navbar 
-          width={{
-            // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
-            sm: 300,
-    
-            // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
-            lg: 400,
-    
-            // When other breakpoints do not match base width is used, defaults to 100%
-            base: 100,
-          }}
-        >
-           Application navbar
-          <Navbar.Section grow mt="xs">
-            <MainLinks />
-          </Navbar.Section>
-          <Navbar.Section>
-            <User />
-          </Navbar.Section>
-        </Navbar>
-      }
-      
-      header={
-        <Header height={60}>
-          <Group sx={{ height: '100%' }} px={20} position="apart">
-            <Logo colorScheme={colorScheme} />
-            <ActionIcon variant="default" onClick={() => toggleColorScheme()} size={30}>
-              {colorScheme === 'dark' ? <IconSun size={16} /> : <IconMoonStars size={16} />}
-            </ActionIcon>
-          </Group>
-        </Header>
-      }
-      styles={(theme) => ({
-        main: {
-          backgroundColor:
-            theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-        },
-      })}
-    >
-      <div className="row">
-        <div className="col-md-6">{props.children}</div>
+    <div className="container">
+    <div className="row justify-content-center center-screen">
+      <div styles={{border : "1px solid white"}} className="col-md-6 col-sm-12">
+        <Paper radius="md" p="xl" withBorder {...props}>
+          {props.children}
+        </Paper>
+        </div>
       </div>
-    </AppShell>
+    </div>  
   );
+
 }
