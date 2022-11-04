@@ -46,9 +46,9 @@ export function baseDashboardLayout(props) {
         },
       })}
     >
-      {/* <div className="row">
+      <div className="row">
         <div className="col-md-6">{props.children}</div>
-      </div> */}
+      </div>
     </AppShell>
   );
 }
