@@ -8,7 +8,7 @@ const styles = {
 
 export default function Status() {
   return (
-    <BaseDashboardLayout>
+    <BaseDashboardLayout activeLink="Status">
       <DashboardStatus />
     </BaseDashboardLayout>
   );
