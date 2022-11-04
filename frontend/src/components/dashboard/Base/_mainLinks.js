@@ -1,8 +1,10 @@
 import React from 'react';
-import { IconGitPullRequest, IconAlertCircle, IconMessages, IconDatabase } from '@tabler/icons';
+import { IconActivity, IconTool } from '@tabler/icons';
 import { ThemeIcon, UnstyledButton, Group, Text } from '@mantine/core';
 
-function MainLink({ icon, color, label }) {
+function MainLink({ icon, color, label, is_active }) {
+  console.log(is_active);
+
   return (
     <UnstyledButton
       sx={(theme) => ({
@@ -11,6 +13,8 @@ function MainLink({ icon, color, label }) {
         padding: theme.spacing.xs,
         borderRadius: theme.radius.sm,
         color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+
+        backgroundColor: is_active ? theme.colors.dark[5] : 'transparent',
 
         '&:hover': {
           backgroundColor:
@@ -24,19 +28,18 @@ function MainLink({ icon, color, label }) {
         </ThemeIcon>
 
         <Text size="sm">{label}</Text>
+        <Text size="sm">{is_active}</Text>
       </Group>
     </UnstyledButton>
   );
 }
 
 const data = [
-  { icon: <IconGitPullRequest size={16} />, color: 'blue', label: 'Pull Requests' },
-  { icon: <IconAlertCircle size={16} />, color: 'teal', label: 'Open Issues' },
-  { icon: <IconMessages size={16} />, color: 'violet', label: 'Discussions' },
-  { icon: <IconDatabase size={16} />, color: 'grape', label: 'Databases' },
+  { icon: <IconActivity size={16} />, color: 'blue', label: 'Status' },
+  { icon: <IconTool size={16} />, color: 'teal', label: 'Settings' },
 ];
 
-export function MainLinks() {
-  const links = data.map((link) => <MainLink {...link} key={link.label} />);
+export function MainLinks({ activeLink }) {
+  const links = data.map((link) => <MainLink {...link} key={link.label} is_active={link.label == activeLink} />);
   return <div>{links}</div>;
 }
