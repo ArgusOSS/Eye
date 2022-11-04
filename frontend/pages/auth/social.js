@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useCookies } from "react-cookie"
 
 
-export default function Login() {
+export default function Social() {
     const query = useRouter().query
     const access_token = query.access;
     const refresh_token = query.refresh;
@@ -17,7 +17,7 @@ export default function Login() {
         refresh_token: refresh_token,
     }
 
-    setCookie("user", JSON.stringify(data), {
+    setCookie("user", JSON.stringify(user), {
         path: "/",
         maxAge: 3600, // Expires after 1hr
         sameSite: true,
