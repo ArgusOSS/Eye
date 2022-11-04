@@ -34,7 +34,15 @@ export default function MyApp(props) {
       </Head>
         <CookiesProvider>
           <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-            <MantineProvider theme={{ colorScheme: "dark" }} withGlobalStyles withNormalizeCSS>
+            <MantineProvider 
+            theme={{
+            fontFamily: 'Verdana, sans-serif',
+            fontFamilyMonospace: 'Monaco, Courier, monospace',
+            headings: { fontFamily: 'Greycliff CF, sans-serif' },
+            colorScheme: "dark"
+          }}  
+            withGlobalStyles 
+            withNormalizeCSS>
               <Component {...pageProps} />
             </MantineProvider>
           </ColorSchemeProvider>

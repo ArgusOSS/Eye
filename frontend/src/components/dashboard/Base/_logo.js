@@ -4,13 +4,13 @@ export function Logo() {
     return (
         <Text
             variant="gradient"
-            gradient={{ from: 'red', to: 'yellow', deg: 45 }}
-            sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+            gradient={{ from: 'yellow', to: 'red', deg: 45 }}
+            // sx={{ fontFamily: 'Verdana, sans-serif', }}
             ta="center"
             fz="xl"
-            fw={800}
+            fw={900}
         >
-            Eye.
+            <h1>Eye.</h1>
         </Text>
     );
 }

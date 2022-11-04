@@ -22,8 +22,6 @@ export function BaseDashboardLayout(props) {
 
   const DashboardHeader = BaseDashboardHeader();
 
-  
-
   return (
     <div>
     {DashboardHeader}
