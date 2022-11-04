@@ -1,6 +1,6 @@
 import styles from "../../../../styles/Home.module.css";
 
-export function dashboardStatus() {
+export function DashboardStatus() {
     return (
         <div className="container">
             

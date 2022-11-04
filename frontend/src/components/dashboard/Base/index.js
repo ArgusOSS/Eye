@@ -4,12 +4,13 @@ import { MainLinks } from "./_mainLinks";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { logoutUser } from "../../../../lib/auth";
 import { Navbar, Title, ScrollArea, Header, AppShell } from '@mantine/core';
+import { Paper } from '@mantine/core';
 
 function MyNavbar(props) {
   return <Navbar {...props}>Your component</Navbar>
 }
 
-export function baseDashboardLayout(props) {
+export function BaseDashboardLayout(props) {
   const mobile = useMediaQuery('(max-width:500px)')
   const handleLogout = async () => {
     const response = await logoutUser();
