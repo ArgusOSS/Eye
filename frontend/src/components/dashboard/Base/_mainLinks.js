@@ -1,9 +1,11 @@
 import React from 'react';
 import { IconActivity, IconTool } from '@tabler/icons';
-import { ThemeIcon, UnstyledButton, Group, Text } from '@mantine/core';
+import { ThemeIcon, UnstyledButton, Group, Text, useMantineColorScheme } from '@mantine/core';
 import Link from 'next/link';
 
 function MainLink({ icon, color, label, is_active, dest }) {
+  const { colorScheme } = useMantineColorScheme();
+
   return (
     <Link href={dest}>
       <UnstyledButton
@@ -14,7 +16,7 @@ function MainLink({ icon, color, label, is_active, dest }) {
           borderRadius: theme.radius.sm,
           color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
 
-          backgroundColor: is_active ? theme.colors.dark[5] : 'transparent',
+          backgroundColor: is_active ? colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[2] : 'transparent',
 
           '&:hover': {
             backgroundColor:
@@ -27,7 +29,7 @@ function MainLink({ icon, color, label, is_active, dest }) {
             {icon}
           </ThemeIcon>
 
-          <Text size="sm">{label}</Text>
+          <Text size="sm" style={{ fontWeight: 'bolder' }}>{label}</Text>
         </Group>
       </UnstyledButton>
     </Link>
