@@ -3,14 +3,11 @@ import Router from "next/router";
 import { loginUser } from "../../../../lib/auth";
 import { removeToken } from "../../../../lib/token";
 import { useCookies } from "react-cookie"
-import { Divider, Button, Progress, PasswordInput, Group, TextInput, Text, Center } from '@mantine/core';
-import { useInputState } from '@mantine/hooks';
-import { IconCheck, IconX } from '@tabler/icons';
+import { Divider, Button, PasswordInput, Group, TextInput } from '@mantine/core';
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [cookie, setCookie] = useCookies(["user"])

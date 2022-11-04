@@ -34,12 +34,17 @@ a {
   min-height: 100vh;
 }
 
+.status {
+  background-color: aliceblue;
+}
+
+/* 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
-    /* color: white; */
     background: black;
   }
-}
+} */
+
