@@ -50,7 +50,7 @@ class LoginSerializer(rfs.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password", "tokens", "shirt_size"]
+        fields = ["email", "password", "tokens",]
 
     def validate(self, attrs):
         email = attrs.get("email", "")
@@ -93,7 +93,6 @@ class UserSerializer(rfs.ModelSerializer):
             "id",
             "email",
             "username",
-            "shirt_size",
             "created_at",
             "updated_at",
         )
