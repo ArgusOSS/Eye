@@ -1,17 +1,17 @@
 import { Brand } from "./_brand";
 import { User } from "./_user";
+import { Logo } from "./_logo";
 import { MainLinks } from "./_mainLinks";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { logoutUser } from "../../../../lib/auth";
-import { Navbar, Title, ScrollArea, Header, AppShell } from '@mantine/core';
-import { Paper } from '@mantine/core';
+import { Navbar, Title, ScrollArea, Header, AppShell, Group, useMantineColorScheme, ActionIcon } from '@mantine/core';
+import { IconMoon, IconMoonStars } from '@tabler/icons';
 
-function MyNavbar(props) {
-  return <Navbar {...props}>Your component</Navbar>
-}
 
 export function BaseDashboardLayout(props) {
   const mobile = useMediaQuery('(max-width:500px)')
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+
   const handleLogout = async () => {
     const response = await logoutUser();
     if (response.status == "successful") {
@@ -19,16 +19,60 @@ export function BaseDashboardLayout(props) {
     }
   };
 
-  return (
-    <div className="container">
-    <div className="row justify-content-center center-screen">
-      <div styles={{border : "1px solid white"}} className="col-md-6 col-sm-12">
-        <Paper radius="md" p="xl" withBorder {...props}>
-          {props.children}
-        </Paper>
-        </div>
-      </div>
-    </div>  
-  );
+  // const handleOnThemeChange = () => {
+  //   toggleColorScheme();
+  // }
 
+  function handleOnThemeChange () {
+    // toggleColorScheme();
+  }
+
+  return (
+    <AppShell
+      padding="md"
+      fixed={false}
+      navbar={
+          <Navbar 
+          width={{
+            // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
+            sm: 300,
+    
+            // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
+            lg: 400,
+    
+            // When other breakpoints do not match base width is used, defaults to 100%
+            base: 100,
+          }}
+        >
+          <Navbar.Section grow mt="xs">
+            <MainLinks />
+          </Navbar.Section>
+          <Navbar.Section>
+            <User />
+          </Navbar.Section>
+        </Navbar>
+      }
+      
+      header={
+        <Header height={60}>
+          <Group sx={{ height: '100%' }} px={20} position="apart">
+            <Logo colorScheme={colorScheme} />
+            <ActionIcon variant="default" onClick={handleOnThemeChange} size={30}>
+              {colorScheme === 'dark' ? <IconSun size={16} /> : <IconMoonStars size={16} />}
+            </ActionIcon>
+          </Group>
+        </Header>
+      }
+      styles={(theme) => ({
+        main: {
+          backgroundColor:
+            theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+        },
+      })}
+    >
+      <div className="row">
+        <div className="col-md-6">{props.children}</div>
+      </div>
+    </AppShell>
+  );
 }
