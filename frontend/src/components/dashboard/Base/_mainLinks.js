@@ -1,42 +1,42 @@
 import React from 'react';
 import { IconActivity, IconTool } from '@tabler/icons';
 import { ThemeIcon, UnstyledButton, Group, Text } from '@mantine/core';
+import Link from 'next/link';
 
-function MainLink({ icon, color, label, is_active }) {
-  console.log(is_active);
-
+function MainLink({ icon, color, label, is_active, dest }) {
   return (
-    <UnstyledButton
-      sx={(theme) => ({
-        display: 'block',
-        width: '100%',
-        padding: theme.spacing.xs,
-        borderRadius: theme.radius.sm,
-        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+    <Link href={dest}>
+      <UnstyledButton
+        sx={(theme) => ({
+          display: 'block',
+          width: '100%',
+          padding: theme.spacing.xs,
+          borderRadius: theme.radius.sm,
+          color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
 
-        backgroundColor: is_active ? theme.colors.dark[5] : 'transparent',
+          backgroundColor: is_active ? theme.colors.dark[5] : 'transparent',
 
-        '&:hover': {
-          backgroundColor:
-            theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-        },
-      })}
-    >
-      <Group>
-        <ThemeIcon color={color} variant="light">
-          {icon}
-        </ThemeIcon>
+          '&:hover': {
+            backgroundColor:
+              theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+          },
+        })}
+      >
+        <Group>
+          <ThemeIcon color={color} variant="light">
+            {icon}
+          </ThemeIcon>
 
-        <Text size="sm">{label}</Text>
-        <Text size="sm">{is_active}</Text>
-      </Group>
-    </UnstyledButton>
+          <Text size="sm">{label}</Text>
+        </Group>
+      </UnstyledButton>
+    </Link>
   );
 }
 
 const data = [
-  { icon: <IconActivity size={16} />, color: 'blue', label: 'Status' },
-  { icon: <IconTool size={16} />, color: 'teal', label: 'Settings' },
+  { icon: <IconActivity size={16} />, color: 'blue', label: 'Status', dest: '/dashboard/status' },
+  { icon: <IconTool size={16} />, color: 'teal', label: 'Settings', dest: '/dashboard/settings' },
 ];
 
 export function MainLinks({ activeLink }) {
