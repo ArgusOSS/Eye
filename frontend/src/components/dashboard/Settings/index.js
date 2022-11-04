@@ -1,9 +1,9 @@
 import styles from "../../../../styles/Home.module.css";
 
-export function DashboardStatus() {
+export function DashboardSettings() {
     return (
         <div className="container">
-            <h1>Status</h1>
+            <h1>Settings</h1>
         </div>
     )
 }
