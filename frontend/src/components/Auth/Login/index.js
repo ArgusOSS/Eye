@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { loginUser } from "../../../../lib/auth";
 import { removeToken } from "../../../../lib/token";
 import { useCookies } from "react-cookie"
@@ -14,6 +14,7 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [cookie, setCookie] = useCookies(["user"])
+  const router = useRouter()
 
   useEffect(() => {
     // Remove the User's token which saved before.
@@ -36,7 +37,7 @@ export function LoginForm() {
           sameSite: true,
         })
         setTimeout(() => {
-          Router.push();
+          router.push(to_forward);
         }, 1000);
       } else {
         setErrorMessage("Invalid Credentials!");
@@ -74,13 +75,15 @@ export function LoginForm() {
           label="Email"
           withAsterisk
           type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         </div>
         <div className="mb-3">
             <PasswordInput
             icon={<IconPassword size={14} /> }
-            // value={password}
-            onChange={setPassword}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Your password"
             label="Password"
             required
@@ -97,7 +100,7 @@ export function LoginForm() {
         <div className="col d-flex justify-content-center">
         <Group position="right" mt="md">
           {/* <Button type="submit">Submit</Button> */}
-          <Button type="submit" variant="gradient" gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} disabled={isLoading}>
+          <Button onSubmit={handleSubmit} type="submit" variant="gradient" gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} disabled={isLoading}>
             <Text>Login</Text>
           </Button>
         </Group>
