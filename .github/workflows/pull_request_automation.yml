@@ -36,3 +36,7 @@ jobs:
       - name: isort
         run: |
           isort . --profile black --filter-files --check-only --diff
+      - name: Lint with eslint
+        run: |
+          npm run lint
+        working-directory: ./frontend
