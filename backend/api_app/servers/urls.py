@@ -8,5 +8,5 @@ router.register(r"settings", ServerViewSet, basename="servers")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("/list", ListServerPingHistory.as_view(), name="list-server-ping"),
+    path("list", ListServerPingHistory.as_view(), name="list-server-ping"),
 ]

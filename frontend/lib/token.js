@@ -17,11 +17,15 @@ export function removeToken() {
  * @returns {string | undefined}
  */
 export function getToken() {
-  const tokens = getCookie('user').tokens;
-  return tokens.access_token;
+  const tokens = JSON.parse(
+    getCookie('user')
+  );
+  return tokens?.access_token;
 }
 
 export function getRefreshToken() {
-  const tokens = getCookie('user').tokens;
-  return tokens.refresh_token;
+  const tokens = JSON.parse(
+    getCookie('user')
+  );
+  return tokens?.refresh_token;
 }

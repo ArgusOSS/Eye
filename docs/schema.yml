@@ -401,6 +401,8 @@ components:
         avatar:
           type: string
           maxLength: 225
+        is_staff:
+          type: boolean
       required:
       - email
       - username

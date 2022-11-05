@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
+    "django_celery_beat",
     "authentication",
     "api_app",
     "api_app.core",
@@ -198,7 +199,7 @@ BROKER_CONNECTION_TIMEOUT = 10
 
 # celery configs
 # celery beat configs
-PING_SERVERS_MINUTES = 1
+PING_SERVERS_MINUTES = "*/10"  # run every 10th minute
 
 # Set redis as celery result backend
 CELERY_RESULT_BACKEND = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
@@ -207,3 +208,6 @@ CELERY_REDIS_MAX_CONNECTIONS = 1
 # Don't use pickle as serializer, json is much safer
 CELERY_TASK_SERIALIZER = "json"
 CELERY_ACCEPT_CONTENT = ["application/json"]
+
+CELERY_TIMEZONE = "UTC"
+CELERY_ENABLE_UTC = True
