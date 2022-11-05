@@ -18,9 +18,9 @@
     "@emotion/server": "latest",
     "@emotion/styled": "latest",
     "@mantine/core": "^5.6.4",
+    "@mantine/form": "^5.7.0",
     "@mantine/hooks": "^5.6.4",
     "@mui/material": "^5.10.12",
-    
     "@tabler/icons": "^1.109.0",
     "cookie": "^0.5.0",
     "cookies-next": "^2.1.1",

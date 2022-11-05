@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Server(BaseMixin):
-    name = models.CharField(default="Server", max_length=125)
+    name = models.CharField(max_length=125)
     provider = models.CharField(default="", blank=True, max_length=125)
     url = models.CharField(max_length=225)  # for frontend
     webhook_url = models.CharField(max_length=225, blank=True, default="")

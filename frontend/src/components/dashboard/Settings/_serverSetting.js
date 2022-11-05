@@ -1,6 +1,11 @@
-import { Accordion, Grid, TextInput, Switch, Box } from "@mantine/core";
+import { useState } from "react";
+import { Accordion, Grid, TextInput, Switch, Box, useMantineColorScheme } from "@mantine/core";
+import { IconCheck, IconX } from "@tabler/icons";
+import { useForm } from "@mantine/form";
 
-export default function ServerSetting({ serverName }) {
+export default function ServerSetting({ server }) {
+    const [active, setActive] = useState(server.active);
+
     const EditAccordionControl = ((props) => {
         return (
             <Box sx={(theme) => ({
@@ -9,62 +14,94 @@ export default function ServerSetting({ serverName }) {
                 padding: theme.spacing.md,
                 alignSelf: 'center'
             })}>
-                <Switch color="orange" />
+                <Switch
+                    checked={active}
+                    onChange={(event) => setActive(event.currentTarget.checked)}
+                    color="teal"
+                    size="md"
+                    thumbIcon={
+                        active ? (
+                            <IconCheck size={12} stroke={3} />
+                        ) : (
+                            <IconX size={12} stroke={3} />
+                        )
+                    }
+                />
 
                 <Accordion.Control {...props} />
             </Box>
         );
     });
 
+    const form = useForm({
+        initialValues: {
+            'active': server.active,
+            'name': server.name,
+            'provider': server.provider,
+            'url': server.url,
+            'api_url': server.api_url,
+            'webhook_url': server.webhook_url
+        },
+        validate: {
+        }
+    })
+
     return (
-        <Accordion.Item value="customization">
-                    <EditAccordionControl>{serverName}</EditAccordionControl>
-                    <Accordion.Panel>
-                        <Grid>
-                            <Grid.Col span={6}>
-                                <TextInput
-                                    placeholder="Server Name"
-                                    variant="filled"
-                                    radius="md"
-                                    withAsterisk
-                                />
-                            </Grid.Col>
-                            <Grid.Col span={6}>
-                                <TextInput
-                                    placeholder="Provider"
-                                    variant="filled"
-                                    radius="md"
-                                />
-                            </Grid.Col>
+        <Accordion.Item value={server.id.toString()}>
+            <EditAccordionControl>{server.name}</EditAccordionControl>
+            <Accordion.Panel>
+                <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                    <Grid>
+                        <Grid.Col span={6}>
+                            <TextInput
+                                placeholder="Server Name"
+                                variant="filled"
+                                radius="md"
+                                withAsterisk
+                                {...form.getInputProps('name')}
+                            />
+                        </Grid.Col>
+                        <Grid.Col span={6}>
+                            <TextInput
+                                placeholder="Provider"
+                                variant="filled"
+                                radius="md"
+                                {...form.getInputProps('provider')}
+                            />
+                        </Grid.Col>
 
-                            <Grid.Col>
-                                <TextInput
-                                    placeholder="Frontend URL"
-                                    variant="filled"
-                                    radius="md"
-                                    withAsterisk
-                                />
-                            </Grid.Col>
+                        <Grid.Col>
+                            <TextInput
+                                placeholder="Frontend URL"
+                                variant="filled"
+                                radius="md"
+                                withAsterisk
+                                {...form.getInputProps('url')}
+                            />
+                        </Grid.Col>
 
-                            <Grid.Col>
-                                <TextInput
-                                    placeholder="API URL"
-                                    variant="filled"
-                                    radius="md"
-                                    withAsterisk
-                                />
-                            </Grid.Col>
+                        <Grid.Col>
+                            <TextInput
+                                placeholder="API URL"
+                                variant="filled"
+                                radius="md"
+                                withAsterisk
+                                {...form.getInputProps('api_url')}
+                            />
+                        </Grid.Col>
 
-                            <Grid.Col>
-                                <TextInput
-                                    placeholder="Webhook URL"
-                                    variant="filled"
-                                    radius="md"
-                                    withAsterisk
-                                />
-                            </Grid.Col>
-                        </Grid>
-                    </Accordion.Panel>
-                </Accordion.Item>
+                        <Grid.Col>
+                            <TextInput
+                                placeholder="Webhook URL"
+                                variant="filled"
+                                radius="md"
+                                withAsterisk
+                                {...form.getInputProps('webhook_url')}
+                            />
+                        </Grid.Col>
+                    </Grid>
+                </form>
+            </Accordion.Panel>
+        </Accordion.Item>
     );
 }
