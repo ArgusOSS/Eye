@@ -3,7 +3,9 @@ import Router from "next/router";
 import { loginUser } from "../../../../lib/auth";
 import { removeToken } from "../../../../lib/token";
 import { useCookies } from "react-cookie"
-import { Divider, Button, PasswordInput, Group, TextInput, Text } from '@mantine/core';
+import { Divider, Button, PasswordInput, Group, TextInput, Text, Image, ActionIcon } from '@mantine/core';
+import Link from 'next/link';
+import { IconBrandGoogle } from "@tabler/icons";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -45,18 +47,23 @@ export function LoginForm() {
     }
   }
 
+  const GoogleIcon = () => {
+    return (
+      <Image src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width={20} height={20} />
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <fieldset className="text-light">
         <div className="row">
             <div className="col d-flex justify-content-center">
-              <a className="btn btn-outline-light" href="/api/authentication/google" role="button">
-                <img width="20px" style={{marginBottom: "3px", marginRight: "5px"}} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-                Login with Google
-              </a>
+              <Button variant={"outline"} leftIcon={<GoogleIcon />}>
+                <Text>Login with Google</Text>
+              </Button>
             </div>
         </div>
-        <Divider label="Or continue with email" labelPosition="center" my="lg" />
+        <Divider label={<Text>Or continue with email</Text>} labelPosition="center" my="lg" />
         <div className="mb-3">
         <TextInput
           placeholder="example@gmail.com"
