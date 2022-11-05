@@ -4,6 +4,7 @@ import { loginUser } from "../../../../lib/auth";
 import { removeToken } from "../../../../lib/token";
 import { useCookies } from "react-cookie"
 import { Divider, Button, PasswordInput, Group, TextInput, Text, Image, ActionIcon } from '@mantine/core';
+import { IconPassword, IconAt } from '@tabler/icons';
 import Link from 'next/link';
 import { IconBrandGoogle } from "@tabler/icons";
 
@@ -58,14 +59,17 @@ export function LoginForm() {
       <fieldset className="text-light">
         <div className="row">
             <div className="col d-flex justify-content-center">
-              <Button variant={"outline"} leftIcon={<GoogleIcon />}>
-                <Text>Login with Google</Text>
-              </Button>
+              <a href="/api/authentication/google" role="button">
+                <Button color="orange.4" variant={"outline"} leftIcon={<GoogleIcon />}>
+                  <Text>Login with Google</Text>
+                </Button>
+              </a>
             </div>
         </div>
-        <Divider label={<Text>Or continue with email</Text>} labelPosition="center" my="lg" />
+        <Divider color="orange.6"  label={<Text>Or continue with email</Text>} labelPosition="center" my="lg" />
         <div className="mb-3">
         <TextInput
+          icon={<IconAt size={14} /> }
           placeholder="example@gmail.com"
           label="Email"
           withAsterisk
@@ -74,6 +78,7 @@ export function LoginForm() {
         </div>
         <div className="mb-3">
             <PasswordInput
+            icon={<IconPassword size={14} /> }
             // value={password}
             onChange={setPassword}
             placeholder="Your password"
@@ -92,7 +97,7 @@ export function LoginForm() {
         <div className="col d-flex justify-content-center">
         <Group position="right" mt="md">
           {/* <Button type="submit">Submit</Button> */}
-          <Button color="ocean-blue" type="submit" className="btn btn-light" disabled={isLoading}>
+          <Button type="submit" variant="gradient" gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} disabled={isLoading}>
             <Text>Login</Text>
           </Button>
         </Group>
