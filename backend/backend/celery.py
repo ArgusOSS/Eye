@@ -12,7 +12,7 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 app.conf.beat_schedule = {
     "ping_servers": {
-        "task": "backend.tasks.ping_servers",
+        "task": "backend.tasks.PingServers",
         "schedule": crontab(minute=settings.PING_SERVERS_MINUTES),
         "options": {"queue": "default"},
     },
