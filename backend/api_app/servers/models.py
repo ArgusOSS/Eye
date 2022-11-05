@@ -26,4 +26,7 @@ class ServerPingHistory(BaseMixin):
     time_taken = models.DurationField(default=timedelta(seconds=0))
 
     def __str__(self):
-        return f"{self.server} - Reachable: {self.status_code}"
+        return (
+            f"{self.server} - Reachable: {self.status_code}"
+            f"Time taken: {self.time_taken}"
+        )

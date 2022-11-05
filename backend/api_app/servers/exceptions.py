@@ -1,0 +1,2 @@
+class LinkNotSetUpProperlyException(Exception):
+    pass
