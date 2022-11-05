@@ -38,7 +38,7 @@ jobs:
           isort . --profile black --filter-files --check-only --diff
       - name: Install dependencies
         run: |
-          npm install next react react-dom
+          npm install next
         working-directory: ./frontend
       - name: Lint with eslint
         run: |
