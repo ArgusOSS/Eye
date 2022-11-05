@@ -196,6 +196,10 @@ if not BROKER_URL.endswith(BROKER_HEARTBEAT):
 BROKER_POOL_LIMIT = 1
 BROKER_CONNECTION_TIMEOUT = 10
 
+# celery configs
+# celery beat configs
+PING_SERVERS_MINUTES = 1
+
 # Set redis as celery result backend
 CELERY_RESULT_BACKEND = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
 CELERY_REDIS_MAX_CONNECTIONS = 1
