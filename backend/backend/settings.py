@@ -199,7 +199,7 @@ BROKER_CONNECTION_TIMEOUT = 10
 
 # celery configs
 # celery beat configs
-PING_SERVERS_MINUTES = "*/1"
+PING_SERVERS_MINUTES = "*/10"  # run every 10th minute
 
 # Set redis as celery result backend
 CELERY_RESULT_BACKEND = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)

@@ -64,7 +64,10 @@ export function DashboardSettings() {
                     </Grid.Col>
                 </Grid>
 
-                <Button sx={(theme) => ({
+                <Button 
+                variant="gradient" 
+                gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} 
+                sx={(theme) => ({
                     marginTop: theme.spacing.md,
                     float: 'right'
                 })} >ADD</Button>
