@@ -27,7 +27,7 @@ export function BaseDashboardLayout(props) {
     {DashboardHeader}
     <AppShell
       padding="md"
-      fixed={false}
+      fixed={true}
       navbar={
           <Navbar 
           width={{
@@ -59,7 +59,7 @@ export function BaseDashboardLayout(props) {
       })}
     >
       <div className="row">
-        <div className="col-md-6">{props.children}</div>
+        <div className="col">{props.children}</div>
       </div>
     </AppShell>
     </div>
