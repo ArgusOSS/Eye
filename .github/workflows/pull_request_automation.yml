@@ -36,6 +36,10 @@ jobs:
       - name: isort
         run: |
           isort . --profile black --filter-files --check-only --diff
+      - name: Install dependencies
+        run: |
+          npm install next react react-dom
+        working-directory: ./frontend
       - name: Lint with eslint
         run: |
           npm run lint
