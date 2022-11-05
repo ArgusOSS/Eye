@@ -6,7 +6,7 @@ from celery.utils.log import get_task_logger
 logger = get_task_logger(__name__)
 
 
-@shared_task
+@shared_task(soft_time_limit=10000)
 def ping_server(server: Server):
     logger.info(f"Running server ping for {server}")
     ps(server=server)

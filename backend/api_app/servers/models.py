@@ -18,8 +18,10 @@ class ServerPingHistory(BaseMixin):
     # pinged_back == true means that the server was up.
     pinged_back = models.BooleanField(default=True)
     server = models.ForeignKey(to=Server, on_delete=models.CASCADE)
+    url_pinged = models.CharField(max_length=225)
     status_code = models.IntegerField(null=True)
     response_html = models.CharField(max_length=255, null=True)
+    time_taken = models.DurationField()
 
     def __str__(self):
         return f"{self.server} - Reachable: {self.status_code}"

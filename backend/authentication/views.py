@@ -112,7 +112,7 @@ class GoogleLoginCallbackView(APIView):
         user = token.get("userinfo")
         user_email = user.get("email")
         user_name = user.get("name")
-        image = user.get("image").get("url")
+        # image = user.get("image").get("url")
         try:
             return User.objects.get(email=user_email)
         except User.DoesNotExist:
@@ -122,7 +122,7 @@ class GoogleLoginCallbackView(APIView):
                 username=user_name,
                 password=None,
                 auth_provider="google",
-                avatar=image,
+                # avatar=image,
             )
 
     def get(self, request):
