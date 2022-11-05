@@ -1,8 +1,6 @@
 import { getToken, removeToken } from "./token";
 import cookie from "cookie"
-import { LOGIN_URL, LOGOUT_URL, REGISTER_URL, ME_URL } from "./constants";
-
-
+import { LOGOUT_URL, REGISTER_URL, ME_URL } from "./constants";
 
 export const loginUser = async (email, password) => {
   const res = await fetch(`/api/authentication/login`, {
@@ -36,26 +34,17 @@ export const logoutUser = async () => {
   return data;
 };
 
-export const registerUser = async (payload) => {
-  const res = await fetch(REGISTER_URL, {
-    body: JSON.stringify(payload),
-    method: "POST",
-    headers: {"Content-type": "application/json;charset=UTF-8"}
-  });
-  const data = await res.json();
-  return data;
-};
-
 export const whoAmI = async () => {
-  const res = await fetch(ME_URL, {
+  const res = await fetch("/api/authentication/me", {
     headers: {
       Authorization: `Bearer ${getToken()}`,
       "Content-type": "application/json;charset=UTF-8"
     },
     method: "GET",
   });
-  const data = await res.json()[0];
-  return data;
+  const data = await res.json()
+  const result = data?.results[0];
+  return result;
 };
 
 export function parseCookies(req) {
