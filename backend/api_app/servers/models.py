@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from api_app.core.models import BaseMixin
 from django.db import models
 
@@ -21,7 +23,7 @@ class ServerPingHistory(BaseMixin):
     url_pinged = models.CharField(max_length=225)
     status_code = models.IntegerField(null=True)
     response_html = models.CharField(max_length=255, null=True)
-    time_taken = models.DurationField()
+    time_taken = models.DurationField(default=timedelta(seconds=0))
 
     def __str__(self):
         return f"{self.server} - Reachable: {self.status_code}"

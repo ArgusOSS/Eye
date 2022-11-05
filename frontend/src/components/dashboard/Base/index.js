@@ -49,7 +49,7 @@ export function BaseDashboardLayout(props) {
           </Navbar.Section>
         </Navbar>
       }
-      
+
       // header={DashboardHeader}
       styles={(theme) => ({
         main: {
