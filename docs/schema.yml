@@ -234,6 +234,44 @@ paths:
           description: ''
       tags:
       - servers
+  /servers/list:
+    get:
+      operationId: listServerPingHistorys
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServerHistory'
+          description: ''
+      tags:
+      - servers
   /authentication/login:
     post:
       operationId: createLogin
@@ -399,6 +437,41 @@ components:
           type: boolean
       required:
       - url
+    ServerHistory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        pinged_back:
+          type: boolean
+        url_pinged:
+          type: string
+          maxLength: 225
+        status_code:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          nullable: true
+        response_html:
+          type: string
+          nullable: true
+          maxLength: 255
+        time_taken:
+          type: string
+        server:
+          type: integer
+      required:
+      - url_pinged
+      - server
     Login:
       type: object
       properties:
