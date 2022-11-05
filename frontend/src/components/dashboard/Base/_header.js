@@ -7,7 +7,7 @@ export function BaseDashboardHeader() {
     const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
     return (
-        <Header height={60}>
+        <Header fixed={true} height={60}>
             <Group sx={{ height: '100%' }} px={20} position="apart">
             <Logo colorScheme={colorScheme} />
                 <ActionIcon variant="default" onClick={() => toggleColorScheme()} size={30}>
