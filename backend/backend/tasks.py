@@ -11,6 +11,7 @@ logger = get_task_logger(__name__)
 @app.task(name="PingServer", soft_time_limit=100)
 def PingServer(server_id: int):
     server = Server.objects.get(server_id)
+    logger.log(f"Starting to ping server {server}")
     crons.ping_server(server=server)
 
 

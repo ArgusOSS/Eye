@@ -44,6 +44,9 @@ services:
     container_name: celery_eye
     volumes:
       - "./:/app"
+    networks:
+      default:
+      internal:
     entrypoint: /app/entrypoint_celery.sh
     env_file:
       - ./.env
@@ -61,6 +64,9 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - "./:/app"
+    networks:
+      default:
+      internal:
     container_name: celery_beat_eye
     entrypoint: /app/entrypoint_beat_celery.sh
     env_file:
@@ -76,16 +82,20 @@ services:
   rabbit:
     hostname: rabbit
     image: rabbitmq:3-management
+    networks:
+      default:
+      internal:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=mypass  # Redis - result backend
 
   redis:
     container_name: redis_app_eye
+    networks:
+      default:
+      internal:
     image: redis:alpine
     hostname: redis
-  
-
 
 networks:
     default:
