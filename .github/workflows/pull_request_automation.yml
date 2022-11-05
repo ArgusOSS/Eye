@@ -38,7 +38,7 @@ jobs:
           isort . --profile black --filter-files --check-only --diff
       - name: Install dependencies
         run: |
-          npm install next
+          npm install next --legacy-peer-deps
         working-directory: ./frontend
       - name: Lint with eslint
         run: |
