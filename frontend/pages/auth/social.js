@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import Router from 'next/router';
 import { useEffect } from 'react';
 import { useCookies } from "react-cookie"
 
 
 export default function Social() {
-    const query = useRouter().query
+    const router = useRouter()
+    const query = router.query
     const access_token = query.access;
     const refresh_token = query.refresh;
     const [cookie, setCookie] = useCookies(["user"])
@@ -24,7 +24,7 @@ export default function Social() {
     })
 
     useEffect(() => {
-        Router.push(to_forward);
+        router.push(to_forward);
     },[]);
 
     return (

@@ -23,7 +23,7 @@ function NewServerModal({ closeModal }) {
             name: '',
             provider: '',
             url: '',
-            api_url: '',
+            api_ping_url: '',
             webhook_url: ''
         },
         validate: {
@@ -84,7 +84,10 @@ function NewServerModal({ closeModal }) {
                 </Grid.Col>
             </Grid>
 
-            <Button type="submit" sx={(theme) => ({
+            <Button 
+                variant="gradient" 
+                gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} 
+                type="submit" sx={(theme) => ({
                 marginTop: theme.spacing.md,
                 float: 'right'
             })} >ADD</Button>
@@ -126,60 +129,6 @@ export function DashboardSettings() {
             >
 
                 <NewServerModal closeModal={() => onCloseNewServerModal()} />
-
-                <Grid>
-                    <Grid.Col span={6}>
-                        <TextInput
-                            placeholder="Server Name"
-                            variant="filled"
-                            radius="md"
-                            withAsterisk
-                        />
-                    </Grid.Col>
-                    <Grid.Col span={6}>
-                        <TextInput
-                            placeholder="Provider"
-                            variant="filled"
-                            radius="md"
-                        />
-                    </Grid.Col>
-
-                    <Grid.Col>
-                        <TextInput
-                            placeholder="Frontend URL"
-                            variant="filled"
-                            radius="md"
-                            withAsterisk
-                        />
-                    </Grid.Col>
-
-                    <Grid.Col>
-                        <TextInput
-                            placeholder="API URL"
-                            variant="filled"
-                            radius="md"
-                            withAsterisk
-                        />
-                    </Grid.Col>
-
-                    <Grid.Col>
-                        <TextInput
-                            placeholder="Webhook URL"
-                            variant="filled"
-                            radius="md"
-                            withAsterisk
-                        />
-                    </Grid.Col>
-                </Grid>
-
-                <Button 
-                variant="gradient" 
-                gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} 
-                sx={(theme) => ({
-                    marginTop: theme.spacing.md,
-                    float: 'right'
-                })} >ADD</Button>
-
             </Modal>
 
             <Group position="apart">

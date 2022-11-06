@@ -1,3 +1,4 @@
+import datetime
 import time
 
 import requests
@@ -20,22 +21,25 @@ def ping_server(server: Server, mode="api"):
         raise LinkNotSetUpProperlyException(
             f"URL to be pinged for {server} is null." "Raising exception."
         )
-    logger.log("Started ping for server")
+    logger.info("Started ping for server")
     try:
         start_time = time.monotonic()
         r = requests.get(url)
         end_time = time.monotonic()
-        time_taken = time.timedelta(seconds=end_time - start_time)
+        time_taken = datetime.timedelta(seconds=end_time - start_time)
+        response_mimetype = r.headers.get("Content-Type")
         server_ping = ServerPingHistory.objects.create(
             server=server,
             status_code=r.status_code,
             response_html=r.text,
             url_pinged=url,
             time_taken=time_taken,
+            response_mimetype=response_mimetype,
         )
     except (Timeout, ConnectionError, RequestException, HTTPError):
-        end_time = time.monotonic()
-        time_taken = time.timedelta(seconds=end_time - start_time)
+        # in the future, implement retrying thrice
+        end_time = datetime.monotonic()
+        time_taken = datetime.timedelta(seconds=end_time - start_time)
         server_ping = ServerPingHistory.objects.create(
             pinged_back=False,
             server=server,

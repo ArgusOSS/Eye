@@ -11,4 +11,4 @@ exclude =
     docs,
     migrations,
     virtualenv
-    .env
+    .envc
