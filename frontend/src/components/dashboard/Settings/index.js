@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import styles from "../../../../styles/Home.module.css";
 import { Text, Accordion, Grid, Group, ActionIcon, Flex, Container, Modal, TextInput, Button } from "@mantine/core";
 import { IconPlus, IconDots } from '@tabler/icons';
 import ServerSetting from "./_serverSetting";
 import { useForm } from '@mantine/form';
+import { fetchServers } from '../../../api/servers';
 
 function NewServerModal({ closeModal }) {
     const createNewServer = ((data) => {
@@ -99,24 +99,20 @@ export function DashboardSettings() {
     const [newServerModalOpened, setNewServerModalOpened] = useState(false);
     const [servers, setServers] = useState([]);
 
-    const fetchServers = (() => {
-        fetch('/api/servers/settings')
-            .then((resp) => resp.json())
-            .then((json) => setServers(json.results))
-            .catch((e) => console.error(e))
-    })
-
     useEffect(() => {
         fetchServers()
+            .then((json) => setServers(json.results))
     }, [])
 
     const openNewServerModal = (() => {
         setNewServerModalOpened(true);
     })
 
-    const onCloseNewServerModal = (() => {
+    const onCloseNewServerModal = (async () => {
         setNewServerModalOpened(false);
-        fetchServers();
+        
+        fetchServers()
+            .then((json) => setServers(json.results))
     })
 
     return (
@@ -138,7 +134,7 @@ export function DashboardSettings() {
 
             <Accordion variant="separated" radius="lg">
                 {servers.map((server) => {
-                    return <ServerSetting server={server} key={server.id}/>
+                    return <ServerSetting server={server} key={server.id} />
                 })}
             </Accordion>
         </Container>
