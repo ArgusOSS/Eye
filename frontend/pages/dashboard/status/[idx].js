@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 
 export default function DetailedServerStatus() {
     const router = useRouter();
-    const { id } = router.query;
+    const { idx } = router.query;
 
     return (
         <BaseDashboardLayout activeLink="Status">
-          <DashboardDetailedServerStatus id={id}/>
+          <DashboardDetailedServerStatus idx={idx}/>
         </BaseDashboardLayout>
       );
 }
