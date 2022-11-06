@@ -437,6 +437,10 @@ components:
           maxLength: 225
         active:
           type: boolean
+        api_percentage_uptime:
+          type: number
+        frontend_percentage_uptime:
+          type: number
       required:
       - name
       - url
@@ -463,9 +467,6 @@ components:
           type: integer
           maximum: 2147483647
           minimum: -2147483648
-          nullable: true
-        response_html:
-          type: string
           nullable: true
         time_taken:
           type: string
