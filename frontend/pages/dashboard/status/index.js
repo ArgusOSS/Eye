@@ -1,5 +1,5 @@
-import { BaseDashboardLayout } from "../../src/components/dashboard/Base";
-import { DashboardStatus } from "../../src/components/dashboard/Status";
+import { BaseDashboardLayout } from "../../../src/components/dashboard/Base";
+import { DashboardStatus } from "../../../src/components/dashboard/Status";
 
 const styles = {
   marginTop: 30,

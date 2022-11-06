@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Text, Accordion, Grid, Group, ActionIcon, Flex, Container, Modal, TextInput, Button } from "@mantine/core";
-import { IconPlus, IconDots } from '@tabler/icons';
+import { IconPlus, IconCheck } from '@tabler/icons';
 import ServerSetting from "./_serverSetting";
 import { useForm } from '@mantine/form';
 import { fetchServers } from '../../../api/servers';
+import { showNotification } from "@mantine/notifications";
 
 function NewServerModal({ closeModal }) {
     const createNewServer = ((data) => {
@@ -113,6 +114,26 @@ export function DashboardSettings() {
         
         fetchServers()
             .then((json) => setServers(json.results))
+        
+            showNotification({
+                title: 'Server added Successfully',
+                icon: <IconCheck />,
+                styles: (theme) => ({
+                  root: {
+                    backgroundColor: theme.colors.blue[6],
+                    borderColor: theme.colors.blue[6],
+    
+                    '&::before': { backgroundColor: theme.white },
+                  },
+    
+                  title: { color: theme.white },
+                  description: { color: theme.white },
+                  closeButton: {
+                    color: theme.white,
+                    '&:hover': { backgroundColor: theme.colors.blue[7] },
+                  },
+                }),
+              })
     })
 
     return (
