@@ -47,7 +47,11 @@ export default function ServerSetting({ server }) {
     })
 
     return (
-        <Accordion.Item value={server.id.toString()}>
+        <Accordion.Item sx={(theme) => ({
+            '&:hover': {
+                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[1],
+            }
+        })} value={server.id.toString()}>
             <EditAccordionControl>{server.name}</EditAccordionControl>
             <Accordion.Panel>
                 <form onSubmit={form.onSubmit((values) => console.log(values))}>

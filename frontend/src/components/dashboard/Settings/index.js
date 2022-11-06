@@ -132,7 +132,9 @@ export function DashboardSettings() {
                 <ActionIcon onClick={openNewServerModal}><IconPlus /></ActionIcon>
             </Group>
 
-            <Accordion variant="separated" radius="lg">
+            <Accordion variant="separated" radius="lg" sx={(theme) => ({
+                marginTop: theme.spacing.md,
+            })}>
                 {servers.map((server) => {
                     return <ServerSetting server={server} key={server.id} />
                 })}

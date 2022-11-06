@@ -6,6 +6,7 @@ export function AtAGlance() {
             <Text size="36px" weight={900}>AT A GLANCE</Text>
             <Paper sx={(theme) => ({
                 padding: theme.spacing.md,
+                marginTop: theme.spacing.md,
             })}>
                 <Text>Test</Text>
             </Paper>

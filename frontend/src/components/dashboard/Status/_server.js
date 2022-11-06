@@ -3,6 +3,10 @@ import { createStyles, Text, Card, RingProgress, Group } from '@mantine/core';
 const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+
+    '&:hover': {
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+      }
   },
 
   label: {
@@ -40,16 +44,25 @@ const useStyles = createStyles((theme) => ({
 
 export function Server({ server }) {
   const { classes, theme } = useStyles();
-//   const items = stats.map((stat) => (
-//     <div key={stat.label}>
-//       <Text className={classes.label}>{stat.value}</Text>
-//       <Text size="xs" color="dimmed">
-//         {stat.label}
-//       </Text>
-//     </div>
-//   ));
 
-    const getUptime = (() => {
+ const stats = [
+    { label: 'Previous Latency', value: '12ms' },
+ ]
+
+  const items = stats.map((stat) => (
+    <div key={stat.label}>
+      <Text className={classes.label}>{stat.value}</Text>
+      <Text size="xs" color="dimmed">
+        {stat.label}
+      </Text>
+    </div>
+  ));
+
+    const getFrontendUptime = (() => {
+        return Math.floor(Math.random() * 100);
+    });
+
+    const getAPIUptime = (() => {
         return Math.floor(Math.random() * 100);
     });
 
@@ -60,15 +73,16 @@ export function Server({ server }) {
           <Text size="xl" className={classes.label}>
             {server.name}
           </Text>
-          {/* <div>
+          <div>
             <Text className={classes.lead} mt={30}>
-              {completed}
+              0.7
             </Text>
             <Text size="xs" color="dimmed">
-              Completed
+                Reliability Index
             </Text>
-          </div> */}
-          {/* <Group mt="lg">{items}</Group> */}
+          </div>
+
+          <Group mt="lg">{items}</Group>
         </div>
 
         <div className={classes.ring}>
@@ -76,14 +90,33 @@ export function Server({ server }) {
             roundCaps
             thickness={6}
             size={150}
-            sections={[{ value: getUptime(), color: theme.primaryColor }]}
+            sections={[{ value: getFrontendUptime(), color: 'yellow' }]}
             label={
               <div>
                 <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                  {getUptime()}%
+                  {getFrontendUptime()}%
                 </Text>
                 <Text align="center" size="xs" color="dimmed">
                   Uptime
+                </Text>
+              </div>
+            }
+          />
+        </div>
+
+        <div className={classes.ring}>
+          <RingProgress
+            roundCaps
+            thickness={6}
+            size={150}
+            sections={[{ value: getAPIUptime(), color: 'orange' }]}
+            label={
+              <div>
+                <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
+                  {getAPIUptime()}%
+                </Text>
+                <Text align="center" size="xs" color="dimmed">
+                  API Uptime
                 </Text>
               </div>
             }
