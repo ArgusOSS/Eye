@@ -63,6 +63,13 @@ def ping_server(server: Server, mode="api"):
     except LinkNotSetUpProperlyException:
         logger.error(f"{server} doesn't have the url for mode {mode}")
 
+    if mode == "api":
+        server.api_last_ping_status = server_ping.pinged_back
+    else:
+        server.frontend_last_ping_status = server_ping.pinged_back
+
+    server.save()
+
     logger.info("Now triggering Calculate Uptime..")
 
     app.send_task("CalculateUptime", kwargs=dict(server_id=server.id, mode=mode))
