@@ -17,8 +17,9 @@ export function Servers() {
 
             <Paper sx={(theme) => ({
                 padding: theme.spacing.md,
+                marginTop: theme.spacing.md,
             })}>
-                <SimpleGrid cols={3}>
+                <SimpleGrid cols={2}>
                     {servers.map((server) => <Server server={server}/>)}
                 </SimpleGrid>
             </Paper>
