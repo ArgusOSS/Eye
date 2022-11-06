@@ -1,4 +1,3 @@
-# from rest_framework import serializers as rfs
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
