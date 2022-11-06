@@ -497,8 +497,16 @@ components:
           type: boolean
         api_percentage_uptime:
           type: number
+        api_reliability_index:
+          type: number
+        api_last_ping_status:
+          type: boolean
         frontend_percentage_uptime:
           type: number
+        frontend_reliability_index:
+          type: number
+        frontend_last_ping_status:
+          type: boolean
       required:
       - name
       - url
