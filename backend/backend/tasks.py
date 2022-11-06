@@ -35,7 +35,12 @@ def CalculateUptime(server_id: int, mode: str = "frontend"):
     # euler's constant
     mean_uptime = up / total
     percentage_uptime = mean_uptime * 100
-    poisson = (mean_uptime**0) * (e**-mean_uptime) / math.factorial(0)
+    expected_uptime = 1
+    poisson = (
+        (mean_uptime**expected_uptime)
+        * (e**-mean_uptime)
+        / math.factorial(expected_uptime)
+    )
 
     if mode == "frontend":
         server.frontend_percentage_uptime = percentage_uptime
