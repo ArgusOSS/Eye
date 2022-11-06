@@ -9,7 +9,6 @@ export function DashboardDetailedServerStatus({ idx }) {
     const [server, setServer] = useState({});
     const [history, setHistory] = useState({});
 
-
     useEffect(() => {
         if (idx === undefined) return;
 

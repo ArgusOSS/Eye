@@ -1,3 +1,4 @@
+import datetime
 import math
 
 from api_app.servers import crons
@@ -20,9 +21,11 @@ def CalculateUptime(server_id: int, mode: str = "frontend"):
 
     # Ideally, take data from last 7 days.
     # or maybe even less.
-    ping_history = ServerPingHistory.objects.filter(server=server).order_by(
-        "-created_at"
-    )
+    date_today = datetime.datetime.now()
+    date_seven_days_ago = str((date_today - datetime.timedelta(days=7)).date())
+    ping_history = ServerPingHistory.objects.filter(
+        server=server, created_at__range=[date_seven_days_ago, str(date_today)]
+    ).order_by("-created_at")
 
     total = 0
     up = 0

@@ -6,7 +6,6 @@ import { Servers } from "./_servers";
 export function DashboardStatus() {
     return (
         <Container>
-            <AtAGlance />
             <Space h="xl" />
             <Servers />
         </Container>

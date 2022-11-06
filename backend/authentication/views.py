@@ -111,19 +111,22 @@ class GoogleLoginCallbackView(APIView):
             raise AuthenticationFailed("OAuth authentication error.")
         user = token.get("userinfo")
         user_email = user.get("email")
-        user_name = user.get("name")
+        # user_name = user.get("name")
         # image = user.get("image").get("url")
         try:
             return User.objects.get(email=user_email)
         except User.DoesNotExist:
-            logging.info("[Google Oauth] User does not exist. Creating new user.")
-            return User.objects.create_user(
-                email=user_email,
-                username=user_name,
-                password=None,
-                auth_provider="google",
-                # avatar=image,
+            logging.info("[Google Oauth] User does not exist. Won't create a new one.")
+            return AuthenticationFailed(
+                "User email didn't exist in the database before."
             )
+            # return User.objects.create_user(
+            #     email=user_email,
+            #     username=user_name,
+            #     password=None,
+            #     auth_provider="google",
+            #     # avatar=image,
+            # )
 
     def get(self, request):
         return self.post(request)

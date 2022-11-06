@@ -76,7 +76,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 500,
+    "PAGE_SIZE": 50,
 }
 
 AUTH_USER_MODEL = "authentication.User"
@@ -199,7 +199,7 @@ BROKER_CONNECTION_TIMEOUT = 10
 
 # celery configs
 # celery beat configs
-PING_SERVERS_MINUTES = "*/1"  # run every 10th minute
+PING_SERVERS_MINUTES = "*/10"  # run every 10th minute
 
 # Set redis as celery result backend
 CELERY_RESULT_BACKEND = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
