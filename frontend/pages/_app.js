@@ -7,6 +7,7 @@ import createEmotionCache from '../src/createEmotionCache';
 import { CacheProvider } from '@emotion/react';
 import { ColorSchemeProvider, MantineProvider, ColorScheme } from '@mantine/core';
 import { useState } from 'react';
+import { NotificationsProvider } from '@mantine/notifications';
 
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -34,12 +35,14 @@ export default function MyApp(props) {
       </Head>
         <CookiesProvider>
           <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-            <MantineProvider 
-            theme={{colorScheme}}  
-            withGlobalStyles 
-            withNormalizeCSS>
-              <Component {...pageProps} />
-            </MantineProvider>
+            <NotificationsProvider>
+              <MantineProvider 
+              theme={{colorScheme}}  
+              withGlobalStyles 
+              withNormalizeCSS>
+                <Component {...pageProps} />
+              </MantineProvider>
+            </NotificationsProvider>
           </ColorSchemeProvider>
         </CookiesProvider>
     </CacheProvider>
