@@ -11,6 +11,8 @@ class Server(BaseMixin):
     webhook_url = models.CharField(max_length=225, blank=True, default="")
     api_ping_url = models.CharField(max_length=225, blank=True, default="")  # for API
     active = models.BooleanField(default=True)
+    api_percentage_uptime = models.FloatField(default=0)
+    frontend_percentage_uptime = models.FloatField(default=0)
 
     def __str__(self):
         return f"{self.name}:{self.url}"
@@ -22,7 +24,6 @@ class ServerPingHistory(BaseMixin):
     server = models.ForeignKey(to=Server, on_delete=models.CASCADE)
     url_pinged = models.CharField(max_length=225)
     status_code = models.IntegerField(null=True)
-    response_html = models.TextField(null=True)
     time_taken = models.DurationField(default=timedelta(seconds=0))
     # making this nullable because
     # it is possbile that nothing has been specified
