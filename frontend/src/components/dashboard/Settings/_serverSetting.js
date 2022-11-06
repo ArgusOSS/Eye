@@ -39,7 +39,7 @@ export default function ServerSetting({ server }) {
             'name': server.name,
             'provider': server.provider,
             'url': server.url,
-            'api_url': server.api_url,
+            'api_ping_url': server.api_ping_url,
             'webhook_url': server.webhook_url
         },
         validate: {
@@ -86,7 +86,7 @@ export default function ServerSetting({ server }) {
                                 variant="filled"
                                 radius="md"
                                 withAsterisk
-                                {...form.getInputProps('api_url')}
+                                {...form.getInputProps('api_ping_url')}
                             />
                         </Grid.Col>
 

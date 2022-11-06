@@ -199,11 +199,13 @@ BROKER_CONNECTION_TIMEOUT = 10
 
 # celery configs
 # celery beat configs
-PING_SERVERS_MINUTES = "*/10"  # run every 10th minute
+PING_SERVERS_MINUTES = "*/1"  # run every 10th minute
 
 # Set redis as celery result backend
 CELERY_RESULT_BACKEND = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+# RESULT_BACKEND = "django-db"
 CELERY_REDIS_MAX_CONNECTIONS = 1
+CELERY_QUEUES = os.environ.get("CELERY_QUEUES", "default").split(",")
 
 # Don't use pickle as serializer, json is much safer
 CELERY_TASK_SERIALIZER = "json"

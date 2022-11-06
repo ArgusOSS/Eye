@@ -23,7 +23,7 @@ function NewServerModal({ closeModal }) {
             name: '',
             provider: '',
             url: '',
-            api_url: '',
+            api_ping_url: '',
             webhook_url: ''
         },
         validate: {
@@ -84,7 +84,10 @@ function NewServerModal({ closeModal }) {
                 </Grid.Col>
             </Grid>
 
-            <Button type="submit" sx={(theme) => ({
+            <Button 
+                variant="gradient" 
+                gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} 
+                type="submit" sx={(theme) => ({
                 marginTop: theme.spacing.md,
                 float: 'right'
             })} >ADD</Button>
@@ -122,7 +125,6 @@ export function DashboardSettings() {
             >
 
                 <NewServerModal closeModal={() => onCloseNewServerModal()} />
-
             </Modal>
 
             <Group position="apart">

@@ -22,8 +22,11 @@ class ServerPingHistory(BaseMixin):
     server = models.ForeignKey(to=Server, on_delete=models.CASCADE)
     url_pinged = models.CharField(max_length=225)
     status_code = models.IntegerField(null=True)
-    response_html = models.CharField(max_length=255, null=True)
+    response_html = models.TextField(null=True)
     time_taken = models.DurationField(default=timedelta(seconds=0))
+    # making this nullable because
+    # it is possbile that nothing has been specified
+    response_mimetype = models.CharField(max_length=225, null=True)
 
     def __str__(self):
         return (
