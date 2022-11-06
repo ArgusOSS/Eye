@@ -47,10 +47,14 @@ const useStyles = createStyles((theme) => ({
 
 export function Server({ server }) {
   const { classes, theme } = useStyles();
-  const [history, setHistory] = useState([]);
+
+  const successUp = <Text style={{fontSize: '12px'}} color={"green"}>UP</Text>;
+
+  const failureDown = <Text style={{fontSize: '12px'}} color={"red"}>DOWN</Text>;
 
   const stats = [
-    { label: 'Previous Latency', value: '12ms' },
+    { label: 'Frontend', value: server.frontend_last_ping_status === true ? successUp : failureDown },
+    { label: 'API', value: server.api_last_ping_status === true ? successUp : failureDown },
   ]
 
   const items = stats.map((stat) => (
@@ -70,11 +74,6 @@ export function Server({ server }) {
     return Math.floor(Math.random() * 100);
   });
 
-  useEffect(() => {
-    fetchHistory(server.id)
-      .then((json) => setHistory(json));
-  }, []);
-
   return (
     <Link href={`/dashboard/status/${server.id}`}>
       <Card withBorder p="xl" radius="md" className={classes.card}>
@@ -85,10 +84,10 @@ export function Server({ server }) {
             </Text>
             <div>
               <Text className={classes.lead} mt={30}>
-                0.7
+                {Math.round(server.frontend_reliability_index * 100) / 100}
               </Text>
               <Text size="xs" color="dimmed">
-                Reliability Index
+                Poission's for 100% probability
               </Text>
             </div>
 
@@ -100,11 +99,11 @@ export function Server({ server }) {
               roundCaps
               thickness={6}
               size={150}
-              sections={[{ value: getFrontendUptime(), color: 'yellow' }]}
+              sections={[{ value: server.frontend_percentage_uptime, color: 'yellow' }]}
               label={
                 <div>
                   <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                    {getFrontendUptime()}%
+                    {Math.round(server.frontend_percentage_uptime)}%
                   </Text>
                   <Text align="center" size="xs" color="dimmed">
                     Uptime
@@ -119,11 +118,11 @@ export function Server({ server }) {
               roundCaps
               thickness={6}
               size={150}
-              sections={[{ value: getAPIUptime(), color: 'orange' }]}
+              sections={[{ value: server.api_percentage_uptime, color: 'orange' }]}
               label={
                 <div>
                   <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                    {getAPIUptime()}%
+                    {Math.round(server.api_percentage_uptime)}%
                   </Text>
                   <Text align="center" size="xs" color="dimmed">
                     API Uptime
