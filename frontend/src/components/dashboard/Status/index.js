@@ -1,10 +1,14 @@
 import styles from "../../../../styles/Home.module.css";
-import { Text } from "@mantine/core";
+import { Container, Space } from "@mantine/core";
+import { AtAGlance } from "./_atAGlance";
+import { Servers } from "./_servers";
 
 export function DashboardStatus() {
     return (
-        <div className="container">
-            <Text size="36px" weight={900}>Status</Text>
-        </div>
+        <Container>
+            <AtAGlance />
+            <Space h="xl" />
+            <Servers />
+        </Container>
     )
 }
