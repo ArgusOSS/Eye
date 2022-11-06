@@ -1,12 +1,15 @@
 import { createStyles, Text, Card, RingProgress, Group } from '@mantine/core';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { fetchHistory } from '../../../api/servers';
 
 const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
 
     '&:hover': {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-      }
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    }
   },
 
   label: {
@@ -44,10 +47,11 @@ const useStyles = createStyles((theme) => ({
 
 export function Server({ server }) {
   const { classes, theme } = useStyles();
+  const [history, setHistory] = useState([]);
 
- const stats = [
+  const stats = [
     { label: 'Previous Latency', value: '12ms' },
- ]
+  ]
 
   const items = stats.map((stat) => (
     <div key={stat.label}>
@@ -58,71 +62,78 @@ export function Server({ server }) {
     </div>
   ));
 
-    const getFrontendUptime = (() => {
-        return Math.floor(Math.random() * 100);
-    });
+  const getFrontendUptime = (() => {
+    return Math.floor(Math.random() * 100);
+  });
 
-    const getAPIUptime = (() => {
-        return Math.floor(Math.random() * 100);
-    });
+  const getAPIUptime = (() => {
+    return Math.floor(Math.random() * 100);
+  });
+
+  useEffect(() => {
+    fetchHistory(server.id)
+      .then((json) => setHistory(json));
+  }, []);
 
   return (
-    <Card withBorder p="xl" radius="md" className={classes.card}>
-      <div className={classes.inner}>
-        <div>
-          <Text size="xl" className={classes.label}>
-            {server.name}
-          </Text>
+    <Link href={`/dashboard/status/${server.id}`}>
+      <Card withBorder p="xl" radius="md" className={classes.card}>
+        <div className={classes.inner}>
           <div>
-            <Text className={classes.lead} mt={30}>
-              0.7
+            <Text size="xl" className={classes.label}>
+              {server.name}
             </Text>
-            <Text size="xs" color="dimmed">
+            <div>
+              <Text className={classes.lead} mt={30}>
+                0.7
+              </Text>
+              <Text size="xs" color="dimmed">
                 Reliability Index
-            </Text>
+              </Text>
+            </div>
+
+            <Group mt="lg">{items}</Group>
           </div>
 
-          <Group mt="lg">{items}</Group>
-        </div>
+          <div className={classes.ring}>
+            <RingProgress
+              roundCaps
+              thickness={6}
+              size={150}
+              sections={[{ value: getFrontendUptime(), color: 'yellow' }]}
+              label={
+                <div>
+                  <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
+                    {getFrontendUptime()}%
+                  </Text>
+                  <Text align="center" size="xs" color="dimmed">
+                    Uptime
+                  </Text>
+                </div>
+              }
+            />
+          </div>
 
-        <div className={classes.ring}>
-          <RingProgress
-            roundCaps
-            thickness={6}
-            size={150}
-            sections={[{ value: getFrontendUptime(), color: 'yellow' }]}
-            label={
-              <div>
-                <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                  {getFrontendUptime()}%
-                </Text>
-                <Text align="center" size="xs" color="dimmed">
-                  Uptime
-                </Text>
-              </div>
-            }
-          />
+          <div className={classes.ring}>
+            <RingProgress
+              roundCaps
+              thickness={6}
+              size={150}
+              sections={[{ value: getAPIUptime(), color: 'orange' }]}
+              label={
+                <div>
+                  <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
+                    {getAPIUptime()}%
+                  </Text>
+                  <Text align="center" size="xs" color="dimmed">
+                    API Uptime
+                  </Text>
+                </div>
+              }
+            />
+          </div>
         </div>
-
-        <div className={classes.ring}>
-          <RingProgress
-            roundCaps
-            thickness={6}
-            size={150}
-            sections={[{ value: getAPIUptime(), color: 'orange' }]}
-            label={
-              <div>
-                <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                  {getAPIUptime()}%
-                </Text>
-                <Text align="center" size="xs" color="dimmed">
-                  API Uptime
-                </Text>
-              </div>
-            }
-          />
-        </div>
-      </div>
-    </Card>
+      </Card>
+    </Link>
   );
 }
