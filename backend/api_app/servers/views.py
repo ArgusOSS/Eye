@@ -14,6 +14,15 @@ class ServerHistoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = serializer_class.Meta.model.objects.all()
     permission_class = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        server_id = self.request.query_params.get('server_id', None)
+        if server_id is not None:
+            queryset = queryset.filter(server_id=server_id)
+
+        return queryset
+
 class ListServerPingHistory(generics.ListAPIView):
     serializer_class = ServerHistorySerializer
     queryset = serializer_class.Meta.model.objects.all()
