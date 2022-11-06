@@ -7,4 +7,23 @@ const fetchServers = (async () => {
     }
 })
 
-export { fetchServers }
+const fetchServer = (async (id) => {
+    try {
+        const resp = await fetch(`/api/servers/settings/${id}`)
+        return await resp.json()
+    } catch (e) {
+        console.error(e)
+    }
+})
+
+const fetchHistory = (async (id) => {
+    try {
+        const resp = await fetch(`/api/servers/history?server_id=${id}`)
+        return await resp.json()
+    } catch (e) {
+        console.error(e)
+    }
+})
+
+
+export { fetchServers, fetchServer, fetchHistory }

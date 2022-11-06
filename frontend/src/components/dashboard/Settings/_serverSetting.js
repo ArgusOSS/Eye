@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Accordion, Grid, TextInput, Switch, Box, useMantineColorScheme } from "@mantine/core";
 import { IconCheck, IconX } from "@tabler/icons";
 import { useForm } from "@mantine/form";
+import { useRouter } from "next/router";
 
 export default function ServerSetting({ server }) {
     const [active, setActive] = useState(server.active);
