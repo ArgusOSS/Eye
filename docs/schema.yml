@@ -467,9 +467,12 @@ components:
         response_html:
           type: string
           nullable: true
-          maxLength: 255
         time_taken:
           type: string
+        response_mimetype:
+          type: string
+          nullable: true
+          maxLength: 225
         server:
           type: integer
       required:
