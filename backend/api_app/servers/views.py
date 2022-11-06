@@ -1,5 +1,4 @@
-# from rest_framework import serializers as rfs
-from rest_framework import generics, viewsets, mixins
+from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import ServerHistorySerializer, SettingsSerializer

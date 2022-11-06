@@ -234,6 +234,64 @@ paths:
           description: ''
       tags:
       - servers
+  /servers/history:
+    get:
+      operationId: listServerPingHistorys
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=4
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?page=2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServerHistory'
+          description: ''
+      tags:
+      - servers
+  /servers/history/{id}:
+    get:
+      operationId: retrieveServerPingHistory
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this server ping history.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerHistory'
+          description: ''
+      tags:
+      - servers
   /servers/list:
     get:
       operationId: listServerPingHistorys
@@ -437,6 +495,10 @@ components:
           maxLength: 225
         active:
           type: boolean
+        api_percentage_uptime:
+          type: number
+        frontend_percentage_uptime:
+          type: number
       required:
       - name
       - url
@@ -463,9 +525,6 @@ components:
           type: integer
           maximum: 2147483647
           minimum: -2147483648
-          nullable: true
-        response_html:
-          type: string
           nullable: true
         time_taken:
           type: string
