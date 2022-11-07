@@ -1,5 +1,6 @@
-import dynamic from 'next/dynamic';
-const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
+import { Text } from '@mantine/core';
+import { LineChart, Line } from 'recharts';
+
 
 export function LatencyGraph({ server, history }) {
     // Get most recent history logs
@@ -13,16 +14,16 @@ export function LatencyGraph({ server, history }) {
     // }
 
     let parsed_history = [];
-    for (let i = 0; i < history.length; i++) {
-        parsed_history.push({
-            created_at: new Date(history[i].created_at),
-            latency: new Date(history[i].latency)
-        });
-    }
+    // for (let i = 0; i < history.length; i++) {
+    //     parsed_history.push({
+    //         created_at: new Date(history[i].created_at),
+    //         latency: new Date(history[i].latency)
+    //     });
+    // }
 
     let options = {
         chart: {
-          id: 'latency'
+            id: 'latency'
         },
         xaxis: {
             min: new Date('7 Nov 2022').getTime(),
@@ -38,7 +39,15 @@ export function LatencyGraph({ server, history }) {
         data: parsed_history.map((item) => item.latency.getSeconds())
     }];
 
+    const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
+
     return (
-        <ApexCharts options={options} series={series} type="line" width={500} height={320} />
+        <div>
+            <LineChart data={data}>
+                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+            </LineChart>
+            <Text>fuieruigfeur</Text>
+        </div>
+        // <Text>graph</Text>
     );
 }
