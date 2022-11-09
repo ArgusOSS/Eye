@@ -17,7 +17,7 @@ export function DashboardDetailedServerStatus({ idx }) {
         });
 
         fetchHistory(idx).then((history) => {
-            setHistory(history.results);
+            setHistory(history);
         });
     }, [idx]);
 

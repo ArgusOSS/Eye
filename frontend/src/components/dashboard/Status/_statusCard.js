@@ -60,8 +60,8 @@ export function StatusCard({ server, history }) {
   const { classes } = useStyles();
 
   const data = [
-    { stats: history.length, title: "Total Pings", description: "" },
-    { stats: `${server.frontend_percentage_uptime}%`, title: "Uptime Percentage", description: "" },
+    { stats: history.count, title: "Total Pings", description: "" },
+    { stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`, title: "Uptime Percentage", description: "" },
     { stats: '10M', title: "Ping Interval", description: "" },
   ]
 
