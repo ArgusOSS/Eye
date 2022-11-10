@@ -1,5 +1,4 @@
 import datetime
-import math
 
 from api_app.servers import crons
 from api_app.servers.models import Server, ServerPingHistory
@@ -34,23 +33,13 @@ def CalculateUptime(server_id: int, mode: str = "frontend"):
         if ping.pinged_back:
             up += 1
 
-    e = 2.71828
-    # euler's constant
     mean_uptime = up / total
     percentage_uptime = mean_uptime * 100
-    expected_uptime = 1
-    poisson = (
-        (mean_uptime**expected_uptime)
-        * (e**-mean_uptime)
-        / math.factorial(expected_uptime)
-    )
 
     if mode == "frontend":
         server.frontend_percentage_uptime = percentage_uptime
-        server.api_reliability_index = poisson
     else:
         server.api_percentage_uptime = percentage_uptime
-        server.frontend_reliability_index = poisson
 
     logger.info(
         f"Calculated percentage uptime for {server} " f"to be {percentage_uptime}%"

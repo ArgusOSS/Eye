@@ -13,11 +13,9 @@ class Server(BaseMixin):
     active = models.BooleanField(default=True)
 
     api_percentage_uptime = models.FloatField(default=0)
-    api_reliability_index = models.FloatField(default=0)
     api_last_ping_status = models.BooleanField(default=True)
 
     frontend_percentage_uptime = models.FloatField(default=0)
-    frontend_reliability_index = models.FloatField(default=0)
     frontend_last_ping_status = models.BooleanField(default=True)
 
     def __str__(self):

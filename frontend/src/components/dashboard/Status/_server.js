@@ -82,15 +82,6 @@ export function Server({ server }) {
             <Text size="xl" className={classes.label}>
               {server.name}
             </Text>
-            <div>
-              <Text className={classes.lead} mt={30}>
-                {Math.round(server.frontend_reliability_index * 100) / 100}
-              </Text>
-              <Text size="xs" color="dimmed">
-                Poission's for 100% probability
-              </Text>
-            </div>
-
             <Group mt="lg">{items}</Group>
           </div>
 
