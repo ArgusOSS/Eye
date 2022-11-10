@@ -42,18 +42,18 @@ def ping_server(server: Server, mode="api"):
             end_time = time.monotonic()
             time_taken = datetime.timedelta(seconds=end_time - start_time)
             server_ping = ServerPingHistory.objects.create(
-                pinged_back=False,
-                server=server,
-                time_taken=time_taken,
-                url_pinged=url,
+                pinged_back=False, server=server, time_taken=time_taken, url_pinged=url
             )
             if server.webhook_url:
                 logger.info("Sending message to discord webhook for failure.")
-                message = f"Alert! Your service {server.name} "
-                "didn't respond to our hit when we tried to ping "
-                f"{url}. Please check if everything is "
-                f"working fine. It took us {time_taken} to come "
-                "to this conclusion."
+                message = (
+                    f"Alert! Your service {server.name} "
+                    "didn't respond to our hit when we tried to ping "
+                    f"{url}. Please check if everything is "
+                    f"working fine. It took us {time_taken.microseconds}"
+                    "micro-seconds to come "
+                    "to this conclusion."
+                )
                 r = requests.post(server.webhook_url, data=dict(content=message))
                 # ^ add fail checks and repeats in the future.
         logger.info(f"Server ping result: {server_ping}")

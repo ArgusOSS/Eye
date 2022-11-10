@@ -10,5 +10,6 @@ export function middleware(req) {
             return NextResponse.redirect(`${process.env.SITE_URL}/auth/login`);
         }
     }
+
     return res;
 }
