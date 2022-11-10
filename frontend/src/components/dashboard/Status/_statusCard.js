@@ -62,7 +62,6 @@ export function StatusCard({ server, history }) {
   const data = [
     { stats: history.count, title: "Total Pings", description: "" },
     { stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`, title: "Uptime Percentage", description: "" },
-    { stats: '10M', title: "Ping Interval", description: "" },
   ]
 
   const stats = data.map((stat) => (

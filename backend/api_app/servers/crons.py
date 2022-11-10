@@ -3,7 +3,7 @@ import time
 
 import requests
 from celery.utils.log import get_task_logger
-from requests.exceptions import ConnectionError, HTTPError, RequestException, Timeout
+from requests.exceptions import ConnectionError, Timeout
 
 from backend.celery import app
 
@@ -37,7 +37,7 @@ def ping_server(server: Server, mode="api"):
                 time_taken=time_taken,
                 response_mimetype=response_mimetype,
             )
-        except (Timeout, ConnectionError, RequestException, HTTPError):
+        except (Timeout, ConnectionError):
             # in the future, implement retrying thrice
             end_time = time.monotonic()
             time_taken = datetime.timedelta(seconds=end_time - start_time)
@@ -49,13 +49,11 @@ def ping_server(server: Server, mode="api"):
             )
             if server.webhook_url:
                 logger.info("Sending message to discord webhook for failure.")
-                message = f"""
-                Alert! Your service {server.name}"
-                "didn't respond to our hit when we tried to ping
-                {url}. Please check if everything is"
-                " working fine. It took us {time_taken} to come
-                to this conclusion.
-                """
+                message = f"Alert! Your service {server.name} "
+                "didn't respond to our hit when we tried to ping "
+                f"{url}. Please check if everything is "
+                f"working fine. It took us {time_taken} to come "
+                "to this conclusion."
                 r = requests.post(server.webhook_url, data=dict(content=message))
                 # ^ add fail checks and repeats in the future.
         logger.info(f"Server ping result: {server_ping}")

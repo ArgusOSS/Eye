@@ -1,5 +1,5 @@
 import { Text } from '@mantine/core';
-import { LineChart, Line } from 'recharts';
+import { Chart } from "react-google-charts";
 
 
 export function LatencyGraph({ server, history }) {
@@ -12,42 +12,45 @@ export function LatencyGraph({ server, history }) {
     //     created_ats.push(date);
     //     console.log(date)
     // }
-
-    let parsed_history = [];
+    const data =  [
+    [
+        "Day",
+        "Guardians of the Galaxy",
+        "The Avengers",
+        "Transformers: Age of Extinction",
+    ],
+    [1, 37.8, 80.8, 41.8],
+    [2, 30.9, 69.5, 32.4],
+    [3, 25.4, 57, 25.7],
+    [4, 11.7, 18.8, 10.5],]
+    // let data = [];
     // for (let i = 0; i < history.length; i++) {
-    //     parsed_history.push({
-    //         created_at: new Date(history[i].created_at),
-    //         latency: new Date(history[i].latency)
-    //     });
+    //     data.push(
+    //         {
+    //                 uv: new Date(history[i].created_at),
+    //                 pv: new Date(history[i].latency),
+    //                 amt: new Date(history[i].latency),
+    //         }
+    //     );
     // }
 
-    let options = {
+    const options = {
         chart: {
-            id: 'latency'
+          title: "Latency of your services",
+          subtitle: "API endpoints",
         },
-        xaxis: {
-            min: new Date('7 Nov 2022').getTime(),
-            max: new Date().getTime()
-        }
-        // xaxis: {
-        // categories: parsed_history.map((item) => item.created_at.getMinutes())
-        // }
     };
-
-    let series = [{
-        name: 'series-1',
-        data: parsed_history.map((item) => item.latency.getSeconds())
-    }];
-
-    const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
 
     return (
         <div>
-            <LineChart data={data}>
-                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-            </LineChart>
-            <Text>fuieruigfeur</Text>
+            <br></br>
+            <Chart
+                chartType="Line"
+                width="100%"
+                height="400px"
+                data={data}
+                options={options}
+            />
         </div>
-        // <Text>graph</Text>
     );
 }
