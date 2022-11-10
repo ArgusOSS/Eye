@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     "api_app",
     "api_app.core",
     "api_app.servers",
+    "api_app.cloud_providers",
+    "api_app.cloud_providers.AWS",
 ]
 
 SIMPLE_JWT = {
