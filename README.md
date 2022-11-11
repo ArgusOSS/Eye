@@ -9,6 +9,16 @@ cp .env_template .env
 docker-compose up
 ```
 
+## Frontend Setup
+
+```
+cd frontend
+cp .env_template .env.local
+yarn install
+yarn run dev
+```
+
+
 ## Progress as of now:
 
 We are done with the foundation of the project. Expecting many refactors. One feature we are done with is the pinging issue with some bugs in the frontend to be resolved.
