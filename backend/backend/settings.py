@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     "api_app",
     "api_app.core",
     "api_app.servers",
+    "api_app.cloud_providers",
+    "api_app.cloud_providers.AWS",
 ]
 
 SIMPLE_JWT = {
@@ -199,7 +201,7 @@ BROKER_CONNECTION_TIMEOUT = 10
 
 # celery configs
 # celery beat configs
-PING_SERVERS_MINUTES = "*/1"  # run every 10th minute
+PING_SERVERS_MINUTES = "*/60"  # run every 10th minute
 
 # Set redis as celery result backend
 CELERY_RESULT_BACKEND = "redis://%s:%d/%d" % (REDIS_HOST, REDIS_PORT, REDIS_DB)
