@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from .views import ListServerPingHistory, ServerViewSet, ServerHistoryViewSet
+from .views import ListServerPingHistory, ServerHistoryViewSet, ServerViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"settings", ServerViewSet, basename="servers")
