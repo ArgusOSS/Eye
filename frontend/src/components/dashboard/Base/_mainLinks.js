@@ -1,9 +1,13 @@
 import React from 'react';
 import { IconActivity, IconTool } from '@tabler/icons';
-import { ThemeIcon, UnstyledButton, Group, Text, useMantineColorScheme } from '@mantine/core';
+import {
+  ThemeIcon, UnstyledButton, Group, Text, useMantineColorScheme,
+} from '@mantine/core';
 import Link from 'next/link';
 
-function MainLink({ icon, color, label, is_active, dest }) {
+function MainLink({
+  icon, color, label, is_active, dest,
+}) {
   const { colorScheme } = useMantineColorScheme();
 
   return (
@@ -16,7 +20,7 @@ function MainLink({ icon, color, label, is_active, dest }) {
           borderRadius: theme.radius.sm,
           color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
 
-          backgroundColor: is_active ? colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[2] : 'transparent',
+          backgroundColor: is_active ? colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2] : 'transparent',
 
           '&:hover': {
             backgroundColor:
@@ -37,8 +41,12 @@ function MainLink({ icon, color, label, is_active, dest }) {
 }
 
 const data = [
-  { icon: <IconActivity size={16} />, color: 'blue', label: 'Status', dest: '/dashboard/status' },
-  { icon: <IconTool size={16} />, color: 'teal', label: 'Settings', dest: '/dashboard/settings' },
+  {
+    icon: <IconActivity size={16} />, color: 'blue', label: 'Status', dest: '/dashboard/status',
+  },
+  {
+    icon: <IconTool size={16} />, color: 'teal', label: 'Settings', dest: '/dashboard/settings',
+  },
 ];
 
 export function MainLinks({ activeLink }) {

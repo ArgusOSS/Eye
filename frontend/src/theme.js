@@ -6,7 +6,7 @@ const theme = createTheme({
   palette: {
     background: {
       default: 'rgb(0, 0, 0)',
-      paper: 'rgba(42, 42, 42, 1)'
+      paper: 'rgba(42, 42, 42, 1)',
     },
     primary: {
       main: '#FFFFFF',
@@ -19,17 +19,17 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Arial",
+    fontFamily: 'Arial',
     h1: {
-      fontSize: "5em",
+      fontSize: '5em',
       fontWeight: 800,
     },
     h2: {
-      fontSize: "4em",
+      fontSize: '4em',
       fontWeight: 700,
     },
     h4: {
-      fontSize: "3em",
+      fontSize: '3em',
       fontWeight: 700,
     },
   },

@@ -1,4 +1,6 @@
-import { createStyles, Text, Card, RingProgress, Group } from '@mantine/core';
+import {
+  createStyles, Text, Card, RingProgress, Group,
+} from '@mantine/core';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { fetchHistory } from '../../../api/servers';
@@ -9,7 +11,7 @@ const useStyles = createStyles((theme) => ({
 
     '&:hover': {
       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    }
+    },
   },
 
   label: {
@@ -48,14 +50,14 @@ const useStyles = createStyles((theme) => ({
 export function Server({ server }) {
   const { classes, theme } = useStyles();
 
-  const successUp = <Text style={{fontSize: '12px'}} color={"green"}>UP</Text>;
+  const successUp = <Text style={{ fontSize: '12px' }} color="green">UP</Text>;
 
-  const failureDown = <Text style={{fontSize: '12px'}} color={"red"}>DOWN</Text>;
+  const failureDown = <Text style={{ fontSize: '12px' }} color="red">DOWN</Text>;
 
   const stats = [
     { label: 'Frontend', value: server.frontend_last_ping_status === true ? successUp : failureDown },
     { label: 'API', value: server.api_last_ping_status === true ? successUp : failureDown },
-  ]
+  ];
 
   const items = stats.map((stat) => (
     <div key={stat.label}>
@@ -66,13 +68,9 @@ export function Server({ server }) {
     </div>
   ));
 
-  const getFrontendUptime = (() => {
-    return Math.floor(Math.random() * 100);
-  });
+  const getFrontendUptime = (() => Math.floor(Math.random() * 100));
 
-  const getAPIUptime = (() => {
-    return Math.floor(Math.random() * 100);
-  });
+  const getAPIUptime = (() => Math.floor(Math.random() * 100));
 
   return (
     <Link href={`/dashboard/status/${server.id}`}>
@@ -91,16 +89,17 @@ export function Server({ server }) {
               thickness={6}
               size={150}
               sections={[{ value: server.frontend_percentage_uptime, color: 'yellow' }]}
-              label={
+              label={(
                 <div>
                   <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                    {Math.round(server.frontend_percentage_uptime)}%
+                    {Math.round(server.frontend_percentage_uptime)}
+                    %
                   </Text>
                   <Text align="center" size="xs" color="dimmed">
                     Uptime
                   </Text>
                 </div>
-              }
+              )}
             />
           </div>
 
@@ -110,16 +109,17 @@ export function Server({ server }) {
               thickness={6}
               size={150}
               sections={[{ value: server.api_percentage_uptime, color: 'orange' }]}
-              label={
+              label={(
                 <div>
                   <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                    {Math.round(server.api_percentage_uptime)}%
+                    {Math.round(server.api_percentage_uptime)}
+                    %
                   </Text>
                   <Text align="center" size="xs" color="dimmed">
                     API Uptime
                   </Text>
                 </div>
-              }
+              )}
             />
           </div>
         </div>
