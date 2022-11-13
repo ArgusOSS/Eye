@@ -38,7 +38,11 @@ jobs:
           isort . --profile black --filter-files --check-only --diff
 
       - name: Install modules
-        run: yarn
+        run: |
+          cd frontend
+          yarn
 
       - name: Run ESLint
-        run: ./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx
+        run: |
+          cd frontend
+          ./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx
