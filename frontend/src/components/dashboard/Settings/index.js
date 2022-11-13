@@ -145,7 +145,7 @@ export function DashboardSettings() {
                 centered
             >
 
-                <NewServerModal closeModal={() => onCloseNewServerModal()} />
+                <NewServerModal closeModal={setNewServerModalOpened} />
             </Modal>
 
             <Group position="apart">

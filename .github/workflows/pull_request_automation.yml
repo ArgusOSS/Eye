@@ -36,3 +36,13 @@ jobs:
       - name: isort
         run: |
           isort . --profile black --filter-files --check-only --diff
+
+      - name: Install modules
+        run: |
+          cd frontend
+          yarn
+
+      - name: Run ESLint
+        run: |
+          cd frontend
+          ./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx
