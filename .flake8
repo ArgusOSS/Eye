@@ -6,9 +6,9 @@ ignore =
     W605, # invalid escape sequence (caused by regex)
 exclude =
     Dockerfile,
-    docker-compose*,
-    venv,
-    docs,
-    migrations,
+    docker-compose*
+    venv
+    docs
+    migrations
     virtualenv
     .envc
