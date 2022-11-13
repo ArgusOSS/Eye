@@ -8,7 +8,7 @@ import { getCookie, removeCookies } from 'cookies-next';
  */
 
 export function removeToken() {
-  removeCookies('user')
+  removeCookies('user');
 }
 
 /**
@@ -18,14 +18,14 @@ export function removeToken() {
  */
 export function getToken() {
   const tokens = JSON.parse(
-    getCookie('user')
+    getCookie('user'),
   );
   return tokens?.access_token;
 }
 
 export function getRefreshToken() {
   const tokens = JSON.parse(
-    getCookie('user')
+    getCookie('user'),
   );
   return tokens?.refresh_token;
 }
