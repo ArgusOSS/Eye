@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
-export function Social() {
+export default function Social() {
   const router = useRouter();
   const { query } = router;
   const access_token = query.access;
