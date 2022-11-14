@@ -1,5 +1,9 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable camelcase */
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 import {
   Divider, Button, PasswordInput, Group, TextInput, Text, Image, ActionIcon,

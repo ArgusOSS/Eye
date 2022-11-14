@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable camelcase */
 import React from 'react';
 import { IconActivity, IconTool } from '@tabler/icons';
 import {
@@ -20,6 +22,7 @@ function MainLink({
           borderRadius: theme.radius.sm,
           color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
 
+          // eslint-disable-next-line no-nested-ternary
           backgroundColor: is_active ? colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[2] : 'transparent',
 
           '&:hover': {
@@ -50,6 +53,8 @@ const data = [
 ];
 
 export function MainLinks({ activeLink }) {
-  const links = data.map((link) => <MainLink {...link} key={link.label} is_active={link.label == activeLink} />);
+  const links = data.map(
+    (link) => <MainLink {...link} key={link.label} is_active={link.label === activeLink} />,
+  );
   return <div>{links}</div>;
 }

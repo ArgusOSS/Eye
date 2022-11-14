@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import { BaseDashboardLayout } from '../../src/components/dashboard/Base';
 import { DashboardSettings } from '../../src/components/dashboard/Settings';
 
@@ -6,7 +7,7 @@ import { DashboardSettings } from '../../src/components/dashboard/Settings';
 //   textAlign: 'center',
 // };
 
-export function Settings() {
+export default function Settings() {
   return (
     <BaseDashboardLayout activeLink="Settings">
       <DashboardSettings />

@@ -5,6 +5,7 @@ const fetchServers = (async () => {
   } catch (e) {
     console.error(e);
   }
+  return null;
 });
 
 const fetchServer = (async (id) => {

@@ -1,9 +1,10 @@
-import { Text } from '@mantine/core';
+// import { Text } from '@mantine/core';
 import { Chart } from 'react-google-charts';
 
 export function LatencyGraph({ server, history }) {
   // Get most recent history logs
-  // const recentHistory = history === undefined ? [] : history.slice(Math.max(history.length - 10, 0));
+  // const recentHistory = history === undefined ? [] :
+  // history.slice(Math.max(history.length - 10, 0));
   // let created_ats = [];
   // for (let i = 0; i < history.length; i++) {
   //     // parse ISO 8601 date string
@@ -11,6 +12,8 @@ export function LatencyGraph({ server, history }) {
   //     created_ats.push(date);
   //     console.log(date)
   // }
+
+  console.log(server, history);
   const data = [
     [
       'Day',
