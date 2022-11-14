@@ -1,48 +1,82 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
   title: Eye
-  version: ''
-  description: Documentation
+  version: 0.0.1
+  description: Eye OpenAPI Documentation
 paths:
   /authentication/google-callback:
     get:
-      operationId: listGoogleLoginCallbacks
-      description: ''
-      parameters: []
+      operationId: authentication_google_callback_retrieve
+      tags:
+      - authentication
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: authentication_google_callback_create
+      tags:
+      - authentication
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /authentication/login:
+    post:
+      operationId: authentication_login_create
+      tags:
+      - authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: array
-                items: {}
+                $ref: '#/components/schemas/Login'
           description: ''
-      tags:
-      - authentication
+  /authentication/logout:
     post:
-      operationId: createGoogleLoginCallback
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema: {}
-          application/x-www-form-urlencoded:
-            schema: {}
-          multipart/form-data:
-            schema: {}
-      responses:
-        '201':
-          content:
-            application/json:
-              schema: {}
-          description: ''
+      operationId: authentication_logout_create
       tags:
       - authentication
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
   /authentication/me:
     get:
-      operationId: listUsers
-      description: ''
+      operationId: authentication_me_list
       parameters:
       - name: page
         required: false
@@ -50,194 +84,80 @@ paths:
         description: A page number within the paginated result set.
         schema:
           type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=4
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=2
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/User'
-          description: ''
       tags:
       - authentication
-  /servers/settings:
-    get:
-      operationId: listServers
-      description: ''
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=4
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=2
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Settings'
+                $ref: '#/components/schemas/PaginatedUserList'
           description: ''
-      tags:
-      - servers
+  /authentication/register:
     post:
-      operationId: createServer
-      description: ''
-      parameters: []
+      operationId: authentication_register_create
+      tags:
+      - authentication
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Settings'
+              $ref: '#/components/schemas/Register'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Settings'
+              $ref: '#/components/schemas/Register'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Settings'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Settings'
-          description: ''
-      tags:
-      - servers
-  /servers/settings/{id}:
-    get:
-      operationId: retrieveServer
-      description: ''
-      parameters:
-      - name: id
-        in: path
+              $ref: '#/components/schemas/Register'
         required: true
-        description: A unique integer value identifying this server.
-        schema:
-          type: string
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settings'
+                $ref: '#/components/schemas/Register'
           description: ''
+  /authentication/token/refresh:
+    post:
+      operationId: authentication_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
       tags:
-      - servers
-    put:
-      operationId: updateServer
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this server.
-        schema:
-          type: string
+      - authentication
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Settings'
+              $ref: '#/components/schemas/TokenRefresh'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Settings'
+              $ref: '#/components/schemas/TokenRefresh'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Settings'
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Settings'
+                $ref: '#/components/schemas/TokenRefresh'
           description: ''
-      tags:
-      - servers
-    patch:
-      operationId: partialUpdateServer
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this server.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Settings'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Settings'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Settings'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Settings'
-          description: ''
-      tags:
-      - servers
-    delete:
-      operationId: destroyServer
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this server.
-        schema:
-          type: string
-      responses:
-        '204':
-          description: ''
-      tags:
-      - servers
   /servers/history:
     get:
-      operationId: listServerPingHistorys
-      description: ''
+      operationId: servers_history_list
       parameters:
       - name: page
         required: false
@@ -245,44 +165,39 @@ paths:
         description: A page number within the paginated result set.
         schema:
           type: integer
+      tags:
+      - servers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=4
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=2
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ServerHistory'
+                $ref: '#/components/schemas/PaginatedServerHistoryList'
           description: ''
-      tags:
-      - servers
   /servers/history/{id}:
     get:
-      operationId: retrieveServerPingHistory
-      description: ''
+      operationId: servers_history_retrieve
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this server ping history.
+      - in: path
+        name: id
         schema:
-          type: string
+          type: integer
+        description: A unique integer value identifying this server ping history.
+        required: true
+      tags:
+      - servers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -290,12 +205,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerHistory'
           description: ''
-      tags:
-      - servers
   /servers/list:
     get:
-      operationId: listServerPingHistorys
-      description: ''
+      operationId: servers_list_list
       parameters:
       - name: page
         required: false
@@ -303,168 +215,274 @@ paths:
         description: A page number within the paginated result set.
         schema:
           type: integer
+      tags:
+      - servers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=4
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://api.example.org/accounts/?page=2
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ServerHistory'
+                $ref: '#/components/schemas/PaginatedServerHistoryList'
           description: ''
+  /servers/settings:
+    get:
+      operationId: servers_settings_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
       tags:
       - servers
-  /authentication/login:
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSettingsList'
+          description: ''
     post:
-      operationId: createLogin
-      description: ''
-      parameters: []
+      operationId: servers_settings_create
+      tags:
+      - servers
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/Settings'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/Settings'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/Settings'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Login'
+                $ref: '#/components/schemas/Settings'
           description: ''
+  /servers/settings/{id}:
+    get:
+      operationId: servers_settings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this server.
+        required: true
       tags:
-      - authentication
-  /authentication/logout:
-    post:
-      operationId: createLogout
-      description: ''
-      parameters: []
+      - servers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+          description: ''
+    put:
+      operationId: servers_settings_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this server.
+        required: true
+      tags:
+      - servers
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Logout'
+              $ref: '#/components/schemas/Settings'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Logout'
+              $ref: '#/components/schemas/Settings'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Logout'
+              $ref: '#/components/schemas/Settings'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Logout'
+                $ref: '#/components/schemas/Settings'
           description: ''
+    patch:
+      operationId: servers_settings_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this server.
+        required: true
       tags:
-      - authentication
-  /authentication/register:
-    post:
-      operationId: createRegister
-      description: ''
-      parameters: []
+      - servers
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Register'
+              $ref: '#/components/schemas/PatchedSettings'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Register'
+              $ref: '#/components/schemas/PatchedSettings'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Register'
+              $ref: '#/components/schemas/PatchedSettings'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Register'
+                $ref: '#/components/schemas/Settings'
           description: ''
+    delete:
+      operationId: servers_settings_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this server.
+        required: true
       tags:
-      - authentication
-  /authentication/token/refresh:
-    post:
-      operationId: createTokenRefresh
-      description: 'Takes a refresh type JSON web token and returns an access type
-        JSON web
-
-        token if the refresh token is valid.'
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TokenRefresh'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/TokenRefresh'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/TokenRefresh'
+      - servers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
       responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TokenRefresh'
-          description: ''
-      tags:
-      - authentication
+        '204':
+          description: No response body
 components:
   schemas:
-    User:
+    Login:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
         email:
           type: string
           format: email
           maxLength: 255
-        username:
+          minLength: 3
+        password:
           type: string
-          maxLength: 255
-        created_at:
+          writeOnly: true
+          maxLength: 68
+          minLength: 6
+        tokens:
           type: string
-          format: date-time
           readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        avatar:
-          type: string
-          maxLength: 225
-        is_staff:
-          type: boolean
       required:
       - email
-      - username
-    Settings:
+      - password
+      - tokens
+    PaginatedServerHistoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServerHistory'
+    PaginatedSettingsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settings'
+    PaginatedUserList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    PatchedSettings:
       type: object
       properties:
         id:
@@ -497,15 +515,33 @@ components:
           type: boolean
         api_percentage_uptime:
           type: number
+          format: double
         api_last_ping_status:
           type: boolean
         frontend_percentage_uptime:
           type: number
+          format: double
         frontend_last_ping_status:
           type: boolean
+    Register:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        username:
+          type: string
+          maxLength: 255
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 68
+          minLength: 6
       required:
-      - name
-      - url
+      - email
+      - password
+      - username
     ServerHistory:
       type: object
       properties:
@@ -539,33 +575,76 @@ components:
         server:
           type: integer
       required:
-      - url_pinged
+      - created_at
+      - id
       - server
-    Login:
+      - updated_at
+      - url_pinged
+    Settings:
       type: object
       properties:
-        email:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
           type: string
-          format: email
-          maxLength: 255
-          minLength: 3
-        password:
+          format: date-time
+          readOnly: true
+        updated_at:
           type: string
-          writeOnly: true
-          maxLength: 68
-          minLength: 6
-        tokens:
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 125
+        provider:
+          type: string
+          maxLength: 125
+        url:
+          type: string
+          maxLength: 225
+        webhook_url:
+          type: string
+          maxLength: 225
+        api_ping_url:
+          type: string
+          maxLength: 225
+        active:
+          type: boolean
+        api_percentage_uptime:
+          type: number
+          format: double
+        api_last_ping_status:
+          type: boolean
+        frontend_percentage_uptime:
+          type: number
+          format: double
+        frontend_last_ping_status:
+          type: boolean
+      required:
+      - created_at
+      - id
+      - name
+      - updated_at
+      - url
+    TokenRefresh:
+      type: object
+      properties:
+        access:
           type: string
           readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
       required:
-      - email
-      - password
-    Logout:
-      type: object
-      properties: {}
-    Register:
+      - access
+      - refresh
+    User:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
         email:
           type: string
           format: email
@@ -573,22 +652,42 @@ components:
         username:
           type: string
           maxLength: 255
-        password:
+        created_at:
           type: string
-          writeOnly: true
-          maxLength: 68
-          minLength: 6
-      required:
-      - email
-      - username
-      - password
-    TokenRefresh:
-      type: object
-      properties:
-        refresh:
-          type: string
-        access:
-          type: string
+          format: date-time
           readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        avatar:
+          type: string
+          maxLength: 225
+        is_staff:
+          type: boolean
       required:
-      - refresh
+      - created_at
+      - email
+      - id
+      - updated_at
+      - username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+servers:
+- url: http://localhost:3000/
+  description: Localhost API base URL

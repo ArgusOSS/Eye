@@ -39,3 +39,4 @@ redoc = [
         'embed': True,
     }
 ]
+redoc_uri = 'https://unpkg.com/redoc@2.0.0-rc.66/bundles/redoc.standalone.js'
