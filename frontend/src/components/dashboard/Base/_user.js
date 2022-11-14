@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { IconChevronRight, IconChevronLeft } from '@tabler/icons';
 import {
-  UnstyledButton, Group, Avatar, Text, Box, useMantineTheme,
+  UnstyledButton, Group, Text, Box, useMantineTheme,
 } from '@mantine/core';
 
-import { whoAmI } from '../../../../lib/auth';
+// import { whoAmI } from '../../../../lib/auth';
 
 export function User() {
   const theme = useMantineTheme();

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 

@@ -1,10 +1,13 @@
+/* eslint-disable import/no-default-export */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/no-unstable-nested-components */
 import { useState } from 'react';
 import {
-  Accordion, Grid, TextInput, Switch, Box, useMantineColorScheme,
+  Accordion, Grid, TextInput, Switch, Box,
 } from '@mantine/core';
 import { IconCheck, IconX } from '@tabler/icons';
 import { useForm } from '@mantine/form';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 export default function ServerSetting({ server }) {
   const [active, setActive] = useState(server.active);

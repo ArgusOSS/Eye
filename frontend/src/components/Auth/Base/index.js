@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/no-unknown-property */
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Paper } from '@mantine/core';
 import { BaseDashboardHeader } from '../../dashboard/Base/_header';

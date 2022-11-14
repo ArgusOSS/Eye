@@ -1,14 +1,18 @@
-import '../styles/globals.css'
-import theme from '../src/theme';
+/* eslint-disable import/no-default-export */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable import/no-extraneous-dependencies */
+import '../styles/globals.css';
+// import theme from '../src/theme';
 import Head from 'next/head';
-import { CookiesProvider } from "react-cookie"
+import { CookiesProvider } from 'react-cookie';
 import PropTypes from 'prop-types';
-import createEmotionCache from '../src/createEmotionCache';
 import { CacheProvider } from '@emotion/react';
-import { ColorSchemeProvider, MantineProvider, ColorScheme } from '@mantine/core';
+import { ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { useState } from 'react';
 import { NotificationsProvider } from '@mantine/notifications';
-
+import createEmotionCache from '../src/createEmotionCache';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -17,8 +21,7 @@ export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const [colorScheme, setColorScheme] = useState('dark');
-  const toggleColorScheme = (value) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
   return (
     <CacheProvider value={emotionCache}>
@@ -33,18 +36,19 @@ export default function MyApp(props) {
         />
         <link rel="icon" href="/logo.ico" />
       </Head>
-        <CookiesProvider>
-          <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-            <NotificationsProvider>
-              <MantineProvider 
-              theme={{colorScheme}}  
-              withGlobalStyles 
-              withNormalizeCSS>
-                <Component {...pageProps} />
-              </MantineProvider>
-            </NotificationsProvider>
-          </ColorSchemeProvider>
-        </CookiesProvider>
+      <CookiesProvider>
+        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+          <NotificationsProvider>
+            <MantineProvider
+              theme={{ colorScheme }}
+              withGlobalStyles
+              withNormalizeCSS
+            >
+              <Component {...pageProps} />
+            </MantineProvider>
+          </NotificationsProvider>
+        </ColorSchemeProvider>
+      </CookiesProvider>
     </CacheProvider>
   );
 }

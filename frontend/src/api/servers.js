@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const fetchServers = (async () => {
   try {
     const resp = await fetch('/api/servers/settings');
@@ -5,6 +6,7 @@ const fetchServers = (async () => {
   } catch (e) {
     console.error(e);
   }
+  return null;
 });
 
 const fetchServer = (async (id) => {

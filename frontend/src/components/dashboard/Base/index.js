@@ -1,25 +1,26 @@
-import useMediaQuery from '@mui/material/useMediaQuery';
-import {
-  Navbar, Title, ScrollArea, Header, AppShell, Group, useMantineColorScheme, ActionIcon, Text,
-} from '@mantine/core';
-import { IconMoon, IconMoonStars } from '@tabler/icons';
-import { Brand } from './_brand';
+/* eslint-disable react/jsx-props-no-multi-spaces */
+
+// import useMediaQuery from '@mui/material/useMediaQuery';
+import { Navbar, AppShell } from '@mantine/core';
+
+// import Router from 'next/router';
+
 import { User } from './_user';
-import { Logo } from './_logo';
+
 import { MainLinks } from './_mainLinks';
-import { logoutUser } from '../../../../lib/auth';
+// import { logoutUser } from '../../../../lib/auth';
 import { BaseDashboardHeader } from './_header';
 
 export function BaseDashboardLayout(props) {
-  const mobile = useMediaQuery('(max-width:500px)');
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  // const mobile = useMediaQuery('(max-width:500px)');
+  // const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
-  const handleLogout = async () => {
-    const response = await logoutUser();
-    if (response.status == 'successful') {
-      Router.push('/auth/login');
-    }
-  };
+  // const handleLogout = async () => {
+  //   const response = await logoutUser();
+  //   if (response.status == 'successful') {
+  //     Router.push('/auth/login');
+  //   }
+  // };
 
   const DashboardHeader = BaseDashboardHeader();
 

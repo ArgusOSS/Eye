@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState } from 'react';
 import {
-  Text, Accordion, Grid, Group, ActionIcon, Flex, Container, Modal, TextInput, Button,
+  Text, Accordion, Grid, Group, ActionIcon, Container, Modal, TextInput, Button,
 } from '@mantine/core';
 import { IconPlus, IconCheck } from '@tabler/icons';
 import { useForm } from '@mantine/form';
