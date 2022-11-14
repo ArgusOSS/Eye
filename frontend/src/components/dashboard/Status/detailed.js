@@ -1,6 +1,7 @@
+/* eslint-disable no-shadow */
 import { useState, useEffect } from 'react';
 import { Container, Text, Paper } from '@mantine/core';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { fetchServer, fetchHistory } from '../../../api/servers';
 import { StatusCard } from './_statusCard';
 import { LatencyGraph } from './_latencyGraph';

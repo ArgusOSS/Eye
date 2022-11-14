@@ -1,6 +1,4 @@
-import {
-  createStyles, Card, Divider, Group, Text, Stack, Paper,
-} from '@mantine/core';
+import { createStyles, Text } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   root: {

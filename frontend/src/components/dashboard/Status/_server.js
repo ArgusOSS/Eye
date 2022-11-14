@@ -2,8 +2,8 @@ import {
   createStyles, Text, Card, RingProgress, Group,
 } from '@mantine/core';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { fetchHistory } from '../../../api/servers';
+// import { useEffect, useState } from 'react';
+// import { fetchHistory } from '../../../api/servers';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -48,6 +48,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function Server({ server }) {
+  // eslint-disable-next-line no-unused-vars
   const { classes, theme } = useStyles();
 
   const successUp = <Text style={{ fontSize: '12px' }} color="green">UP</Text>;
@@ -68,9 +69,9 @@ export function Server({ server }) {
     </div>
   ));
 
-  const getFrontendUptime = (() => Math.floor(Math.random() * 100));
+  // const getFrontendUptime = (() => Math.floor(Math.random() * 100));
 
-  const getAPIUptime = (() => Math.floor(Math.random() * 100));
+  // const getAPIUptime = (() => Math.floor(Math.random() * 100));
 
   return (
     <Link href={`/dashboard/status/${server.id}`}>

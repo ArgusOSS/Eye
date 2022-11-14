@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const fetchServers = (async () => {
   try {
     const resp = await fetch('/api/servers/settings');
