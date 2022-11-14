@@ -48,7 +48,7 @@ export function LoginForm() {
         setErrorMessage('Invalid Credentials!');
       }
     } catch (error) {
-      console.log(error);
+      // add something
     } finally {
       setIsLoading(false);
     }

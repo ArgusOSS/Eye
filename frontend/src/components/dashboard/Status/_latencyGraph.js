@@ -13,7 +13,7 @@ export function LatencyGraph({ server, history }) {
   //     console.log(date)
   // }
 
-  console.log(server, history);
+  // console.log(server, history);
   const data = [
     [
       'Day',

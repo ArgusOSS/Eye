@@ -16,7 +16,6 @@ function NewServerModal({ closeModal }) {
     })
       .then((resp) => resp.json())
       .then((json) => {
-        console.log(json);
         closeModal();
       })
       .catch((e) => console.error(e));

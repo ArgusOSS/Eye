@@ -10,7 +10,6 @@ export const loginUser = async (email, password) => {
   });
 
   const { status } = res;
-  console.log(status);
   if (status !== 200) {
     return {
       error: 'Invalid Credentials!',
