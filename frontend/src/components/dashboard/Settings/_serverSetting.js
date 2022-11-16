@@ -14,10 +14,10 @@ export default function ServerSetting({ server }) {
     return (
       <Box
         sx={(theme) => ({
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
           padding: theme.spacing.md,
-          alignSelf: "center",
+          alignSelf: 'center',
         })}
       >
         <Switch
@@ -54,9 +54,9 @@ export default function ServerSetting({ server }) {
   return (
     <Accordion.Item
       sx={(theme) => ({
-        "&:hover": {
+        '&:hover': {
           backgroundColor:
-            theme.colorScheme === "dark"
+            theme.colorScheme === 'dark'
               ? theme.colors.dark[7]
               : theme.colors.gray[1],
         },
@@ -65,7 +65,11 @@ export default function ServerSetting({ server }) {
     >
       <EditAccordionControl>{server.name}</EditAccordionControl>
       <Accordion.Panel>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form
+          onSubmit={() => {
+            console.log('ok');
+          }}
+        >
           <Grid>
             <Grid.Col span={6}>
               <TextInput

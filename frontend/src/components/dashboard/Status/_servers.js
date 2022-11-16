@@ -22,11 +22,15 @@ export function Servers() {
           marginTop: theme.spacing.md,
         })}
       >
-        <SimpleGrid cols={2}>
-          {servers.map((server) => (
-            <Server server={server} />
-          ))}
-        </SimpleGrid>
+        {servers.length > 0 ? (
+          <SimpleGrid cols={2}>
+            {servers.map((server) => (
+              <Server server={server} />
+            ))}
+          </SimpleGrid>
+        ) : (
+          <Text>No servers available.</Text>
+        )}
       </Paper>
     </>
   );
