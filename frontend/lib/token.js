@@ -1,4 +1,4 @@
-import { getCookie, removeCookies } from 'cookies-next';
+import { getCookie, removeCookies } from "cookies-next";
 
 /**
  * * Remove stored token
@@ -8,7 +8,7 @@ import { getCookie, removeCookies } from 'cookies-next';
  */
 
 export function removeToken() {
-  removeCookies('user');
+  removeCookies("user");
 }
 
 /**
@@ -17,15 +17,11 @@ export function removeToken() {
  * @returns {string | undefined}
  */
 export function getToken() {
-  const tokens = JSON.parse(
-    getCookie('user'),
-  );
+  const tokens = JSON.parse(getCookie("user"));
   return tokens?.access_token;
 }
 
 export function getRefreshToken() {
-  const tokens = JSON.parse(
-    getCookie('user'),
-  );
+  const tokens = JSON.parse(getCookie("user"));
   return tokens?.refresh_token;
 }

@@ -1,42 +1,37 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { IconChevronRight, IconChevronLeft } from '@tabler/icons';
-import {
-  UnstyledButton, Group, Text, Box, useMantineTheme,
-} from '@mantine/core';
+import React, { useState } from "react";
+import { IconChevronRight, IconChevronLeft } from "@tabler/icons";
+import { UnstyledButton, Group, Text, Box, useMantineTheme } from "@mantine/core";
 
 // import { whoAmI } from '../../../../lib/auth';
 
 export function User() {
   const theme = useMantineTheme();
   const [user, setUser] = useState({
-    username: '',
+    username: "",
     is_staff: false,
-    email: '',
+    email: "",
   });
-  const [userRole, setRole] = useState('Engineer');
+  const [userRole, setRole] = useState("Engineer");
   // const userRole = user.is_staff ? "Admin" : "Engineer";
 
   return (
     <Box
       sx={{
         paddingTop: theme.spacing.sm,
-        borderTop: `1px solid ${
-          theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
-        }`,
+        borderTop: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]}`,
       }}
     >
       <UnstyledButton
         sx={{
-          display: 'block',
-          width: '100%',
+          display: "block",
+          width: "100%",
           padding: theme.spacing.xs,
           borderRadius: theme.radius.sm,
-          color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+          color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
 
-          '&:hover': {
-            backgroundColor:
-                theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+          "&:hover": {
+            backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
           },
         }}
       >
@@ -54,7 +49,7 @@ export function User() {
             </Text>
           </Box>
 
-          {theme.dir === 'ltr' ? <IconChevronRight size={18} /> : <IconChevronLeft size={18} />}
+          {theme.dir === "ltr" ? <IconChevronRight size={18} /> : <IconChevronLeft size={18} />}
         </Group>
       </UnstyledButton>
     </Box>

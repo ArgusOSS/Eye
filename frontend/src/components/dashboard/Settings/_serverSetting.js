@@ -1,12 +1,10 @@
 /* eslint-disable import/no-default-export */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unstable-nested-components */
-import { useState } from 'react';
-import {
-  Accordion, Grid, TextInput, Switch, Box,
-} from '@mantine/core';
-import { IconCheck, IconX } from '@tabler/icons';
-import { useForm } from '@mantine/form';
+import { useState } from "react";
+import { Accordion, Grid, TextInput, Switch, Box } from "@mantine/core";
+import { IconCheck, IconX } from "@tabler/icons";
+import { useForm } from "@mantine/form";
 // import { useRouter } from 'next/router';
 
 export default function ServerSetting({ server }) {
@@ -16,10 +14,10 @@ export default function ServerSetting({ server }) {
     return (
       <Box
         sx={(theme) => ({
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           padding: theme.spacing.md,
-          alignSelf: 'center',
+          alignSelf: "center",
         })}
       >
         <Switch
@@ -27,13 +25,7 @@ export default function ServerSetting({ server }) {
           onChange={(event) => setActive(event.currentTarget.checked)}
           color="teal"
           size="md"
-          thumbIcon={
-            active ? (
-              <IconCheck size={12} stroke={3} />
-            ) : (
-              <IconX size={12} stroke={3} />
-            )
-          }
+          thumbIcon={active ? <IconCheck size={12} stroke={3} /> : <IconX size={12} stroke={3} />}
         />
 
         <Accordion.Control {...props} />
@@ -50,18 +42,14 @@ export default function ServerSetting({ server }) {
       api_ping_url: server.api_ping_url,
       webhook_url: server.webhook_url,
     },
-    validate: {
-    },
+    validate: {},
   });
 
   return (
     <Accordion.Item
       sx={(theme) => ({
-        '&:hover': {
-          backgroundColor:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[7]
-              : theme.colors.gray[1],
+        "&:hover": {
+          backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[1],
         },
       })}
       value={server.id.toString()}
@@ -70,7 +58,7 @@ export default function ServerSetting({ server }) {
       <Accordion.Panel>
         <form
           onSubmit={() => {
-            console.log('ok');
+            console.log("ok");
           }}
         >
           <Grid>
@@ -80,16 +68,11 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('name')}
+                {...form.getInputProps("name")}
               />
             </Grid.Col>
             <Grid.Col span={6}>
-              <TextInput
-                placeholder="Provider"
-                variant="filled"
-                radius="md"
-                {...form.getInputProps('provider')}
-              />
+              <TextInput placeholder="Provider" variant="filled" radius="md" {...form.getInputProps("provider")} />
             </Grid.Col>
 
             <Grid.Col>
@@ -98,7 +81,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('url')}
+                {...form.getInputProps("url")}
               />
             </Grid.Col>
 
@@ -108,7 +91,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('api_ping_url')}
+                {...form.getInputProps("api_ping_url")}
               />
             </Grid.Col>
 
@@ -118,7 +101,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('webhook_url')}
+                {...form.getInputProps("webhook_url")}
               />
             </Grid.Col>
           </Grid>

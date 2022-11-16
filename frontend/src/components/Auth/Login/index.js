@@ -2,23 +2,21 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useCookies } from 'react-cookie';
-import {
-  Divider, Button, PasswordInput, Group, TextInput, Text, Image, ActionIcon,
-} from '@mantine/core';
-import { IconPassword, IconAt, IconBrandGoogle } from '@tabler/icons';
-import Link from 'next/link';
-import { removeToken } from '../../../../lib/token';
-import { loginUser } from '../../../../lib/auth';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
+import { Divider, Button, PasswordInput, Group, TextInput, Text, Image, ActionIcon } from "@mantine/core";
+import { IconPassword, IconAt, IconBrandGoogle } from "@tabler/icons";
+import Link from "next/link";
+import { removeToken } from "../../../../lib/token";
+import { loginUser } from "../../../../lib/auth";
 
 export function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [cookie, setCookie] = useCookies(['user']);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [cookie, setCookie] = useCookies(["user"]);
   const router = useRouter();
 
   useEffect(() => {
@@ -30,14 +28,14 @@ export function LoginForm() {
     e.preventDefault();
 
     try {
-      const to_forward = '/dashboard/';
+      const to_forward = "/dashboard/";
       setIsLoading(true);
       // API call:
       const data = await loginUser(email, password);
 
       if (data && data.tokens) {
-        setCookie('user', JSON.stringify(data), {
-          path: '/',
+        setCookie("user", JSON.stringify(data), {
+          path: "/",
           maxAge: 3600, // Expires after 1hr
           sameSite: true,
         });
@@ -45,7 +43,7 @@ export function LoginForm() {
           router.push(to_forward);
         }, 1000);
       } else {
-        setErrorMessage('Invalid Credentials!');
+        setErrorMessage("Invalid Credentials!");
       }
     } catch (error) {
       // add something
@@ -93,7 +91,6 @@ export function LoginForm() {
             label="Password"
             required
           />
-
         </div>
         {errorMessage && (
           <div className="alert alert-danger" role="alert">
@@ -105,7 +102,13 @@ export function LoginForm() {
           <div className="col d-flex justify-content-center">
             <Group position="right" mt="md">
               {/* <Button type="submit">Submit</Button> */}
-              <Button onSubmit={handleSubmit} type="submit" variant="gradient" gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }} disabled={isLoading}>
+              <Button
+                onSubmit={handleSubmit}
+                type="submit"
+                variant="gradient"
+                gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
+                disabled={isLoading}
+              >
                 <Text>Login</Text>
               </Button>
             </Group>

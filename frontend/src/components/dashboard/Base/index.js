@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-multi-spaces */
 
 // import useMediaQuery from '@mui/material/useMediaQuery';
-import { Navbar, AppShell } from '@mantine/core';
+import { Navbar, AppShell } from "@mantine/core";
 
 // import Router from 'next/router';
 
-import { User } from './_user';
+import { User } from "./_user";
 
-import { MainLinks } from './_mainLinks';
+import { MainLinks } from "./_mainLinks";
 // import { logoutUser } from '../../../../lib/auth';
-import { BaseDashboardHeader } from './_header';
+import { BaseDashboardHeader } from "./_header";
 
 export function BaseDashboardLayout(props) {
   // const mobile = useMediaQuery('(max-width:500px)');
@@ -30,10 +30,10 @@ export function BaseDashboardLayout(props) {
       <AppShell
         padding="md"
         fixed
-        navbar={(
+        navbar={
           <Navbar
             width={{
-            // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
+              // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
               sm: 200,
 
               // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
@@ -50,13 +50,11 @@ export function BaseDashboardLayout(props) {
               <User />
             </Navbar.Section>
           </Navbar>
-        )}
-
-      // header={DashboardHeader}
+        }
+        // header={DashboardHeader}
         styles={(theme) => ({
           main: {
-            backgroundColor:
-            theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+            backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.colors.gray[0],
           },
         })}
       >

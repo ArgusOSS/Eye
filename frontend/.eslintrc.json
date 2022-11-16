@@ -6,7 +6,8 @@
     "extends": [
         "plugin:react/recommended",
         "airbnb",
-        "plugin:@next/next/recommended"
+        "plugin:@next/next/recommended",
+        "prettier"
     ],
     "overrides": [
     ],
@@ -15,9 +16,16 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+            ],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/react-in-jsx-scope": "off",
         "import/prefer-default-export": "off",
@@ -26,6 +34,7 @@
         "no-console": "off",
         "no-unused-vars": "off",
         "import/no-default-export": "off",
-        "import/no-named-as-defaul": "off"
+        "import/no-named-as-defaul": "off",
+        "@next/next/no-html-link-for-pages": ["error", "/Users/abheektripathy/Documents/Code/Argus/Eye/frontend/pages"]
     }
 }

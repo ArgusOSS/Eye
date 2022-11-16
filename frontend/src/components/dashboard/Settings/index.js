@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Text,
   Accordion,
@@ -11,11 +12,18 @@ import {
   Modal,
   TextInput,
   Button,
-} from '@mantine/core';
-import { IconPlus, IconCheck } from '@tabler/icons';
-import { useForm } from '@mantine/form';
+} from "@mantine/core";
+import { IconPlus, IconCheck } from "@tabler/icons";
+import { useForm } from "@mantine/form";
 import { showNotification } from '@mantine/notifications';
-import ServerSetting from './_serverSetting';
+
+import ServerSetting from "./_serverSetting";
+
+
+
+
+
+
 import { fetchServers } from '../../../api/servers';
 
 const URLRegex = new RegExp(
@@ -134,11 +142,11 @@ function NewServerModal({ closeModal }) {
 
   const form = useForm({
     initialValues: {
-      name: '',
-      provider: '',
-      url: '',
-      api_ping_url: '',
-      webhook_url: '',
+      name: "",
+      provider: "",
+      url: "",
+      api_ping_url: "",
+      webhook_url: "",
     },
     validate: {
       name: (value) => (value.length < 3 ? 'Name must be at least 3 characters' : null),
@@ -159,7 +167,7 @@ function NewServerModal({ closeModal }) {
             withAsterisk
             required
             data-autofocus
-            {...form.getInputProps('name')}
+            {...form.getInputProps("name")}
           />
         </Grid.Col>
         <Grid.Col span={6}>
@@ -167,7 +175,7 @@ function NewServerModal({ closeModal }) {
             placeholder="Provider"
             variant="filled"
             radius="md"
-            {...form.getInputProps('provider')}
+            {...form.getInputProps("provider")}
           />
         </Grid.Col>
 
@@ -178,7 +186,7 @@ function NewServerModal({ closeModal }) {
             radius="md"
             withAsterisk
             required
-            {...form.getInputProps('url')}
+            {...form.getInputProps("url")}
           />
         </Grid.Col>
 
@@ -187,7 +195,7 @@ function NewServerModal({ closeModal }) {
             placeholder="API URL"
             variant="filled"
             radius="md"
-            {...form.getInputProps('api_ping_url')}
+            {...form.getInputProps("api_ping_url")}
           />
         </Grid.Col>
 
@@ -196,18 +204,18 @@ function NewServerModal({ closeModal }) {
             placeholder="Webhook URL"
             variant="filled"
             radius="md"
-            {...form.getInputProps('webhook_url')}
+            {...form.getInputProps("webhook_url")}
           />
         </Grid.Col>
       </Grid>
 
       <Button
         variant="gradient"
-        gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }}
+        gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
         type="submit"
         sx={(theme) => ({
           marginTop: theme.spacing.md,
-          float: 'right',
+          float: "right",
         })}
       >
         ADD

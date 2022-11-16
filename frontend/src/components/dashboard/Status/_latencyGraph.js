@@ -1,5 +1,5 @@
 // import { Text } from '@mantine/core';
-import { Chart } from 'react-google-charts';
+import { Chart } from "react-google-charts";
 
 export function LatencyGraph({ server, history }) {
   // Get most recent history logs
@@ -15,16 +15,12 @@ export function LatencyGraph({ server, history }) {
 
   // console.log(server, history);
   const data = [
-    [
-      'Day',
-      'Guardians of the Galaxy',
-      'The Avengers',
-      'Transformers: Age of Extinction',
-    ],
+    ["Day", "Guardians of the Galaxy", "The Avengers", "Transformers: Age of Extinction"],
     [1, 37.8, 80.8, 41.8],
     [2, 30.9, 69.5, 32.4],
     [3, 25.4, 57, 25.7],
-    [4, 11.7, 18.8, 10.5]];
+    [4, 11.7, 18.8, 10.5],
+  ];
   // let data = [];
   // for (let i = 0; i < history.length; i++) {
   //     data.push(
@@ -38,21 +34,15 @@ export function LatencyGraph({ server, history }) {
 
   const options = {
     chart: {
-      title: 'Latency of your services',
-      subtitle: 'API endpoints',
+      title: "Latency of your services",
+      subtitle: "API endpoints",
     },
   };
 
   return (
     <div>
       <br />
-      <Chart
-        chartType="Line"
-        width="100%"
-        height="400px"
-        data={data}
-        options={options}
-      />
+      <Chart chartType="Line" width="100%" height="400px" data={data} options={options} />
     </div>
   );
 }
