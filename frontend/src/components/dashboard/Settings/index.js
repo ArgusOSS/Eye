@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState } from "react";
@@ -14,23 +15,15 @@ import {
 } from "@mantine/core";
 import { IconPlus, IconCheck } from "@tabler/icons";
 import { useForm } from "@mantine/form";
-import { showNotification } from "@mantine/notifications";
-import ServerSetting from "./_serverSetting";
-import { fetchServers } from "../../../api/servers";
-  Text,
-  Accordion,
-  Grid,
-  Group,
-  ActionIcon,
-  Container,
-  Modal,
-  TextInput,
-  Button,
-} from '@mantine/core';
-import { IconPlus, IconCheck } from '@tabler/icons';
-import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
-import ServerSetting from './_serverSetting';
+
+import ServerSetting from "./_serverSetting";
+
+
+
+
+
+
 import { fetchServers } from '../../../api/servers';
 
 const URLRegex = new RegExp(

@@ -14,10 +14,10 @@ export default function ServerSetting({ server }) {
     return (
       <Box
         sx={(theme) => ({
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           padding: theme.spacing.md,
-          alignSelf: 'center',
+          alignSelf: "center",
         })}
       >
         <Switch
@@ -25,13 +25,7 @@ export default function ServerSetting({ server }) {
           onChange={(event) => setActive(event.currentTarget.checked)}
           color="teal"
           size="md"
-          thumbIcon={
-            active ? (
-              <IconCheck size={12} stroke={3} />
-            ) : (
-              <IconX size={12} stroke={3} />
-            )
-          }
+          thumbIcon={active ? <IconCheck size={12} stroke={3} /> : <IconX size={12} stroke={3} />}
         />
 
         <Accordion.Control {...props} />
@@ -54,11 +48,8 @@ export default function ServerSetting({ server }) {
   return (
     <Accordion.Item
       sx={(theme) => ({
-        '&:hover': {
-          backgroundColor:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[7]
-              : theme.colors.gray[1],
+        "&:hover": {
+          backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[1],
         },
       })}
       value={server.id.toString()}
@@ -67,7 +58,7 @@ export default function ServerSetting({ server }) {
       <Accordion.Panel>
         <form
           onSubmit={() => {
-            console.log('ok');
+            console.log("ok");
           }}
         >
           <Grid>
@@ -81,12 +72,7 @@ export default function ServerSetting({ server }) {
               />
             </Grid.Col>
             <Grid.Col span={6}>
-              <TextInput
-                placeholder="Provider"
-                variant="filled"
-                radius="md"
-                {...form.getInputProps("provider")}
-              />
+              <TextInput placeholder="Provider" variant="filled" radius="md" {...form.getInputProps("provider")} />
             </Grid.Col>
 
             <Grid.Col>
