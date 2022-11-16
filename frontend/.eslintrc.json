@@ -25,6 +25,7 @@
         "react/destructuring-assignment": "off",
         "no-console": "off",
         "no-unused-vars": "off",
-        "import/no-default-export": "off"
+        "import/no-default-export": "off",
+        "import/no-named-as-defaul": "off"
     }
 }

@@ -35,7 +35,7 @@ jobs:
       # this edtion of the workflow uses Django's inbuilt generateschema to give us the schema file
       - name: Generate the schema file
         run: |
-          ./backend/manage.py generateschema --title Eye --description Documentation --file docs/schema.yml
+          ./backend/manage.py spectacular --file docs/schema.yml
 
       - name: Commit the generated schema
         uses: stefanzweifel/git-auto-commit-action@v4
