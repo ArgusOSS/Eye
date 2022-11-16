@@ -1,12 +1,10 @@
 /* eslint-disable import/no-default-export */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unstable-nested-components */
-import { useState } from 'react';
-import {
-  Accordion, Grid, TextInput, Switch, Box,
-} from '@mantine/core';
-import { IconCheck, IconX } from '@tabler/icons';
-import { useForm } from '@mantine/form';
+import { useState } from "react";
+import { Accordion, Grid, TextInput, Switch, Box } from "@mantine/core";
+import { IconCheck, IconX } from "@tabler/icons";
+import { useForm } from "@mantine/form";
 // import { useRouter } from 'next/router';
 
 export default function ServerSetting({ server }) {
@@ -14,12 +12,13 @@ export default function ServerSetting({ server }) {
 
   function EditAccordionControl(props) {
     return (
-      <Box sx={(theme) => ({
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing.md,
-        alignSelf: 'center',
-      })}
+      <Box
+        sx={(theme) => ({
+          display: "flex",
+          alignItems: "center",
+          padding: theme.spacing.md,
+          alignSelf: "center",
+        })}
       >
         <Switch
           checked={active}
@@ -27,12 +26,12 @@ export default function ServerSetting({ server }) {
           color="teal"
           size="md"
           thumbIcon={
-                        active ? (
-                          <IconCheck size={12} stroke={3} />
-                        ) : (
-                          <IconX size={12} stroke={3} />
-                        )
-                    }
+            active ? (
+              <IconCheck size={12} stroke={3} />
+            ) : (
+              <IconX size={12} stroke={3} />
+            )
+          }
         />
 
         <Accordion.Control {...props} />
@@ -56,15 +55,22 @@ export default function ServerSetting({ server }) {
   return (
     <Accordion.Item
       sx={(theme) => ({
-        '&:hover': {
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[1],
+        "&:hover": {
+          backgroundColor:
+            theme.colorScheme === "dark"
+              ? theme.colors.dark[7]
+              : theme.colors.gray[1],
         },
       })}
       value={server.id.toString()}
     >
       <EditAccordionControl>{server.name}</EditAccordionControl>
       <Accordion.Panel>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form
+          onSubmit={() => {
+            console.log("ok");
+          }}
+        >
           <Grid>
             <Grid.Col span={6}>
               <TextInput
@@ -72,7 +78,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('name')}
+                {...form.getInputProps("name")}
               />
             </Grid.Col>
             <Grid.Col span={6}>
@@ -80,7 +86,7 @@ export default function ServerSetting({ server }) {
                 placeholder="Provider"
                 variant="filled"
                 radius="md"
-                {...form.getInputProps('provider')}
+                {...form.getInputProps("provider")}
               />
             </Grid.Col>
 
@@ -90,7 +96,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('url')}
+                {...form.getInputProps("url")}
               />
             </Grid.Col>
 
@@ -100,7 +106,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('api_ping_url')}
+                {...form.getInputProps("api_ping_url")}
               />
             </Grid.Col>
 
@@ -110,7 +116,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps('webhook_url')}
+                {...form.getInputProps("webhook_url")}
               />
             </Grid.Col>
           </Grid>
