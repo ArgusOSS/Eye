@@ -1,22 +1,22 @@
-import { createStyles, Text } from '@mantine/core';
+import { createStyles, Text } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   root: {
-    display: 'flex',
-    backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
-      theme.colors[theme.primaryColor][7]
-    } 100%)`,
+    display: "flex",
+    backgroundImage: `linear-gradient(-60deg, ${
+      theme.colors[theme.primaryColor][4]
+    } 0%, ${theme.colors[theme.primaryColor][7]} 100%)`,
     padding: theme.spacing.xl * 1.5,
     borderRadius: theme.radius.md,
 
-    [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column',
+    [theme.fn.smallerThan("sm")]: {
+      flexDirection: "column",
     },
   },
 
   title: {
     color: theme.white,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     fontWeight: 700,
     fontSize: theme.fontSizes.sm,
   },
@@ -39,12 +39,12 @@ const useStyles = createStyles((theme) => ({
   stat: {
     flex: 1,
 
-    '& + &': {
+    "& + &": {
       paddingLeft: theme.spacing.xl,
       marginLeft: theme.spacing.xl,
       borderLeft: `1px solid ${theme.colors[theme.primaryColor][3]}`,
 
-      [theme.fn.smallerThan('sm')]: {
+      [theme.fn.smallerThan("sm")]: {
         paddingLeft: 0,
         marginLeft: 0,
         borderLeft: 0,
@@ -60,8 +60,12 @@ export function StatusCard({ server, history }) {
   const { classes } = useStyles();
 
   const data = [
-    { stats: history.count, title: 'Total Pings', description: '' },
-    { stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`, title: 'Uptime Percentage', description: '' },
+    { stats: history.count, title: "Total Pings", description: "" },
+    {
+      stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`,
+      title: "Uptime Percentage",
+      description: "",
+    },
   ];
 
   const stats = data.map((stat) => (

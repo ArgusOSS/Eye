@@ -1,37 +1,45 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
-  Text, Accordion, Grid, Group, ActionIcon, Container, Modal, TextInput, Button,
-} from '@mantine/core';
-import { IconPlus, IconCheck } from '@tabler/icons';
-import { useForm } from '@mantine/form';
-import { showNotification } from '@mantine/notifications';
-import ServerSetting from './_serverSetting';
-import { fetchServers } from '../../../api/servers';
+  Text,
+  Accordion,
+  Grid,
+  Group,
+  ActionIcon,
+  Container,
+  Modal,
+  TextInput,
+  Button,
+} from "@mantine/core";
+import { IconPlus, IconCheck } from "@tabler/icons";
+import { useForm } from "@mantine/form";
+import { showNotification } from "@mantine/notifications";
+import ServerSetting from "./_serverSetting";
+import { fetchServers } from "../../../api/servers";
 
 function NewServerModal({ closeModal }) {
-  const createNewServer = ((data) => {
-    fetch('/api/servers/settings', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
+  const createNewServer = (data) => {
+    fetch("/api/servers/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     })
       .then((resp) => resp.json())
       .then((json) => {
         closeModal();
       })
       .catch((e) => console.error(e));
-  });
+  };
 
   const form = useForm({
     initialValues: {
-      name: '',
-      provider: '',
-      url: '',
-      api_ping_url: '',
-      webhook_url: '',
+      name: "",
+      provider: "",
+      url: "",
+      api_ping_url: "",
+      webhook_url: "",
     },
-    validate: {
-
-    },
+    validate: {},
   });
 
   return (
@@ -45,7 +53,7 @@ function NewServerModal({ closeModal }) {
             withAsterisk
             required
             data-autofocus
-            {...form.getInputProps('name')}
+            {...form.getInputProps("name")}
           />
         </Grid.Col>
         <Grid.Col span={6}>
@@ -53,7 +61,7 @@ function NewServerModal({ closeModal }) {
             placeholder="Provider"
             variant="filled"
             radius="md"
-            {...form.getInputProps('provider')}
+            {...form.getInputProps("provider")}
           />
         </Grid.Col>
 
@@ -64,7 +72,7 @@ function NewServerModal({ closeModal }) {
             radius="md"
             withAsterisk
             required
-            {...form.getInputProps('url')}
+            {...form.getInputProps("url")}
           />
         </Grid.Col>
 
@@ -73,7 +81,7 @@ function NewServerModal({ closeModal }) {
             placeholder="API URL"
             variant="filled"
             radius="md"
-            {...form.getInputProps('api_ping_url')}
+            {...form.getInputProps("api_ping_url")}
           />
         </Grid.Col>
 
@@ -82,18 +90,18 @@ function NewServerModal({ closeModal }) {
             placeholder="Webhook URL"
             variant="filled"
             radius="md"
-            {...form.getInputProps('webhook_url')}
+            {...form.getInputProps("webhook_url")}
           />
         </Grid.Col>
       </Grid>
 
       <Button
         variant="gradient"
-        gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }}
+        gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
         type="submit"
         sx={(theme) => ({
           marginTop: theme.spacing.md,
-          float: 'right',
+          float: "right",
         })}
       >
         ADD
@@ -107,40 +115,38 @@ export function DashboardSettings() {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
-    fetchServers()
-      .then((json) => setServers(json.results));
+    fetchServers().then((json) => setServers(json.results));
   }, []);
 
-  const openNewServerModal = (() => {
+  const openNewServerModal = () => {
     setNewServerModalOpened(true);
-  });
+  };
 
-  const onCloseNewServerModal = (async () => {
+  const onCloseNewServerModal = async () => {
     setNewServerModalOpened(false);
 
-    fetchServers()
-      .then((json) => setServers(json.results));
+    fetchServers().then((json) => setServers(json.results));
 
     showNotification({
-      title: 'Server added Successfully',
+      title: "Server added Successfully",
       icon: <IconCheck />,
       styles: (theme) => ({
         root: {
           backgroundColor: theme.colors.blue[6],
           borderColor: theme.colors.blue[6],
 
-          '&::before': { backgroundColor: theme.white },
+          "&::before": { backgroundColor: theme.white },
         },
 
         title: { color: theme.white },
         description: { color: theme.white },
         closeButton: {
           color: theme.white,
-          '&:hover': { backgroundColor: theme.colors.blue[7] },
+          "&:hover": { backgroundColor: theme.colors.blue[7] },
         },
       }),
     });
-  });
+  };
 
   return (
     <Container>
@@ -150,13 +156,16 @@ export function DashboardSettings() {
         title="Add Server"
         centered
       >
-
         <NewServerModal closeModal={setNewServerModalOpened} />
       </Modal>
 
       <Group position="apart">
-        <Text size="36px" weight={900}>SERVERS</Text>
-        <ActionIcon onClick={openNewServerModal}><IconPlus /></ActionIcon>
+        <Text size="36px" weight={900}>
+          SERVERS
+        </Text>
+        <ActionIcon onClick={openNewServerModal}>
+          <IconPlus />
+        </ActionIcon>
       </Group>
 
       <Accordion
@@ -166,7 +175,9 @@ export function DashboardSettings() {
           marginTop: theme.spacing.md,
         })}
       >
-        {servers.map((server) => <ServerSetting server={server} key={server.id} />)}
+        {servers.map((server) => (
+          <ServerSetting server={server} key={server.id} />
+        ))}
       </Accordion>
     </Container>
   );

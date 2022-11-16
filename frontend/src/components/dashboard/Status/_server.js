@@ -1,16 +1,18 @@
-import {
-  createStyles, Text, Card, RingProgress, Group,
-} from '@mantine/core';
-import Link from 'next/link';
+import { createStyles, Text, Card, RingProgress, Group } from "@mantine/core";
+import Link from "next/link";
 // import { useEffect, useState } from 'react';
 // import { fetchHistory } from '../../../api/servers';
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
 
-    '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
     },
   },
 
@@ -28,20 +30,20 @@ const useStyles = createStyles((theme) => ({
   },
 
   inner: {
-    display: 'flex',
+    display: "flex",
 
     [theme.fn.smallerThan(350)]: {
-      flexDirection: 'column',
+      flexDirection: "column",
     },
   },
 
   ring: {
     flex: 1,
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
 
     [theme.fn.smallerThan(350)]: {
-      justifyContent: 'center',
+      justifyContent: "center",
       marginTop: theme.spacing.md,
     },
   },
@@ -51,13 +53,28 @@ export function Server({ server }) {
   // eslint-disable-next-line no-unused-vars
   const { classes, theme } = useStyles();
 
-  const successUp = <Text style={{ fontSize: '12px' }} color="green">UP</Text>;
+  const successUp = (
+    <Text style={{ fontSize: "12px" }} color="green">
+      UP
+    </Text>
+  );
 
-  const failureDown = <Text style={{ fontSize: '12px' }} color="red">DOWN</Text>;
+  const failureDown = (
+    <Text style={{ fontSize: "12px" }} color="red">
+      DOWN
+    </Text>
+  );
 
   const stats = [
-    { label: 'Frontend', value: server.frontend_last_ping_status === true ? successUp : failureDown },
-    { label: 'API', value: server.api_last_ping_status === true ? successUp : failureDown },
+    {
+      label: "Frontend",
+      value:
+        server.frontend_last_ping_status === true ? successUp : failureDown,
+    },
+    {
+      label: "API",
+      value: server.api_last_ping_status === true ? successUp : failureDown,
+    },
   ];
 
   const items = stats.map((stat) => (
@@ -89,18 +106,24 @@ export function Server({ server }) {
               roundCaps
               thickness={6}
               size={150}
-              sections={[{ value: server.frontend_percentage_uptime, color: 'yellow' }]}
-              label={(
+              sections={[
+                { value: server.frontend_percentage_uptime, color: "yellow" },
+              ]}
+              label={
                 <div>
-                  <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                    {Math.round(server.frontend_percentage_uptime)}
-                    %
+                  <Text
+                    align="center"
+                    size="lg"
+                    className={classes.label}
+                    sx={{ fontSize: 22 }}
+                  >
+                    {Math.round(server.frontend_percentage_uptime)}%
                   </Text>
                   <Text align="center" size="xs" color="dimmed">
                     Uptime
                   </Text>
                 </div>
-              )}
+              }
             />
           </div>
 
@@ -109,18 +132,24 @@ export function Server({ server }) {
               roundCaps
               thickness={6}
               size={150}
-              sections={[{ value: server.api_percentage_uptime, color: 'orange' }]}
-              label={(
+              sections={[
+                { value: server.api_percentage_uptime, color: "orange" },
+              ]}
+              label={
                 <div>
-                  <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                    {Math.round(server.api_percentage_uptime)}
-                    %
+                  <Text
+                    align="center"
+                    size="lg"
+                    className={classes.label}
+                    sx={{ fontSize: 22 }}
+                  >
+                    {Math.round(server.api_percentage_uptime)}%
                   </Text>
                   <Text align="center" size="xs" color="dimmed">
                     API Uptime
                   </Text>
                 </div>
-              )}
+              }
             />
           </div>
         </div>

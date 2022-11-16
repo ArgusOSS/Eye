@@ -1,10 +1,10 @@
 /* eslint-disable no-shadow */
-import { useState, useEffect } from 'react';
-import { Container, Text, Paper } from '@mantine/core';
+import { useState, useEffect } from "react";
+import { Container, Text, Paper } from "@mantine/core";
 // import { useRouter } from 'next/router';
-import { fetchServer, fetchHistory } from '../../../api/servers';
-import { StatusCard } from './_statusCard';
-import { LatencyGraph } from './_latencyGraph';
+import { fetchServer, fetchHistory } from "../../../api/servers";
+import { StatusCard } from "./_statusCard";
+import { LatencyGraph } from "./_latencyGraph";
 
 export function DashboardDetailedServerStatus({ idx }) {
   const [server, setServer] = useState({});
@@ -24,11 +24,14 @@ export function DashboardDetailedServerStatus({ idx }) {
 
   return (
     <Container>
-      <Text size="36px" weight={900}>{server.name}</Text>
+      <Text size="36px" weight={900}>
+        {server.name}
+      </Text>
 
-      <Paper sx={(theme) => ({
-        marginTop: theme.spacing.md,
-      })}
+      <Paper
+        sx={(theme) => ({
+          marginTop: theme.spacing.md,
+        })}
       >
         <StatusCard server={server} history={history} />
         <LatencyGraph server={server} history={history} />

@@ -1,27 +1,31 @@
-import { Text, SimpleGrid, Paper } from '@mantine/core';
-import { useEffect, useState } from 'react';
-import { fetchServers } from '../../../api/servers';
-import { Server } from './_server';
+import { Text, SimpleGrid, Paper } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { fetchServers } from "../../../api/servers";
+import { Server } from "./_server";
 
 export function Servers() {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
-    fetchServers()
-      .then((json) => setServers(json.results));
+    fetchServers().then((json) => setServers(json.results));
   }, []);
 
   return (
     <>
-      <Text size="36px" weight={900}>SERVERS</Text>
+      <Text size="36px" weight={900}>
+        SERVERS
+      </Text>
 
-      <Paper sx={(theme) => ({
-        padding: theme.spacing.md,
-        marginTop: theme.spacing.md,
-      })}
+      <Paper
+        sx={(theme) => ({
+          padding: theme.spacing.md,
+          marginTop: theme.spacing.md,
+        })}
       >
         <SimpleGrid cols={2}>
-          {servers.map((server) => <Server server={server} />)}
+          {servers.map((server) => (
+            <Server server={server} />
+          ))}
         </SimpleGrid>
       </Paper>
     </>
