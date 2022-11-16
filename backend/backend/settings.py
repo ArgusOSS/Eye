@@ -79,7 +79,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "PAGE_SIZE": 50,
 }
 
@@ -220,11 +220,11 @@ CELERY_ENABLE_UTC = True
 
 # Spectacular settings
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Eye',
-    'DESCRIPTION': 'Eye OpenAPI Documentation',
-    'VERSION': '0.0.1',
-    'SERVE_INCLUDE_SCHEMA': False,
-    'SERVERS': [
-        {'url': 'http://localhost:3000/', 'description': 'Localhost API base URL'},
-    ]
+    "TITLE": "Eye",
+    "DESCRIPTION": "Eye OpenAPI Documentation",
+    "VERSION": "0.0.1",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SERVERS": [
+        {"url": "http://localhost:3000/", "description": "Localhost API base URL"},
+    ],
 }
