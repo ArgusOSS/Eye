@@ -1,7 +1,7 @@
-import { Text, SimpleGrid, Paper } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { fetchServers } from "../../../api/servers";
-import { Server } from "./_server";
+import { Text, SimpleGrid, Paper } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import { fetchServers } from '../../../api/servers';
+import { Server } from './_server';
 
 export function Servers() {
   const [servers, setServers] = useState([]);

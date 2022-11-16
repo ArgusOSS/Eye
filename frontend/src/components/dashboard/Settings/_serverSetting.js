@@ -1,10 +1,12 @@
 /* eslint-disable import/no-default-export */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unstable-nested-components */
-import { useState } from "react";
-import { Accordion, Grid, TextInput, Switch, Box } from "@mantine/core";
-import { IconCheck, IconX } from "@tabler/icons";
-import { useForm } from "@mantine/form";
+import { useState } from 'react';
+import {
+  Accordion, Grid, TextInput, Switch, Box,
+} from '@mantine/core';
+import { IconCheck, IconX } from '@tabler/icons';
+import { useForm } from '@mantine/form';
 // import { useRouter } from 'next/router';
 
 export default function ServerSetting({ server }) {
@@ -14,10 +16,10 @@ export default function ServerSetting({ server }) {
     return (
       <Box
         sx={(theme) => ({
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
           padding: theme.spacing.md,
-          alignSelf: "center",
+          alignSelf: 'center',
         })}
       >
         <Switch
@@ -55,9 +57,9 @@ export default function ServerSetting({ server }) {
   return (
     <Accordion.Item
       sx={(theme) => ({
-        "&:hover": {
+        '&:hover': {
           backgroundColor:
-            theme.colorScheme === "dark"
+            theme.colorScheme === 'dark'
               ? theme.colors.dark[7]
               : theme.colors.gray[1],
         },
@@ -68,7 +70,7 @@ export default function ServerSetting({ server }) {
       <Accordion.Panel>
         <form
           onSubmit={() => {
-            console.log("ok");
+            console.log('ok');
           }}
         >
           <Grid>
@@ -78,7 +80,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps("name")}
+                {...form.getInputProps('name')}
               />
             </Grid.Col>
             <Grid.Col span={6}>
@@ -86,7 +88,7 @@ export default function ServerSetting({ server }) {
                 placeholder="Provider"
                 variant="filled"
                 radius="md"
-                {...form.getInputProps("provider")}
+                {...form.getInputProps('provider')}
               />
             </Grid.Col>
 
@@ -96,7 +98,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps("url")}
+                {...form.getInputProps('url')}
               />
             </Grid.Col>
 
@@ -106,7 +108,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps("api_ping_url")}
+                {...form.getInputProps('api_ping_url')}
               />
             </Grid.Col>
 
@@ -116,7 +118,7 @@ export default function ServerSetting({ server }) {
                 variant="filled"
                 radius="md"
                 withAsterisk
-                {...form.getInputProps("webhook_url")}
+                {...form.getInputProps('webhook_url')}
               />
             </Grid.Col>
           </Grid>

@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   Text,
   Accordion,
@@ -10,21 +11,21 @@ import {
   Modal,
   TextInput,
   Button,
-} from "@mantine/core";
-import { IconPlus, IconCheck } from "@tabler/icons";
-import { useForm } from "@mantine/form";
-import { showNotification } from "@mantine/notifications";
-import ServerSetting from "./_serverSetting";
-import { fetchServers } from "../../../api/servers";
+} from '@mantine/core';
+import { IconPlus, IconCheck } from '@tabler/icons';
+import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import ServerSetting from './_serverSetting';
+import { fetchServers } from '../../../api/servers';
 
 const URLRegex = new RegExp(
-  "^(https?:\\/\\/)?" + // protocol
-    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-    "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-    "(\\#[-a-z\\d_]*)?$",
-  "i"
+  '^(https?:\\/\\/)?' // protocol
+    + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' // domain name
+    + '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
+    + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' // port and path
+    + '(\\?[;&a-z\\d%_.~+=-]*)?' // query string
+    + '(\\#[-a-z\\d_]*)?$',
+  'i',
 );
 
 export default function Servers() {
@@ -96,21 +97,21 @@ export default function Servers() {
 
 const showSuccessNotification = () => {
   showNotification({
-    title: "Server added Successfully",
+    title: 'Server added Successfully',
     icon: <IconCheck />,
     styles: (theme) => ({
       root: {
         backgroundColor: theme.colors.blue[6],
         borderColor: theme.colors.blue[6],
 
-        "&::before": { backgroundColor: theme.white },
+        '&::before': { backgroundColor: theme.white },
       },
 
       title: { color: theme.white },
       description: { color: theme.white },
       closeButton: {
         color: theme.white,
-        "&:hover": { backgroundColor: theme.colors.blue[7] },
+        '&:hover': { backgroundColor: theme.colors.blue[7] },
       },
     }),
   });
@@ -118,9 +119,9 @@ const showSuccessNotification = () => {
 
 function NewServerModal({ closeModal }) {
   const createNewServer = (data) => {
-    fetch("/api/servers/settings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetch('/api/servers/settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
       .then((resp) => resp.json())
@@ -133,18 +134,17 @@ function NewServerModal({ closeModal }) {
 
   const form = useForm({
     initialValues: {
-      name: "",
-      provider: "",
-      url: "",
-      api_ping_url: "",
-      webhook_url: "",
+      name: '',
+      provider: '',
+      url: '',
+      api_ping_url: '',
+      webhook_url: '',
     },
     validate: {
-      name: (value) =>
-        value.length < 3 ? "Name must be at least 3 characters" : null,
-      url: (value) => (URLRegex.test(value) ? null : "URL must be a valid URL"),
-      api_ping_url: (value) => (value.length === 0 ? null : URLRegex.test(value) ? null : "URL must be a valid URL"),
-      webhook_url: (value) => (value.length === 0 ? null : URLRegex.test(value) ? null : "URL must be a valid URL"),
+      name: (value) => (value.length < 3 ? 'Name must be at least 3 characters' : null),
+      url: (value) => (URLRegex.test(value) ? null : 'URL must be a valid URL'),
+      api_ping_url: (value) => (value.length === 0 ? null : URLRegex.test(value) ? null : 'URL must be a valid URL'),
+      webhook_url: (value) => (value.length === 0 ? null : URLRegex.test(value) ? null : 'URL must be a valid URL'),
     },
   });
 
@@ -159,7 +159,7 @@ function NewServerModal({ closeModal }) {
             withAsterisk
             required
             data-autofocus
-            {...form.getInputProps("name")}
+            {...form.getInputProps('name')}
           />
         </Grid.Col>
         <Grid.Col span={6}>
@@ -167,7 +167,7 @@ function NewServerModal({ closeModal }) {
             placeholder="Provider"
             variant="filled"
             radius="md"
-            {...form.getInputProps("provider")}
+            {...form.getInputProps('provider')}
           />
         </Grid.Col>
 
@@ -178,7 +178,7 @@ function NewServerModal({ closeModal }) {
             radius="md"
             withAsterisk
             required
-            {...form.getInputProps("url")}
+            {...form.getInputProps('url')}
           />
         </Grid.Col>
 
@@ -187,7 +187,7 @@ function NewServerModal({ closeModal }) {
             placeholder="API URL"
             variant="filled"
             radius="md"
-            {...form.getInputProps("api_ping_url")}
+            {...form.getInputProps('api_ping_url')}
           />
         </Grid.Col>
 
@@ -196,18 +196,18 @@ function NewServerModal({ closeModal }) {
             placeholder="Webhook URL"
             variant="filled"
             radius="md"
-            {...form.getInputProps("webhook_url")}
+            {...form.getInputProps('webhook_url')}
           />
         </Grid.Col>
       </Grid>
 
       <Button
         variant="gradient"
-        gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
+        gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }}
         type="submit"
         sx={(theme) => ({
           marginTop: theme.spacing.md,
-          float: "right",
+          float: 'right',
         })}
       >
         ADD
