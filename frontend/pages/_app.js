@@ -7,6 +7,7 @@ import '../styles/globals.css';
 // import theme from '../src/theme';
 import Head from 'next/head';
 import { CookiesProvider } from 'react-cookie';
+// eslint-disable-next-line import/no-unresolved
 import PropTypes from 'prop-types';
 import { CacheProvider } from '@emotion/react';
 import { ColorSchemeProvider, MantineProvider } from '@mantine/core';

@@ -14,12 +14,13 @@ export default function ServerSetting({ server }) {
 
   function EditAccordionControl(props) {
     return (
-      <Box sx={(theme) => ({
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing.md,
-        alignSelf: 'center',
-      })}
+      <Box
+        sx={(theme) => ({
+          display: 'flex',
+          alignItems: 'center',
+          padding: theme.spacing.md,
+          alignSelf: 'center',
+        })}
       >
         <Switch
           checked={active}
@@ -27,12 +28,12 @@ export default function ServerSetting({ server }) {
           color="teal"
           size="md"
           thumbIcon={
-                        active ? (
-                          <IconCheck size={12} stroke={3} />
-                        ) : (
-                          <IconX size={12} stroke={3} />
-                        )
-                    }
+            active ? (
+              <IconCheck size={12} stroke={3} />
+            ) : (
+              <IconX size={12} stroke={3} />
+            )
+          }
         />
 
         <Accordion.Control {...props} />
@@ -57,14 +58,21 @@ export default function ServerSetting({ server }) {
     <Accordion.Item
       sx={(theme) => ({
         '&:hover': {
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[1],
+          backgroundColor:
+            theme.colorScheme === 'dark'
+              ? theme.colors.dark[7]
+              : theme.colors.gray[1],
         },
       })}
       value={server.id.toString()}
     >
       <EditAccordionControl>{server.name}</EditAccordionControl>
       <Accordion.Panel>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form
+          onSubmit={() => {
+            console.log('ok');
+          }}
+        >
           <Grid>
             <Grid.Col span={6}>
               <TextInput
