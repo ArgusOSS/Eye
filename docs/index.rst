@@ -8,12 +8,10 @@ Welcome to Eye's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-   api-doc
+   :caption: Table of Contents
 
-Indices and tables
-==================
+   /api-doc
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Introduction
+------------
+A project to monitor all of your cloud infrastructure at one place. 
