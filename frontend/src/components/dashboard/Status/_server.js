@@ -5,14 +5,10 @@ import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
 
     "&:hover": {
-      backgroundColor:
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
     },
   },
 
@@ -68,8 +64,7 @@ export function Server({ server }) {
   const stats = [
     {
       label: "Frontend",
-      value:
-        server.frontend_last_ping_status === true ? successUp : failureDown,
+      value: server.frontend_last_ping_status === true ? successUp : failureDown,
     },
     {
       label: "API",
@@ -106,17 +101,10 @@ export function Server({ server }) {
               roundCaps
               thickness={6}
               size={150}
-              sections={[
-                { value: server.frontend_percentage_uptime, color: "yellow" },
-              ]}
+              sections={[{ value: server.frontend_percentage_uptime, color: "yellow" }]}
               label={
                 <div>
-                  <Text
-                    align="center"
-                    size="lg"
-                    className={classes.label}
-                    sx={{ fontSize: 22 }}
-                  >
+                  <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
                     {Math.round(server.frontend_percentage_uptime)}%
                   </Text>
                   <Text align="center" size="xs" color="dimmed">
@@ -132,17 +120,10 @@ export function Server({ server }) {
               roundCaps
               thickness={6}
               size={150}
-              sections={[
-                { value: server.api_percentage_uptime, color: "orange" },
-              ]}
+              sections={[{ value: server.api_percentage_uptime, color: "orange" }]}
               label={
                 <div>
-                  <Text
-                    align="center"
-                    size="lg"
-                    className={classes.label}
-                    sx={{ fontSize: 22 }}
-                  >
+                  <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
                     {Math.round(server.api_percentage_uptime)}%
                   </Text>
                   <Text align="center" size="xs" color="dimmed">

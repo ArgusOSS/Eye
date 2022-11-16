@@ -2,13 +2,7 @@
 /* eslint-disable camelcase */
 import React from "react";
 import { IconActivity, IconTool } from "@tabler/icons";
-import {
-  ThemeIcon,
-  UnstyledButton,
-  Group,
-  Text,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { ThemeIcon, UnstyledButton, Group, Text, useMantineColorScheme } from "@mantine/core";
 import Link from "next/link";
 
 function MainLink({ icon, color, label, is_active, dest }) {
@@ -22,8 +16,7 @@ function MainLink({ icon, color, label, is_active, dest }) {
           width: "100%",
           padding: theme.spacing.xs,
           borderRadius: theme.radius.sm,
-          color:
-            theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
+          color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
 
           // eslint-disable-next-line no-nested-ternary
           backgroundColor: is_active
@@ -33,10 +26,7 @@ function MainLink({ icon, color, label, is_active, dest }) {
             : "transparent",
 
           "&:hover": {
-            backgroundColor:
-              theme.colorScheme === "dark"
-                ? theme.colors.dark[6]
-                : theme.colors.gray[0],
+            backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
           },
         })}
       >
@@ -70,12 +60,6 @@ const data = [
 ];
 
 export function MainLinks({ activeLink }) {
-  const links = data.map((link) => (
-    <MainLink
-      {...link}
-      key={link.label}
-      is_active={link.label === activeLink}
-    />
-  ));
+  const links = data.map((link) => <MainLink {...link} key={link.label} is_active={link.label === activeLink} />);
   return <div>{links}</div>;
 }

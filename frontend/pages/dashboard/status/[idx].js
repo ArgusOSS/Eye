@@ -1,8 +1,8 @@
 /* eslint-disable import/no-default-export */
-import React from 'react';
-import { useRouter } from 'next/router';
-import { BaseDashboardLayout } from '../../../src/components/dashboard/Base';
-import { DashboardDetailedServerStatus } from '../../../src/components/dashboard/Status/detailed';
+import React from "react";
+import { useRouter } from "next/router";
+import { BaseDashboardLayout } from "../../../src/components/dashboard/Base";
+import { DashboardDetailedServerStatus } from "../../../src/components/dashboard/Status/detailed";
 
 export default function DetailedServerStatus() {
   const router = useRouter();

@@ -12,25 +12,13 @@ export function Brand() {
         paddingLeft: theme.spacing.xs,
         paddingRight: theme.spacing.xs,
         paddingBottom: theme.spacing.lg,
-        borderBottom: `1px solid ${
-          theme.colorScheme === "dark"
-            ? theme.colors.dark[4]
-            : theme.colors.gray[2]
-        }`,
+        borderBottom: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2]}`,
       })}
     >
       <Group position="apart">
         <Logo colorScheme={colorScheme} />
-        <ActionIcon
-          variant="default"
-          onClick={() => toggleColorScheme()}
-          size={30}
-        >
-          {colorScheme === "dark" ? (
-            <IconSun size={16} />
-          ) : (
-            <IconMoonStars size={16} />
-          )}
+        <ActionIcon variant="default" onClick={() => toggleColorScheme()} size={30}>
+          {colorScheme === "dark" ? <IconSun size={16} /> : <IconMoonStars size={16} />}
         </ActionIcon>
       </Group>
     </Box>

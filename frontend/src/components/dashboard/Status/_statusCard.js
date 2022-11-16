@@ -3,9 +3,9 @@ import { createStyles, Text } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   root: {
     display: "flex",
-    backgroundImage: `linear-gradient(-60deg, ${
-      theme.colors[theme.primaryColor][4]
-    } 0%, ${theme.colors[theme.primaryColor][7]} 100%)`,
+    backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
+      theme.colors[theme.primaryColor][7]
+    } 100%)`,
     padding: theme.spacing.xl * 1.5,
     borderRadius: theme.radius.md,
 

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-default-export */
-import { BaseDashboardLayout } from '../../src/components/dashboard/Base';
-import { DashboardSettings } from '../../src/components/dashboard/Settings';
+import { BaseDashboardLayout } from "../../src/components/dashboard/Base";
+import { DashboardSettings } from "../../src/components/dashboard/Settings";
 
 // const styles = {
 //   marginTop: 30,

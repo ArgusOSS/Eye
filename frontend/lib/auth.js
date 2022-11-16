@@ -1,18 +1,18 @@
-import cookie from 'cookie';
-import { getToken, removeToken } from './token';
-import { LOGOUT_URL } from './constants';
+import cookie from "cookie";
+import { getToken, removeToken } from "./token";
+import { LOGOUT_URL } from "./constants";
 
 export const loginUser = async (email, password) => {
-  const res = await fetch('/api/authentication/login', {
+  const res = await fetch("/api/authentication/login", {
     body: JSON.stringify({ email, password }),
-    method: 'POST',
-    headers: { 'Content-type': 'application/json;charset=UTF-8' },
+    method: "POST",
+    headers: { "Content-type": "application/json;charset=UTF-8" },
   });
 
   const { status } = res;
   if (status !== 200) {
     return {
-      error: 'Invalid Credentials!',
+      error: "Invalid Credentials!",
     };
   }
 
@@ -22,9 +22,9 @@ export const loginUser = async (email, password) => {
 
 export const logoutUser = async () => {
   const res = await fetch(LOGOUT_URL, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-type': 'application/json;charset=UTF-8',
+      "Content-type": "application/json;charset=UTF-8",
       Authorization: `Bearer ${getToken()}`,
     },
   });
@@ -34,12 +34,12 @@ export const logoutUser = async () => {
 };
 
 export const whoAmI = async () => {
-  const res = await fetch('/api/authentication/me', {
+  const res = await fetch("/api/authentication/me", {
     headers: {
       Authorization: `Bearer ${getToken()}`,
-      'Content-type': 'application/json;charset=UTF-8',
+      "Content-type": "application/json;charset=UTF-8",
     },
-    method: 'GET',
+    method: "GET",
   });
   const data = await res.json();
   const result = data?.results[0];
@@ -47,5 +47,5 @@ export const whoAmI = async () => {
 };
 
 export function parseCookies(req) {
-  return cookie.parse(req ? req.headers.cookie || '' : document.cookie);
+  return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
