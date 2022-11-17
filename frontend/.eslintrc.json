@@ -12,7 +12,7 @@
     "overrides": [
     ],
     "parserOptions": {
-        "ecmaVersion": "latest",
+        "ecmaVersion": 13,
         "sourceType": "module"
     },
     "plugins": [
@@ -34,7 +34,7 @@
         "no-console": "off",
         "no-unused-vars": "off",
         "import/no-default-export": "off",
-        "import/no-named-as-defaul": "off",
-        "@next/next/no-html-link-for-pages": ["error", "/Users/abheektripathy/Documents/Code/Argus/Eye/frontend/pages"]
+        "import/no-named-as-defaul": 0,
+        "@next/next/no-html-link-for-pages": ["error", "frontend/pages"]
     }
 }
