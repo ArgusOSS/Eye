@@ -38,6 +38,7 @@
     "react-apexcharts": "^1.4.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
+    "react-github-calendar": "^3.3.4",
     "react-google-charts": "latest",
     "zustand": "^4.0.0"
   },
