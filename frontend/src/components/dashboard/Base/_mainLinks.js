@@ -1,65 +1,67 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable camelcase */
-import React from "react";
+import { createStyles } from "@mantine/core";
 import { IconActivity, IconTool } from "@tabler/icons";
-import { ThemeIcon, UnstyledButton, Group, Text, useMantineColorScheme } from "@mantine/core";
-import Link from "next/link";
 
-function MainLink({ icon, color, label, is_active, dest }) {
-  const { colorScheme } = useMantineColorScheme();
+import { LinksGroup } from "./_linksGroup";
 
-  return (
-    <Link href={dest}>
-      <UnstyledButton
-        sx={(theme) => ({
-          display: "block",
-          width: "100%",
-          padding: theme.spacing.xs,
-          borderRadius: theme.radius.sm,
-          color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
-
-          // eslint-disable-next-line no-nested-ternary
-          backgroundColor: is_active
-            ? colorScheme === "dark"
-              ? theme.colors.dark[6]
-              : theme.colors.gray[2]
-            : "transparent",
-
-          "&:hover": {
-            backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
-          },
-        })}
-      >
-        <Group>
-          <ThemeIcon color={color} variant="light">
-            {icon}
-          </ThemeIcon>
-
-          <Text size="sm" style={{ fontWeight: "bolder" }}>
-            {label}
-          </Text>
-        </Group>
-      </UnstyledButton>
-    </Link>
-  );
-}
-
-const data = [
+const destinations = [
   {
-    icon: <IconActivity size={16} />,
-    color: "blue",
     label: "Status",
-    dest: "/dashboard/status",
+    icon: IconActivity,
+    initiallyOpened: true,
+    id: "status",
+    links: [
+      { label: "Projects", id: "status-projects", link: "/dashboard/status/projects" },
+      { label: "Servers", id: "status-servers", link: "/dashboard/status/servers" },
+    ],
   },
   {
-    icon: <IconTool size={16} />,
-    color: "teal",
     label: "Settings",
-    dest: "/dashboard/settings",
+    icon: IconTool,
+    id: "settings",
+    initiallyOpened: true,
+    links: [
+      { label: "Projects", id: "settings-projects", link: "/dashboard/settings/projects" },
+      { label: "Servers", id: "settings-servers", link: "/dashboard/settings/servers" },
+    ],
   },
 ];
 
-export function MainLinks({ activeLink }) {
-  const links = data.map((link) => <MainLink {...link} key={link.label} is_active={link.label === activeLink} />);
-  return <div>{links}</div>;
+const useStyles = createStyles((theme) => ({
+  navbar: {
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
+    paddingBottom: 0,
+  },
+
+  header: {
+    padding: theme.spacing.md,
+    paddingTop: 0,
+    marginLeft: -theme.spacing.md,
+    marginRight: -theme.spacing.md,
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    borderBottom: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]}`,
+  },
+
+  links: {
+    marginLeft: -theme.spacing.md,
+    marginRight: -theme.spacing.md,
+  },
+
+  linksInner: {
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
+  },
+
+  footer: {
+    marginLeft: -theme.spacing.md,
+    marginRight: -theme.spacing.md,
+    borderTop: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]}`,
+  },
+}));
+
+export function MainLinks(props) {
+  const { classes } = useStyles();
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  const links = destinations.map((item) => <LinksGroup {...item} key={item.label} activeLink={props.activeLink} />);
+
+  return <div className={classes.linksInner}>{links}</div>;
 }

@@ -6,7 +6,7 @@ export default function Custom404() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/dashboard/status");
+    router.replace("/dashboard/status/projects");
   });
 
   return null;

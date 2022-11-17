@@ -86,7 +86,7 @@ export function Server({ server }) {
   // const getAPIUptime = (() => Math.floor(Math.random() * 100));
 
   return (
-    <Link href={`/dashboard/status/${server.id}`}>
+    <Link href={`/dashboard/status/servers/${server.id}`}>
       <Card withBorder p="xl" radius="md" className={classes.card}>
         <div className={classes.inner}>
           <div>
