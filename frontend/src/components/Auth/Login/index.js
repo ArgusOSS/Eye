@@ -10,6 +10,7 @@ import { IconPassword, IconAt, IconBrandGoogle } from "@tabler/icons";
 import Link from "next/link";
 import { removeToken } from "../../../../lib/token";
 import { loginUser } from "../../../../lib/auth";
+import { Loginlogo } from "../../dashboard/Base/_loginlogo";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -62,15 +63,11 @@ export function LoginForm() {
     <form onSubmit={handleSubmit}>
       <fieldset className="text-light">
         <div className="row">
-          <div className="col d-flex justify-content-center">
-            <a href="/api/authentication/google" role="button">
-              <Button color="orange.4" variant="outline" leftIcon={<GoogleIcon />}>
-                <Text>Login with Google</Text>
-              </Button>
-            </a>
-          </div>
+          <Loginlogo />
+          <br />
         </div>
-        <Divider color="orange.6" label={<Text>Or continue with email</Text>} labelPosition="center" my="lg" />
+        <br />
+
         <div className="mb-3">
           <TextInput
             icon={<IconAt size={14} />}
@@ -98,22 +95,34 @@ export function LoginForm() {
           </div>
         )}
 
+        <div className="col d-flex justify-content-center">
+          <Group position="right" mt="md">
+            {/* <Button type="submit">Submit</Button> */}
+            <Button
+              onSubmit={handleSubmit}
+              type="submit"
+              variant="gradient"
+              gradient={{ from: "yellow", to: "orange", deg: 75 }}
+              disabled={isLoading}
+              size="md"
+            >
+              <Text>Login</Text>
+            </Button>
+          </Group>
+        </div>
+        <br />
+
         <div className="row">
+          <br />
           <div className="col d-flex justify-content-center">
-            <Group position="right" mt="md">
-              {/* <Button type="submit">Submit</Button> */}
-              <Button
-                onSubmit={handleSubmit}
-                type="submit"
-                variant="gradient"
-                gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
-                disabled={isLoading}
-              >
-                <Text>Login</Text>
+            <a href="/api/authentication/google" role="button">
+              <Button color="orange.4" variant="outline" leftIcon={<GoogleIcon />} size="sm">
+                <Text>Login with Google</Text>
               </Button>
-            </Group>
+            </a>
           </div>
         </div>
+        <br />
       </fieldset>
     </form>
   );
