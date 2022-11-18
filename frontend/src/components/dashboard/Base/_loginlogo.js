@@ -12,7 +12,7 @@ export function Loginlogo() {
       size={50}
       weight={900}
     >
-      Login
+      Welcome
     </Text>
   );
 }

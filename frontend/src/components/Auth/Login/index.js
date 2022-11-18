@@ -94,6 +94,7 @@ export function LoginForm() {
             {errorMessage}
           </div>
         )}
+        <br />
 
         <div className="col d-flex justify-content-center">
           <Group position="right" mt="md">
@@ -104,19 +105,39 @@ export function LoginForm() {
               variant="gradient"
               gradient={{ from: "yellow", to: "orange", deg: 75 }}
               disabled={isLoading}
-              size="md"
+              size="lg"
+              styles={(theme) => ({
+                root: {
+                  backgroundColor: "#00acee",
+                  border: 0,
+                  height: 42,
+                  paddingLeft: 76,
+                  paddingRight: 78,
+
+                  "&:hover": {
+                    backgroundColor: theme.fn.darken("#00acee", 0.05),
+                  },
+                },
+
+                leftIcon: {
+                  marginRight: 15,
+                },
+              })}
             >
-              <Text>Login</Text>
+              <Text> Login </Text>
             </Button>
           </Group>
         </div>
         <br />
+        <br />
+        <Divider color="orange.6" label={<Text>Or continue with gmail</Text>} labelPosition="center" my="lg" />
 
         <div className="row">
           <br />
+
           <div className="col d-flex justify-content-center">
             <a href="/api/authentication/google" role="button">
-              <Button color="orange.4" variant="outline" leftIcon={<GoogleIcon />} size="sm">
+              <Button color="orange.2" variant="outline" leftIcon={<GoogleIcon />} size="md">
                 <Text>Login with Google</Text>
               </Button>
             </a>
