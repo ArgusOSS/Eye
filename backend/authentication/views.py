@@ -117,7 +117,7 @@ class GoogleLoginCallbackView(APIView):
             return User.objects.get(email=user_email)
         except User.DoesNotExist:
             logging.info("[Google Oauth] User does not exist. Won't create a new one.")
-            return AuthenticationFailed(
+            raise AuthenticationFailed(
                 "User email didn't exist in the database before."
             )
             # return User.objects.create_user(
