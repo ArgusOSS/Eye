@@ -1,6 +1,7 @@
 // import { Text } from '@mantine/core';
+import { Flex } from "@mantine/core";
+import { Calendar } from "@mantine/dates";
 import { Chart } from "react-google-charts";
-import GitHubCalendar from "react-github-calendar";
 
 export function LatencyGraph({ server, history }) {
   // return (
@@ -24,7 +25,7 @@ export function LatencyGraph({ server, history }) {
   // }
   // console.log(server, histor y);
   const data = [
-    ["Day", "aws", "azure", "ok"],
+    ["Day", "ok", "ok", "ok"],
     [1, 37.8, 80.8, 41.8],
     [2, 30.9, 69.5, 32.4],
     [3, 25.4, 57, 25.7],
@@ -49,10 +50,16 @@ export function LatencyGraph({ server, history }) {
   return (
     <div>
       <br />
-      <Chart chartType="Line" width="100%" height="400px" data={data} options={options} />
+      <Flex direction={{ base: "column", sm: "row" }} gap={{ base: "sm", sm: "lg" }} justify={{ sm: "center" }}>
+        <br />
+        <Calendar />
+        <br />
+
+        <Chart chartType="Line" width="100%" height="400px" data={data} options={options} />
+        <br />
+      </Flex>
       <br />
       <br />
-      <GitHubCalendar username="abheektripathy" color=" orange" />
     </div>
   );
 }
