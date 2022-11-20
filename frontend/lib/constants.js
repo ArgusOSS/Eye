@@ -1,4 +1,4 @@
-export const BASE_URL = `${process.env.SITE_URL}/api`;
+export const BASE_URL = `/api`;
 export const AUTH_URL = `${BASE_URL}/authentication`;
 export const LOGIN_URL = `${AUTH_URL}/login`;
 export const LOGOUT_URL = `${AUTH_URL}/logout`;
