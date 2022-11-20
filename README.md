@@ -2,6 +2,8 @@
 
 One dashboard to debug in a multi-cloud environment while being able to manage projects and get statistics over how much your services have gone down in the past with detailed API response time.
 
+Here is the <a href=https://eye-three.vercel.app/">demo</a> instance for this project! Backend would be plugged in soon to this.
+
 ## Docker set-up
 
 ```
@@ -13,7 +15,6 @@ docker-compose up
 
 ```
 cd frontend
-cp .env_template .env.local
 yarn install
 yarn run dev
 ```
