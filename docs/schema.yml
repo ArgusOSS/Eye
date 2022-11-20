@@ -180,6 +180,176 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedCloudProviderList'
           description: ''
+  /providers/projects:
+    get:
+      operationId: providers_projects_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - providers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProjectProviderList'
+          description: ''
+    post:
+      operationId: providers_projects_create
+      tags:
+      - providers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectProvider'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProjectProvider'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProjectProvider'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectProvider'
+          description: ''
+  /providers/projects/{id}:
+    get:
+      operationId: providers_projects_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this project.
+        required: true
+      tags:
+      - providers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectProvider'
+          description: ''
+    put:
+      operationId: providers_projects_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this project.
+        required: true
+      tags:
+      - providers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectProvider'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProjectProvider'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProjectProvider'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectProvider'
+          description: ''
+    patch:
+      operationId: providers_projects_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this project.
+        required: true
+      tags:
+      - providers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectProvider'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectProvider'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProjectProvider'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectProvider'
+          description: ''
+    delete:
+      operationId: providers_projects_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this project.
+        required: true
+      tags:
+      - providers
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
   /servers/history:
     get:
       operationId: servers_history_list
@@ -475,6 +645,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CloudProvider'
+    PaginatedProjectProviderList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectProvider'
     PaginatedServerHistoryList:
       type: object
       properties:
@@ -535,6 +725,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
+    PatchedProjectProvider:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 225
     PatchedSettings:
       type: object
       properties:
@@ -578,6 +785,28 @@ components:
           format: double
         frontend_last_ping_status:
           type: boolean
+    ProjectProvider:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 225
+      required:
+      - created_at
+      - id
+      - name
+      - updated_at
     Register:
       type: object
       properties:
