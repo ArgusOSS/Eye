@@ -134,19 +134,11 @@ DATABASES = {
 
 if DEMO_INSTANCE:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        
-        'HOST': 'db', # You are supposed to use service name not localhost
-        'PORT': '3306',
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 
 
 # Password validation
