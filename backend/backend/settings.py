@@ -18,6 +18,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -116,10 +118,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "backend.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+DEMO_INSTANCE = True if os.environ.get("DEMO_INSTANCE") == "true" else False
 
 DATABASES = {
     "default": {
@@ -131,6 +130,24 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
+
+if DEMO_INSTANCE:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        
+        'HOST': 'db', # You are supposed to use service name not localhost
+        'PORT': '3306',
+        }
+    }
+
+
+# Database
+# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

@@ -12,7 +12,6 @@ from .models import Server, ServerPingHistory
 
 logger = get_task_logger(__name__)
 
-
 def ping_server(server: Server, mode="api"):
     logger.info(f"Starting pinging for {server}")
     # mode=api => will ping the API server
