@@ -8,4 +8,5 @@ python manage.py migrate --no-input
 
 python3 manage.py setup_cloudproviders
 
+if [[ $DEMO_INSTANCE = "true" ]]; then python3 manage.py setup_adddemouser; fi
 gunicorn backend.wsgi:application --bind 0.0.0.0:8000
