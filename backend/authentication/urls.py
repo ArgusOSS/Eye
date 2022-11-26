@@ -1,12 +1,11 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import (
+from .views import (  # RegisterView,
     GoogleLoginCallbackView,
     LoginAPIView,
     LogoutAPIView,
     MeAPIView,
-#    RegisterView,
     google_login,
 )
 
