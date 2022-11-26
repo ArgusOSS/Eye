@@ -6,7 +6,7 @@ from .views import (
     LoginAPIView,
     LogoutAPIView,
     MeAPIView,
-    RegisterView,
+#    RegisterView,
     google_login,
 )
 
