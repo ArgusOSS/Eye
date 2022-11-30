@@ -98,36 +98,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedUserList'
           description: ''
-  /authentication/register:
-    post:
-      operationId: authentication_register_create
-      tags:
-      - authentication
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Register'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Register'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Register'
-        required: true
-      security:
-      - basicAuth: []
-      - cookieAuth: []
-      - tokenAuth: []
-      - jwtAuth: []
-      - {}
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Register'
-          description: ''
   /authentication/token/refresh:
     post:
       operationId: authentication_token_refresh_create
@@ -764,8 +734,7 @@ components:
           maxLength: 125
         url:
           type: string
-          pattern: "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\b\
-            ([-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)"
+          pattern: https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)
           maxLength: 225
         webhook_url:
           type: string
@@ -807,25 +776,6 @@ components:
       - id
       - name
       - updated_at
-    Register:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          maxLength: 255
-        username:
-          type: string
-          maxLength: 255
-        password:
-          type: string
-          writeOnly: true
-          maxLength: 68
-          minLength: 6
-      required:
-      - email
-      - password
-      - username
     ServerHistory:
       type: object
       properties:
@@ -886,8 +836,7 @@ components:
           maxLength: 125
         url:
           type: string
-          pattern: "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\b\
-            ([-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)"
+          pattern: https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)
           maxLength: 225
         webhook_url:
           type: string
