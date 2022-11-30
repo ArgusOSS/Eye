@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from api_app.core.models import BaseMixin
 from django.db import models
-
+from django.core.validators import RegexValidator
 
 class Server(BaseMixin):
     name = models.CharField(max_length=125)
