@@ -1,4 +1,5 @@
 import { createStyles, Text } from "@mantine/core";
+import { useState, useEffect } from "react";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -58,15 +59,22 @@ const useStyles = createStyles((theme) => ({
 
 export function StatusCard({ server, history }) {
   const { classes } = useStyles();
+  const [data, setData] = useState([]);
 
-  const data = [
-    { stats: history.count, title: "Total Pings", description: "" },
-    {
-      stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`,
-      title: "Uptime Percentage",
-      description: "",
-    },
-  ];
+  useEffect(() => {
+    if (history === undefined) return;
+
+    const data = [
+      { stats: history.count, title: "Total Pings", description: "" },
+      {
+        stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`,
+        title: "Uptime Percentage",
+        description: "",
+      },
+    ];
+
+    setData(data);
+  }, [history])
 
   const stats = data.map((stat) => (
     <div key={stat.title} className={classes.stat}>
@@ -75,5 +83,6 @@ export function StatusCard({ server, history }) {
       <Text className={classes.description}>{stat.description}</Text>
     </div>
   ));
+
   return <div className={classes.root}>{stats}</div>;
 }

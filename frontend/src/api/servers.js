@@ -18,9 +18,9 @@ const fetchServer = async (id) => {
   }
 };
 
-const fetchHistory = async (id) => {
+const fetchHistory = async (id, date) => {
   try {
-    const resp = await fetch(`/api/servers/history?server_id=${id}`);
+    const resp = await fetch(`/api/servers/history?server_id=${id}&date=${date}`);
     return await resp.json();
   } catch (e) {
     console.error(e);
