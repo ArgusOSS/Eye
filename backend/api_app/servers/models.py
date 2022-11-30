@@ -1,7 +1,6 @@
 from datetime import timedelta
 
 from api_app.core.models import BaseMixin
-from django.core.validators import RegexValidator
 from django.db import models
 
 
@@ -19,6 +18,7 @@ class Server(BaseMixin):
             ),
         ],
     )  # for frontend
+
 
     webhook_url = models.CharField(max_length=225, blank=True, default="")
     api_ping_url = models.CharField(max_length=225, blank=True, default="")  # for API

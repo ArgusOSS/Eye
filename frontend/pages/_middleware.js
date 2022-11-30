@@ -7,7 +7,7 @@ export function middleware(req) {
 
   if (url.includes("/dashboard")) {
     if (cookie === undefined) {
-      return NextResponse.redirect(`${process.env.SITE_URL}/auth/login`);
+      return NextResponse.redirect(`/auth/login`);
     }
   }
 
