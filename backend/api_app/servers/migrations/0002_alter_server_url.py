@@ -7,13 +7,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('servers', '0001_initial'),
+        ("servers", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='server',
-            name='url',
-            field=models.CharField(max_length=225, validators=[django.core.validators.RegexValidator(message='URL validation failed.', regex='https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)')]),
+            model_name="server",
+            name="url",
+            field=models.CharField(
+                max_length=225,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="URL validation failed.",
+                        regex="https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)",
+                    )
+                ],
+            ),
         ),
     ]

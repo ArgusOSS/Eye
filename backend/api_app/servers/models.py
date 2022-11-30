@@ -4,6 +4,7 @@ from api_app.core.models import BaseMixin
 from django.db import models
 from django.core.validators import RegexValidator
 
+
 class Server(BaseMixin):
     name = models.CharField(max_length=125)
     provider = models.CharField(default="", blank=True, max_length=125)
@@ -18,7 +19,6 @@ class Server(BaseMixin):
             ),
         ],
     )  # for frontend
-
 
     webhook_url = models.CharField(max_length=225, blank=True, default="")
     api_ping_url = models.CharField(max_length=225, blank=True, default="")  # for API
