@@ -2,12 +2,23 @@ from datetime import timedelta
 
 from api_app.core.models import BaseMixin
 from django.db import models
+from django.core.validators import RegexValidator
 
 
 class Server(BaseMixin):
     name = models.CharField(max_length=125)
     provider = models.CharField(default="", blank=True, max_length=125)
-    url = models.CharField(max_length=225)  # for frontend
+    url = models.CharField(
+        max_length=225,
+        validators=[
+            RegexValidator(
+                regex=(
+                    r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"
+                ),
+                message="URL validation failed.",
+            ),
+        ],
+    )  # for frontend
 
     webhook_url = models.CharField(max_length=225, blank=True, default="")
     api_ping_url = models.CharField(max_length=225, blank=True, default="")  # for API
