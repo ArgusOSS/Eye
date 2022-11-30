@@ -21,10 +21,18 @@ class ServerHistoryViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
 
+        # Filter for a specific server
         server_id = self.request.query_params.get("server_id", None)
         if server_id is not None:
             queryset = queryset.filter(server_id=server_id)
+        
+        # Filter for a specific date
+        date = self.request.query_params.get("date", None)
+        if date is not None:
+            date = dt.date.fromisoformat(date)
+            queryset = queryset.filter(created_at__date=date)
 
+        # Filter for a datetime range
         start = self.request.query_params.get("start", None)
         end = self.request.query_params.get("end", None)  # always the greater date
         if start or end:
