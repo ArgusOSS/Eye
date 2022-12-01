@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { Paper, Text, Center } from "@mantine/core";
 
-export function LatencyGraph({ server, history, date }) {
+export function LatencyGraph({ title, history, date }) {
   const [data, setData] = useState([]);
 
   const formatData = (entry) => {
@@ -27,14 +27,13 @@ export function LatencyGraph({ server, history, date }) {
       ["Time", "Latency"],
       ...history.results.map((entry) => formatData(entry)),
     ];
-    console.debug(data);
 
     setData(data);
   }, [date, history])
 
   const options = {
     chart: {
-      // title: "Latency of your services",
+      title: title,
     },
     legend: {
       position: "none",

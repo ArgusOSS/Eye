@@ -9,7 +9,8 @@ import { LatencyGraph } from "./_latencyGraph";
 
 export function DashboardDetailedServerStatus({ idx }) {
   const [server, setServer] = useState({});
-  const [history, setHistory] = useState({});
+  const [frontendHistory, setFrontendHistory] = useState({});
+  const [apiHistory, setApiHistory] = useState({});
 
   const [date, setDate] = useState(new Date());
 
@@ -26,8 +27,11 @@ export function DashboardDetailedServerStatus({ idx }) {
 
     let dateAsISO = date.toISOString().split("T")[0];
 
-    fetchHistory(idx, dateAsISO).then((history) => {
-      setHistory(history);
+    fetchHistory(idx, dateAsISO, "frontend").then((history) => {
+      setFrontendHistory(history);
+    });
+    fetchHistory(idx, dateAsISO, "api").then((history) => {
+      setApiHistory(history);
     });
   }, [idx, date]);
 
@@ -41,14 +45,15 @@ export function DashboardDetailedServerStatus({ idx }) {
         {server.name}
       </Text>
 
-      <StatusCard server={server} history={history} />
+      <StatusCard server={server} frontendHistory={frontendHistory} apiHistory={apiHistory} />
 
       <DatePicker sx={(theme) => ({
           marginTop: theme.spacing.lg,
         })} value={date} onChange={onChangeDate} />
       <Space h="lg" />
 
-      <LatencyGraph server={server} history={history} date={date} />
+      <LatencyGraph title={"Frontend"} history={frontendHistory} date={date} />
+      <LatencyGraph title={"API"} history={apiHistory} date={date} />
     </Container>
   );
 }

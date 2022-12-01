@@ -57,24 +57,27 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function StatusCard({ server, history }) {
+export function StatusCard({ server, frontendHistory, apiHistory }) {
   const { classes } = useStyles();
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    if (history === undefined) return;
+  const getMeanUptimePercentage = () => parseFloat(server.frontend_percentage_uptime) + parseFloat(server.api_percentage_uptime) / 2;
 
+  useEffect(() => {
+    if (server === undefined || frontendHistory === undefined || apiHistory === undefined) return;
+
+    console.debug(getMeanUptimePercentage())
     const data = [
-      { stats: history.count, title: "Total Pings", description: "" },
+      { stats: frontendHistory.count + apiHistory.count, title: "Total Pings", description: "The total number of pings ever sent by the server to this service." },
       {
-        stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`,
+        stats: `${Number(getMeanUptimePercentage()).toFixed(2)}%`,
         title: "Uptime Percentage",
-        description: "",
+        description: "This is the mean uptime percentage of the frontend and the API",
       },
     ];
 
     setData(data);
-  }, [history])
+  }, [frontendHistory, apiHistory, server])
 
   const stats = data.map((stat) => (
     <div key={stat.title} className={classes.stat}>
