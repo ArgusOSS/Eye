@@ -1,14 +1,18 @@
 /* eslint-disable no-shadow */
 import { useState, useEffect } from "react";
-import { Container, Text, Paper } from "@mantine/core";
-// import { useRouter } from 'next/router';
+import { Container, Text, Paper, Space } from "@mantine/core";
+import { DatePicker } from "@mantine/dates";
+
 import { fetchServer, fetchHistory } from "../../../api/servers";
 import { StatusCard } from "./_statusCard";
 import { LatencyGraph } from "./_latencyGraph";
 
 export function DashboardDetailedServerStatus({ idx }) {
   const [server, setServer] = useState({});
-  const [history, setHistory] = useState({});
+  const [frontendHistory, setFrontendHistory] = useState({});
+  const [apiHistory, setApiHistory] = useState({});
+
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     if (idx === undefined) return;
@@ -16,11 +20,24 @@ export function DashboardDetailedServerStatus({ idx }) {
     fetchServer(idx).then((server) => {
       setServer(server);
     });
-
-    fetchHistory(idx).then((history) => {
-      setHistory(history);
-    });
   }, [idx]);
+
+  useEffect(() => {
+    if (idx === undefined) return;
+
+    let dateAsISO = date.toISOString().split("T")[0];
+
+    fetchHistory(idx, dateAsISO, "frontend").then((history) => {
+      setFrontendHistory(history);
+    });
+    fetchHistory(idx, dateAsISO, "api").then((history) => {
+      setApiHistory(history);
+    });
+  }, [idx, date]);
+
+  const onChangeDate = (date) => {
+    setDate(date);
+  }
 
   return (
     <Container>
@@ -28,14 +45,15 @@ export function DashboardDetailedServerStatus({ idx }) {
         {server.name}
       </Text>
 
-      <Paper
-        sx={(theme) => ({
-          marginTop: theme.spacing.md,
-        })}
-      >
-        <StatusCard server={server} history={history} />
-        <LatencyGraph server={server} history={history} />
-      </Paper>
+      <StatusCard server={server} frontendHistory={frontendHistory} apiHistory={apiHistory} />
+
+      <DatePicker sx={(theme) => ({
+          marginTop: theme.spacing.lg,
+        })} value={date} onChange={onChangeDate} />
+      <Space h="lg" />
+
+      <LatencyGraph title={"Frontend"} history={frontendHistory} date={date} />
+      <LatencyGraph title={"API"} history={apiHistory} date={date} />
     </Container>
   );
 }

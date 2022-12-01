@@ -1,48 +1,59 @@
-// import { Text } from '@mantine/core';
+import { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
+import { Paper, Text, Center } from "@mantine/core";
 
-export function LatencyGraph({ server, history }) {
-  // Get most recent history logs
-  // const recentHistory = history === undefined ? [] :
-  // history.slice(Math.max(history.length - 10, 0));
-  // let created_ats = [];
-  // for (let i = 0; i < history.length; i++) {
-  //     // parse ISO 8601 date string
-  //     let date = new Date(history[i].created_at);
-  //     created_ats.push(date);
-  //     console.log(date)
-  // }
+export function LatencyGraph({ title, history, date }) {
+  const [data, setData] = useState([]);
 
-  // console.log(server, history);
-  const data = [
-    ["Day", "Guardians of the Galaxy", "The Avengers", "Transformers: Age of Extinction"],
-    [1, 37.8, 80.8, 41.8],
-    [2, 30.9, 69.5, 32.4],
-    [3, 25.4, 57, 25.7],
-    [4, 11.7, 18.8, 10.5],
-  ];
-  // let data = [];
-  // for (let i = 0; i < history.length; i++) {
-  //     data.push(
-  //         {
-  //                 uv: new Date(history[i].created_at),
-  //                 pv: new Date(history[i].latency),
-  //                 amt: new Date(history[i].latency),
-  //         }
-  //     );
-  // }
+  const formatData = (entry) => {
+    // let createdAt = parseInt(new Date(entry.created_at).getMinutes());
+    let createdAt = new Date(entry.created_at).toLocaleTimeString();
+    let latency = parseInt(entry.time_taken.split(".")[1]) / 1000000;
+
+    return [createdAt, latency];
+  }
+
+  const hasNoData = () => {
+    if (history === undefined) return true;
+    if (history.count === 0) return true;
+
+    return false;
+  }
+
+  useEffect(() => {
+    if (history.results === undefined) return;
+
+    const data = [
+      ["Time", "Latency"],
+      ...history.results.map((entry) => formatData(entry)),
+    ];
+
+    setData(data);
+  }, [date, history])
 
   const options = {
     chart: {
-      title: "Latency of your services",
-      subtitle: "API endpoints",
+      title: title,
     },
+    legend: {
+      position: "none",
+    }
   };
 
+  if (hasNoData()) return (
+    <Center>
+      <Text sx={(theme) => ({
+          marginTop: theme.spacing.lg,
+        })}>No data to display</Text>
+    </Center>
+  );
+
   return (
-    <div>
-      <br />
-      <Chart chartType="Line" width="100%" height="400px" data={data} options={options} />
-    </div>
+    <Paper sx={(theme) => ({
+      padding: theme.spacing.lg,
+      height: "100%",
+    })}>
+      <Chart chartType="Line" width="100%" height="400px" data={data} options={options} loader={<Text>Loading..</Text>} legendToggle />
+    </Paper>
   );
 }
