@@ -734,6 +734,7 @@ components:
           maxLength: 125
         url:
           type: string
+          pattern: https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)
           maxLength: 225
         webhook_url:
           type: string
@@ -835,6 +836,7 @@ components:
           maxLength: 125
         url:
           type: string
+          pattern: https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)
           maxLength: 225
         webhook_url:
           type: string
