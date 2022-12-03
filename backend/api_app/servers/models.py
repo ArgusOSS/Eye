@@ -1,8 +1,8 @@
 from datetime import timedelta
 
 from api_app.core.models import BaseMixin
-from django.db import models
 from django.core.validators import RegexValidator
+from django.db import models
 
 URL_REGEX = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"  # noqa: E501
 
