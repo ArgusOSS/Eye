@@ -1,8 +1,12 @@
-from api_app.core.models import BaseMixin
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
+
+from api_app.core.models import BaseMixin
 
 
 class UserManager(BaseUserManager):

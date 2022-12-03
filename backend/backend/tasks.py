@@ -1,9 +1,10 @@
 import datetime
 
-from api_app.servers import crons
-from api_app.servers.models import Server, ServerPingHistory
 from celery import shared_task
 from celery.utils.log import get_task_logger
+
+from api_app.servers import crons
+from api_app.servers.models import Server, ServerPingHistory
 
 from .celery import app
 

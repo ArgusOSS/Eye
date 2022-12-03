@@ -13,8 +13,12 @@ from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 
 from .oauth import oauth
-from .serializers import (LoginSerializer, LogoutSerializer,
-                          RegisterSerializer, UserSerializer)
+from .serializers import (
+    LoginSerializer,
+    LogoutSerializer,
+    RegisterSerializer,
+    UserSerializer,
+)
 
 logger = logging.getLogger(__name__)
 
