@@ -43,7 +43,10 @@ def ping_server(server: Server, mode="api"):
             time_taken = datetime.timedelta(seconds=end_time - start_time)
             server_ping = ServerPingHistory.objects.create(
                 mode=ServerPingHistoryMode(mode),
-                pinged_back=False, server=server, time_taken=time_taken, url_pinged=url
+                pinged_back=False,
+                server=server,
+                time_taken=time_taken,
+                url_pinged=url,
             )
             if server.webhook_url:
                 logger.info("Sending message to discord webhook for failure.")

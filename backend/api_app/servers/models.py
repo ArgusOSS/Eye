@@ -4,9 +4,11 @@ from api_app.core.models import BaseMixin
 from django.db import models
 from django.core.validators import RegexValidator
 
+
 class ServerPingHistoryMode(models.TextChoices):
     API = "api"
     FRONTEND = "frontend"
+
 
 class Server(BaseMixin):
     name = models.CharField(max_length=125)
@@ -48,7 +50,11 @@ class ServerPingHistory(BaseMixin):
     # it is possbile that nothing has been specified
     response_mimetype = models.CharField(max_length=225, null=True)
 
-    mode = models.CharField(max_length=225, default=ServerPingHistoryMode.API, choices=ServerPingHistoryMode.choices)
+    mode = models.CharField(
+        max_length=225,
+        default=ServerPingHistoryMode.API,
+        choices=ServerPingHistoryMode.choices,
+    )
 
     def __str__(self):
         return (
