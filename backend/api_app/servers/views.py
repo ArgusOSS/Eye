@@ -4,7 +4,6 @@ from datetime import timedelta
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import ServerPingHistoryMode
 from .serializers import ServerHistorySerializer, SettingsSerializer
 
 

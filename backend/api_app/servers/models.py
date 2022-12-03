@@ -4,6 +4,8 @@ from api_app.core.models import BaseMixin
 from django.db import models
 from django.core.validators import RegexValidator
 
+URL_REGEX = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"   # noqa: E501
+
 
 class ServerPingHistoryMode(models.TextChoices):
     API = "api"
@@ -17,9 +19,7 @@ class Server(BaseMixin):
         max_length=225,
         validators=[
             RegexValidator(
-                regex=(
-                    r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"
-                ),
+                regex=(URL_REGEX),
                 message="URL validation failed.",
             ),
         ],
