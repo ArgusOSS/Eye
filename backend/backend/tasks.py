@@ -63,6 +63,8 @@ def PingServers():
     logger.info("Starting to ping servers..")
     servers = Server.objects.all()
     for server in servers:
-        app.send_task("PingServer", kwargs=dict(server_id=server.id))
+        app.send_task("PingServer", kwargs=dict(server_id=server.id))  # type: ignore
         if server.api_ping_url:
-            app.send_task("PingServer", kwargs=dict(server_id=server.id, mode="api"))
+            app.send_task(
+                "PingServer", kwargs=dict(server_id=server.id, mode="api")  # type: ignore
+            )
