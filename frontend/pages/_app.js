@@ -21,21 +21,21 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  const [colorScheme, setColorScheme] = useState('');
+  const [colorScheme, setColorScheme] = useState("");
   useEffect(() => {
-    if (colorScheme == ''){
-      return
+    if (colorScheme == "") {
+      return;
     } else {
-      localStorage.setItem('colorScheme', colorScheme);
+      localStorage.setItem("colorScheme", colorScheme);
     }
   }, [colorScheme]);
   useEffect(() => {
-    const storedState = localStorage.getItem('colorScheme');
+    const storedState = localStorage.getItem("colorScheme");
     if (storedState) {
       setColorScheme(storedState);
     }
   }, []);
-  const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === "dark" ? "light": "dark"));
+  const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   return (
     <CacheProvider value={emotionCache}>
