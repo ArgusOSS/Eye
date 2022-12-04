@@ -23,7 +23,7 @@ export default function MyApp(props) {
 
   const [colorScheme, setColorScheme] = useState("");
   useEffect(() => {
-    if (colorScheme == "") {
+    if (colorScheme === "") {
       return;
     } else {
       localStorage.setItem("colorScheme", colorScheme);
