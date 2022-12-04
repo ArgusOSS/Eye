@@ -25,7 +25,7 @@ export function DashboardDetailedServerStatus({ idx }) {
   useEffect(() => {
     if (idx === undefined) return;
 
-    let dateAsISO = date.toISOString().split("T")[0];
+    const dateAsISO = date.toISOString().split("T")[0];
 
     fetchHistory(idx, dateAsISO, "frontend").then((history) => {
       setFrontendHistory(history);
@@ -37,7 +37,7 @@ export function DashboardDetailedServerStatus({ idx }) {
 
   const onChangeDate = (date) => {
     setDate(date);
-  }
+  };
 
   return (
     <Container>
@@ -47,13 +47,17 @@ export function DashboardDetailedServerStatus({ idx }) {
 
       <StatusCard server={server} frontendHistory={frontendHistory} apiHistory={apiHistory} />
 
-      <DatePicker sx={(theme) => ({
+      <DatePicker
+        sx={(theme) => ({
           marginTop: theme.spacing.lg,
-        })} value={date} onChange={onChangeDate} />
+        })}
+        value={date}
+        onChange={onChangeDate}
+      />
       <Space h="lg" />
 
-      <LatencyGraph title={"Frontend"} history={frontendHistory} date={date} />
-      <LatencyGraph title={"API"} history={apiHistory} date={date} />
+      <LatencyGraph title="Frontend" history={frontendHistory} date={date} />
+      <LatencyGraph title="API" history={apiHistory} date={date} />
     </Container>
   );
 }

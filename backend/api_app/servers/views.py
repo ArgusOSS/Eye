@@ -4,7 +4,6 @@ from datetime import timedelta
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import ServerPingHistoryMode
 from .serializers import ServerHistorySerializer, SettingsSerializer
 
 
@@ -26,12 +25,12 @@ class ServerHistoryViewSet(viewsets.ReadOnlyModelViewSet):
         server_id = self.request.query_params.get("server_id", None)
         if server_id is not None:
             queryset = queryset.filter(server_id=server_id)
-        
+
         # Give an explicit mode
         mode = self.request.query_params.get("mode", None)
         if mode is not None:
             queryset = queryset.filter(mode=mode)
-        
+
         # Filter for a specific date
         date = self.request.query_params.get("date", None)
         if date is not None:

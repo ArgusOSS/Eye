@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('servers', '0002_alter_server_url'),
+        ("servers", "0002_alter_server_url"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='serverpinghistory',
-            name='mode',
-            field=models.CharField(choices=[('api', 'Api'), ('frontend', 'Frontend')], default='api', max_length=225),
+            model_name="serverpinghistory",
+            name="mode",
+            field=models.CharField(
+                choices=[("api", "Api"), ("frontend", "Frontend")],
+                default="api",
+                max_length=225,
+            ),
         ),
     ]
