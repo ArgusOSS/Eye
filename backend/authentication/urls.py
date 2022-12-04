@@ -1,13 +1,8 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import (  # RegisterView,
-    GoogleLoginCallbackView,
-    LoginAPIView,
-    LogoutAPIView,
-    MeAPIView,
-    google_login,
-)
+from .views import LoginAPIView  # RegisterView,
+from .views import GoogleLoginCallbackView, LogoutAPIView, MeAPIView, google_login
 
 urlpatterns = [
     path("login", LoginAPIView.as_view(), name="login"),

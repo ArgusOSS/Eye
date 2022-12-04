@@ -53,7 +53,18 @@ export default function MyApp(props) {
       <CookiesProvider>
         <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
           <NotificationsProvider>
-            <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+            <MantineProvider
+              theme={{
+                colorScheme,
+                globalStyles: (theme) => ({
+                  "g>rect": {
+                    fill: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
+                  },
+                }),
+              }}
+              withGlobalStyles
+              withNormalizeCSS
+            >
               <Component {...pageProps} />
             </MantineProvider>
           </NotificationsProvider>

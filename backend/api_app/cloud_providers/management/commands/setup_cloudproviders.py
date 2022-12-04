@@ -1,5 +1,6 @@
-from api_app.cloud_providers.models import CloudProvider
 from django.core.management.base import BaseCommand
+
+from api_app.cloud_providers.models import CloudProvider
 
 
 def createAWS():

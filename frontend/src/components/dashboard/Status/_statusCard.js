@@ -1,4 +1,5 @@
 import { createStyles, Text } from "@mantine/core";
+import { useState, useEffect } from "react";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -56,17 +57,33 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function StatusCard({ server, history }) {
+export function StatusCard({ server, frontendHistory, apiHistory }) {
   const { classes } = useStyles();
+  const [data, setData] = useState([]);
 
-  const data = [
-    { stats: history.count, title: "Total Pings", description: "" },
-    {
-      stats: `${Number(server.frontend_percentage_uptime).toFixed(2)}%`,
-      title: "Uptime Percentage",
-      description: "",
-    },
-  ];
+  const getMeanUptimePercentage = () =>
+    (parseFloat(server.frontend_percentage_uptime) + parseFloat(server.api_percentage_uptime)) / 2;
+
+  useEffect(() => {
+    if (server === undefined || frontendHistory === undefined || apiHistory === undefined) return;
+
+    console.debug(getMeanUptimePercentage());
+    // eslint-disable-next-line no-shadow
+    const data = [
+      {
+        stats: frontendHistory.count + apiHistory.count,
+        title: "Total Pings",
+        description: "The total number of pings ever sent by the server to this service.",
+      },
+      {
+        stats: `${Number(getMeanUptimePercentage()).toFixed(2)}%`,
+        title: "Uptime Percentage",
+        description: "This is the mean uptime percentage of the frontend and the API",
+      },
+    ];
+
+    setData(data);
+  }, [frontendHistory, apiHistory, server]);
 
   const stats = data.map((stat) => (
     <div key={stat.title} className={classes.stat}>
@@ -75,5 +92,6 @@ export function StatusCard({ server, history }) {
       <Text className={classes.description}>{stat.description}</Text>
     </div>
   ));
+
   return <div className={classes.root}>{stats}</div>;
 }

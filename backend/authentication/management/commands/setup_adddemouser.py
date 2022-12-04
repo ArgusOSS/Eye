@@ -13,7 +13,7 @@ class Command(BaseCommand):
             is_verified=True,
         )
 
-        user.set_password("demo")
+        user.set_password("demo@demo12")
 
         user.save()
 

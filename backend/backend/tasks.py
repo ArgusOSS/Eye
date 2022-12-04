@@ -1,9 +1,10 @@
 import datetime
 
-from api_app.servers import crons
-from api_app.servers.models import Server, ServerPingHistory
 from celery import shared_task
 from celery.utils.log import get_task_logger
+
+from api_app.servers import crons
+from api_app.servers.models import Server, ServerPingHistory
 
 from .celery import app
 
@@ -62,6 +63,8 @@ def PingServers():
     logger.info("Starting to ping servers..")
     servers = Server.objects.all()
     for server in servers:
-        app.send_task("PingServer", kwargs=dict(server_id=server.id))
+        app.send_task("PingServer", kwargs=dict(server_id=server.id))  # type: ignore
         if server.api_ping_url:
-            app.send_task("PingServer", kwargs=dict(server_id=server.id, mode="api"))
+            app.send_task(
+                "PingServer", kwargs=dict(server_id=server.id, mode="api")  # type: ignore
+            )
