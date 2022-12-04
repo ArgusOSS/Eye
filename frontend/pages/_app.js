@@ -11,7 +11,7 @@ import { CookiesProvider } from "react-cookie";
 import PropTypes from "prop-types";
 import { CacheProvider } from "@emotion/react";
 import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NotificationsProvider } from "@mantine/notifications";
 import createEmotionCache from "../src/createEmotionCache";
 
@@ -21,8 +21,21 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  const [colorScheme, setColorScheme] = useState("dark");
-  const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const [colorScheme, setColorScheme] = useState('');
+  useEffect(() => {
+    if (colorScheme == ''){
+      return
+    } else {
+      localStorage.setItem('colorScheme', colorScheme);
+    }
+  }, [colorScheme]);
+  useEffect(() => {
+    const storedState = localStorage.getItem('colorScheme');
+    if (storedState) {
+      setColorScheme(storedState);
+    }
+  }, []);
+  const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === "dark" ? "light": "dark"));
 
   return (
     <CacheProvider value={emotionCache}>
