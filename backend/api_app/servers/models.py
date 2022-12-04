@@ -1,8 +1,16 @@
 from datetime import timedelta
 
-from api_app.core.models import BaseMixin
-from django.db import models
 from django.core.validators import RegexValidator
+from django.db import models
+
+from api_app.core.models import BaseMixin
+
+URL_REGEX = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"  # noqa: E501
+
+
+class ServerPingHistoryMode(models.TextChoices):
+    API = "api"
+    FRONTEND = "frontend"
 
 
 class Server(BaseMixin):
@@ -12,9 +20,7 @@ class Server(BaseMixin):
         max_length=225,
         validators=[
             RegexValidator(
-                regex=(
-                    r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"
-                ),
+                regex=(URL_REGEX),
                 message="URL validation failed.",
             ),
         ],
@@ -44,6 +50,12 @@ class ServerPingHistory(BaseMixin):
     # making this nullable because
     # it is possbile that nothing has been specified
     response_mimetype = models.CharField(max_length=225, null=True)
+
+    mode = models.CharField(
+        max_length=225,
+        default=ServerPingHistoryMode.API,
+        choices=ServerPingHistoryMode.choices,
+    )
 
     def __str__(self):
         return (

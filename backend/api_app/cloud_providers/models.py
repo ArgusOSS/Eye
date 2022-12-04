@@ -1,6 +1,7 @@
 # from api_app.cloud_providers.AWS.models import AWSServices
-from api_app.core.models import BaseMixin
 from django.db import models
+
+from api_app.core.models import BaseMixin
 
 
 class Services(BaseMixin):

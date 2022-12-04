@@ -595,6 +595,11 @@ components:
       - email
       - password
       - tokens
+    ModeEnum:
+      enum:
+      - api
+      - frontend
+      type: string
     PaginatedCloudProviderList:
       type: object
       properties:
@@ -806,6 +811,8 @@ components:
           type: string
           nullable: true
           maxLength: 225
+        mode:
+          $ref: '#/components/schemas/ModeEnum'
         server:
           type: integer
       required:
